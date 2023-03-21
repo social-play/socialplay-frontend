@@ -30,6 +30,7 @@ function App() {
     firstName: "",
     lastName: "",
     isOver16: false,
+    capture: "",
     accessGroups: [],
   });
 

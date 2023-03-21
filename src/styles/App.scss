@@ -144,8 +144,37 @@ body {
   }
   .buttonRow {
     padding: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
     button {
       width: 100%;
+    }
+    .capture {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: max-content;
+      height: 50px;
+      background: linear-gradient(to right, $backgroundColor, $Lime, $mainColor, $backgroundColor);
+      padding: 1rem;
+      width: 100%;
+      input {
+        width: 60px;
+        height: 45px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.3rem;
+        background-color: rgba($Lime, 0.3);
+        color: $capture;
+      }
+      .numbers {
+        font-size: 2rem;
+        font-weight: bold;
+        letter-spacing: 10px;
+        color: $capture;
+      }
     }
   }
   input {

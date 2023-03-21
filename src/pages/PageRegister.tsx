@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { IUser } from "../interfaces";
 
@@ -16,13 +16,25 @@ const initialFormValues = {
   errors: [],
   isOver16: false,
   formMessage: "",
-  //registrationSuccessful: false,
+  capture: "",
 };
 export const PageRegister = (props: IPageRegisterProps) => {
   const { baseUrl, setCurrentUser } = props;
   const [formValues, setFormValues] = useState(initialFormValues);
   const [registrationSuccessful, setRegistrationSuccessful] =
     useState<boolean>(false);
+
+  const [firstNumber, setFirstNumber] = useState<number>(0);
+  const [secondNumber, setSecondNumber] = useState<number>(0);
+  const [result, setResult] = useState<number>(0);
+
+  useEffect(() => {
+    const randomFirstNumber = Math.floor(Math.random() * 49) + 1;
+    const randomSecondNumber = Math.floor(Math.random() * 49) + 1;
+    setFirstNumber(randomFirstNumber);
+    setSecondNumber(randomSecondNumber);
+  }, []);
+
   const handleRegisterButton = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
 
@@ -44,11 +56,11 @@ export const PageRegister = (props: IPageRegisterProps) => {
           { withCredentials: true }
         )
       ).data;
-      console.log("data", data);
+      // console.log("data", data);
 
       if (data.errors.length > 0) {
-        console.log("errors", data.errors);
-        console.log("errors erwischen");
+        // console.log("errors", data.errors);
+        // console.log("errors erwischen");
 
         setFormValues({ ...formValues, errors: data.errors });
       } else {
@@ -59,6 +71,19 @@ export const PageRegister = (props: IPageRegisterProps) => {
     })();
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    if (name === "capture") {
+      const result: number = firstNumber + secondNumber;
+      if (parseInt(value) === result) {
+        setResult(parseInt(value));
+      }
+
+      setFormValues({ ...formValues, [name]: value });
+    }
+  };
   return (
     <div className="pageRegister">
       {registrationSuccessful ? (
@@ -77,7 +102,10 @@ export const PageRegister = (props: IPageRegisterProps) => {
                   value={formValues.firstName}
                   autoFocus
                   onChange={(e) =>
-                    setFormValues({ ...formValues, firstName: e.target.value })
+                    setFormValues({
+                      ...formValues,
+                      firstName: e.target.value,
+                    })
                   }
                 />
               </div>
@@ -142,6 +170,21 @@ export const PageRegister = (props: IPageRegisterProps) => {
                 >
                   Register
                 </button>
+
+                <div className="capture">
+                  <div className="numbers">
+                    <span>{firstNumber}</span>+<span>{secondNumber}</span>
+                  </div>
+
+                  <input
+                    value={formValues.capture}
+                    type="text"
+                    required
+                    name="capture"
+                    onChange={handleChange}
+                  />
+                </div>
+
                 <div className="formMessage">{formValues.formMessage}</div>
               </div>
             </div>
