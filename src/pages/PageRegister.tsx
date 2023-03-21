@@ -32,13 +32,13 @@ export const PageRegister = (props: IPageRegisterProps) => {
           `${baseUrl}/register`,
 
           {
-            //...formValues
-            firstName: formValues.firstName,
-            lastName: formValues.lastName,
-            userName: formValues.userName,
-            password: formValues.password,
-            email: formValues.email,
-            isOver16: formValues.isOver16,
+            ...formValues,
+            // firstName: formValues.firstName,
+            // lastName: formValues.lastName,
+            // userName: formValues.userName,
+            // password: formValues.password,
+            // email: formValues.email,
+            // isOver16: formValues.isOver16,
           },
 
           { withCredentials: true }
@@ -135,8 +135,11 @@ export const PageRegister = (props: IPageRegisterProps) => {
                   <div className="w-11 h-6 bg-red-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-cyan-600"></div>
                 </label>
               </div>
-              <div className="buttonRow">
-                <button onClick={(e) => handleRegisterButton(e)}>
+              <div className="buttonRow ">
+                <button
+                  onClick={(e) => handleRegisterButton(e)}
+                  className="py-2 px-4 text-sm font-bold text-blue-200 active:outline-none bg-blue-900 rounded-lg  hover:bg-blue-400 hover:text-blue-700 active:z-10 active:ring-4 active:ring-blue-500 dark:active:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                >
                   Register
                 </button>
                 <div className="formMessage">{formValues.formMessage}</div>

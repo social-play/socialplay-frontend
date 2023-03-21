@@ -32,7 +32,7 @@ export const PageLogin = (props: IPageLoginProps) => {
       ).data;
       const _currentUser = data.currentUser;
       if (_currentUser.userName === "anonymousUser") {
-        setFormMessage("bad login");
+        setFormMessage("username or Password incorrect");
       } else {
         setCurrentUser(_currentUser);
         setFormMessage("");
@@ -51,31 +51,34 @@ export const PageLogin = (props: IPageLoginProps) => {
     <div className="pageLogin">
       <form>
         <div className="row">
-          <label>username</label>
-          <div>
-            <input
-              autoFocus
-              type="text"
-              value={userName}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
+          <label>Username:</label>
+
+          <input
+            autoFocus
+            type="text"
+            value={userName}
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </div>
 
         <div className="row">
-          <label>Password</label>
-          <div>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+          <label>Password:</label>
+
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
 
         <div className="buttonRow">
-          <button onClick={(e) => handleLoginButton(e)}>Login</button>
-          <div className="formMessage">{formMessage}</div>
+          <button
+            onClick={(e) => handleLoginButton(e)}
+            className="py-2 px-4 text-sm font-bold text-blue-200 active:outline-none bg-blue-900 rounded-lg    hover:bg-blue-400 hover:text-blue-700 active:z-10 active:ring-4 active:ring-blue-500 dark:active:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+          >
+            Login
+          </button>
+          <div className="errorArea">{formMessage}</div>
         </div>
       </form>
     </div>
