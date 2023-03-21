@@ -103,6 +103,7 @@ body {
       }
     }
     .errorArea {
+      width: 50%;
       ul {
         color: tomato;
         padding-left: 20px;
@@ -126,6 +127,9 @@ body {
         display: flex;
         gap: 1rem;
         align-items: center;
+        label {
+          width: 150px;
+        }
         input {
           color: #222;
           padding: 5px;

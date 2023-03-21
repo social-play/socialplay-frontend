@@ -48,10 +48,10 @@ export const PageLogin = (props: IPageLoginProps) => {
   }, [userName, password]);
 
   return (
-    <form>
-      <fieldset>
+    <div className="pageLogin">
+      <form>
         <div className="row">
-          <label>userName</label>
+          <label>username</label>
           <div>
             <input
               autoFocus
@@ -74,10 +74,10 @@ export const PageLogin = (props: IPageLoginProps) => {
         </div>
 
         <div className="buttonRow">
-          <div className="formMessage">{formMessage}</div>
           <button onClick={(e) => handleLoginButton(e)}>Login</button>
+          <div className="formMessage">{formMessage}</div>
         </div>
-      </fieldset>
-    </form>
+      </form>
+    </div>
   );
 };
