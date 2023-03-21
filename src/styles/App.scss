@@ -75,30 +75,40 @@ body {
         font-weight: bold;
       }
     }
-    form {
-      padding: 1rem;
+    .pageRegister {
+      display: flex;
+      justify-content: center;
+      flex-flow: column wrap;
+      align-items: center;
+      width: 70%;
+      form {
+        padding: 1rem;
 
-      .column {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        flex-wrap: wrap;
-        .row {
+        .column {
           display: flex;
-          align-items: center;
+          flex-direction: column;
+          gap: 1rem;
           flex-wrap: wrap;
-          label {
-            width: 150px;
+          .row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            label {
+              width: 150px;
+            }
+            label.relative {
+              width: fit-content;
+            }
+            input {
+              color: #222;
+            }
           }
-          input {
-            color: #222;
+          .buttonRow {
+            width: max-content;
+            background-color: #aaa;
+            padding: 10px;
+            float: right;
           }
-        }
-        .buttonRow {
-          width: max-content;
-          background-color: #aaa;
-          padding: 10px;
-          float: right;
         }
       }
     }
