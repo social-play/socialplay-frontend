@@ -82,7 +82,7 @@ body {
       align-items: center;
       width: 100%;
       form {
-        padding: 1rem;
+        padding: 0.5rem;
         display: flex;
         justify-content: center;
         .column {
@@ -124,14 +124,27 @@ body {
             width: 150px;
           }
         }
+
+        .orLine {
+          width: 100%;
+
+          span {
+            display: flex;
+            flex-direction: row;
+            color: #aaa;
+            &::before,
+            &::after {
+              content: "";
+              flex: 1 1;
+              border-bottom: 1px solid #aaa;
+              margin: auto;
+            }
+          }
+        }
       }
     }
     .errorArea {
       color: tomato;
-      padding: 1rem 0;
-      ul {
-        padding-left: 20px;
-      }
     }
 
     .spinner {
@@ -181,6 +194,7 @@ body {
     color: #222;
     padding: 2px 5px;
     width: 100%;
+    border-radius: 5px;
   }
 
   @keyframes fadein {

@@ -47,6 +47,10 @@ export const PageLogin = (props: IPageLoginProps) => {
     setFormMessage("");
   }, [userName, password]);
 
+  const handleGoToRegister = () => {
+    navigate("/register");
+  };
+
   return (
     <div className="pageLogin">
       <form>
@@ -78,8 +82,19 @@ export const PageLogin = (props: IPageLoginProps) => {
           >
             Login
           </button>
-          <div className="errorArea">{formMessage}</div>
+          <div className="orLine pt-3">
+            <span>OR</span>
+          </div>
+          <button
+            type="button"
+            onClick={handleGoToRegister}
+            className="py-2 px-4 text-sm font-bold text-green-200 active:outline-none bg-green-900 rounded-lg hover:bg-green-400 hover:text-green-700 active:z-10 active:ring-4 active:ring-green-500 dark:active:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+          >
+            Create new account
+          </button>
         </div>
+
+        <div className="errorArea">{formMessage}</div>
       </form>
     </div>
   );
