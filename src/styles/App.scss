@@ -101,9 +101,6 @@ body {
             label.relative {
               width: fit-content;
             }
-            input {
-              color: #222;
-            }
           }
         }
       }
@@ -145,6 +142,7 @@ body {
     }
     .errorArea {
       color: tomato;
+      width: 70%;
     }
 
     .spinner {
@@ -156,7 +154,7 @@ body {
     animation: fadein 0.5s ease-in;
   }
   .buttonRow {
-    padding: 1rem 0;
+    padding: 10px 0;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -164,7 +162,7 @@ body {
     button {
       width: 100%;
     }
-    .capture {
+    .Captcha {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -195,6 +193,10 @@ body {
     padding: 2px 5px;
     width: 100%;
     border-radius: 5px;
+
+    &:focus {
+      outline: 2px solid blue;
+    }
   }
 
   @keyframes fadein {

@@ -3,6 +3,6 @@ export interface IUser {
   firstName: string;
   lastName: string;
   isOver16: boolean;
-  capture: string;
+  captcha: boolean;
   accessGroups: string[];
 }

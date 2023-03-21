@@ -15,8 +15,7 @@ const initialFormValues = {
   email: "",
   errors: [],
   isOver16: false,
-  formMessage: "",
-  capture: "",
+  captcha: false,
 };
 export const PageRegister = (props: IPageRegisterProps) => {
   const { baseUrl, setCurrentUser } = props;
@@ -26,7 +25,6 @@ export const PageRegister = (props: IPageRegisterProps) => {
 
   const [firstNumber, setFirstNumber] = useState<number>(0);
   const [secondNumber, setSecondNumber] = useState<number>(0);
-  const [result, setResult] = useState<number>(0);
 
   useEffect(() => {
     const randomFirstNumber = Math.floor(Math.random() * 49) + 1;
@@ -45,45 +43,30 @@ export const PageRegister = (props: IPageRegisterProps) => {
 
           {
             ...formValues,
-            // firstName: formValues.firstName,
-            // lastName: formValues.lastName,
-            // userName: formValues.userName,
-            // password: formValues.password,
-            // email: formValues.email,
-            // isOver16: formValues.isOver16,
           },
 
           { withCredentials: true }
         )
       ).data;
-      // console.log("data", data);
 
       if (data.errors.length > 0) {
-        // console.log("errors", data.errors);
-        // console.log("errors erwischen");
-
         setFormValues({ ...formValues, errors: data.errors });
       } else {
         setFormValues({ ...formValues });
-
         setRegistrationSuccessful(true);
       }
     })();
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name;
+  const handleCaptchaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    if (name === "capture") {
-      const result: number = firstNumber + secondNumber;
-      if (parseInt(value) === result) {
-        setResult(parseInt(value));
-      }
-
-      setFormValues({ ...formValues, [name]: value });
+    const result: number = firstNumber + secondNumber;
+    if (parseInt(value) === result) {
+      setFormValues({ ...formValues, captcha: true });
     }
   };
+
   return (
     <div className="pageRegister">
       {registrationSuccessful ? (
@@ -171,24 +154,21 @@ export const PageRegister = (props: IPageRegisterProps) => {
                   Register
                 </button>
 
-                <div className="capture">
+                <div className="Captcha">
                   <div className="numbers">
                     <span>{firstNumber}</span>+<span>{secondNumber}</span>
                   </div>
 
                   <input
-                    value={formValues.capture}
                     type="text"
                     required
-                    name="capture"
-                    onChange={handleChange}
+                    onChange={(e) => handleCaptchaChange(e)}
                   />
                 </div>
-
-                <div className="formMessage">{formValues.formMessage}</div>
               </div>
             </div>
           </form>
+
           {formValues.errors?.length > 0 && (
             <div className="errorArea">
               <ul>

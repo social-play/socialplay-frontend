@@ -30,7 +30,7 @@ function App() {
     firstName: "",
     lastName: "",
     isOver16: false,
-    capture: "",
+    captcha: false,
     accessGroups: [],
   });
 
