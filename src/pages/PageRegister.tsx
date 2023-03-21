@@ -14,7 +14,7 @@ const initialFormValues = {
   password: "",
   email: "",
   errors: [],
-  birthDate: "",
+  isOver16: false,
   formMessage: "",
   //registrationSuccessful: false,
 };
@@ -38,7 +38,7 @@ export const PageRegister = (props: IPageRegisterProps) => {
             userName: formValues.userName,
             password: formValues.password,
             email: formValues.email,
-            birthDate: formValues.birthDate,
+            isOver16: formValues.isOver16,
           },
 
           { withCredentials: true }
@@ -111,16 +111,7 @@ export const PageRegister = (props: IPageRegisterProps) => {
                   }
                 />
               </div>
-              <div className="birthDate row">
-                <label>Birth Date:</label>
-                <input
-                  type="text"
-                  value={formValues.birthDate}
-                  onChange={(e) =>
-                    setFormValues({ ...formValues, birthDate: e.target.value })
-                  }
-                />
-              </div>
+
               <div className="email row">
                 <label>Email:</label>
                 <input
@@ -130,6 +121,20 @@ export const PageRegister = (props: IPageRegisterProps) => {
                     setFormValues({ ...formValues, email: e.target.value })
                   }
                 />
+              </div>
+              <div className="isOver16 row">
+                <label>Over 16:</label>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="sr-only peer"
+                    onChange={() =>
+                      setFormValues({ ...formValues, isOver16: true })
+                    }
+                  />
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                  <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"></span>
+                </label>
               </div>
               <div className="buttonRow">
                 <button onClick={(e) => handleRegisterButton(e)}>

@@ -29,7 +29,7 @@ function App() {
     userName: "",
     firstName: "",
     lastName: "",
-    birthDate: "",
+    isOver16: false,
     accessGroups: [],
   });
 
