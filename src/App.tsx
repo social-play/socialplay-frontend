@@ -18,6 +18,9 @@ import { PageConfirmRegistration } from "./pages/PageConfirmRegistration";
 import { PageMembers } from "./pages/PageMembers";
 import { FaSpinner } from "react-icons/fa";
 import { PageLogout } from "./pages/PageLogout";
+import { FiLogIn, FiUserPlus } from "react-icons/fi";
+
+import { HiOutlineLogin } from "react-icons/hi";
 
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -66,7 +69,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="text-5xl font-bold text-blue-600">SocialPlay</h1>
+      {/*   <h1 className="text-5xl font-bold text-blue-600">SocialPlay</h1> */}
 
       {pageIsLoaded() && currentUser.userName !== "anonymousUser" && (
         <div className="userFullName">
@@ -84,21 +87,37 @@ function App() {
             </span>
           </span>
         )}
-        {(currentUser.accessGroups.includes("members") ||
-          currentUser.accessGroups.includes("unconfirmedMembers")) && (
-          <NavLink to="/members">Members</NavLink>
-        )}
-        {currentUser.accessGroups.includes("loggedOutUsers") && (
-          <NavLink to="/register">Register</NavLink>
-        )}
-        {currentUser.accessGroups.includes("loggedOutUsers") && (
-          <NavLink to="/login">Login</NavLink>
-        )}
-        {currentUser.accessGroups.includes("loggedInUsers") && (
-          <span className="navCommand" onClick={handleLogoutButton}>
-            Logout
-          </span>
-        )}
+        <div className="navRow">
+          {(currentUser.accessGroups.includes("members") ||
+            currentUser.accessGroups.includes("unconfirmedMembers")) && (
+            <NavLink to="/members">Members</NavLink>
+          )}
+
+          {currentUser.accessGroups.includes("loggedOutUsers") && (
+            <NavLink to="/login">
+              <span className="iconRow">
+                <FiLogIn />
+                Sign in
+              </span>
+            </NavLink>
+          )}
+          {currentUser.accessGroups.includes("loggedOutUsers") && (
+            <NavLink to="/register">
+              <span className="iconRow">
+                <FiUserPlus />
+                Sign up
+              </span>
+            </NavLink>
+          )}
+          {currentUser.accessGroups.includes("loggedInUsers") && (
+            <span className="navCommand" onClick={handleLogoutButton}>
+              <span className="iconRow">
+                <HiOutlineLogin />
+                Sign out
+              </span>
+            </span>
+          )}
+        </div>
       </nav>
       <Routes>
         <Route path="*" element={<Page404 />} />
