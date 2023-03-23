@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { IUser } from "../interfaces";
 interface IPageMembersProps {
   currentUser: IUser;

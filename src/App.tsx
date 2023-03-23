@@ -22,6 +22,7 @@ import { FiLogIn, FiUserPlus } from "react-icons/fi";
 import { HiOutlineLogin } from "react-icons/hi";
 import { PageTeams } from "./pages/PageTeams";
 import { PagePlayers } from "./pages/PagePlayers";
+import { PageProfile } from "./pages/PageProfile";
 
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -98,6 +99,10 @@ function App() {
             currentUser.accessGroups.includes("unconfirmedMembers")) && (
             <NavLink to="/members">Members</NavLink>
           )}
+          {(currentUser.accessGroups.includes("members") ||
+            currentUser.accessGroups.includes("unconfirmedMembers")) && (
+            <NavLink to="/profile">Profile</NavLink>
+          )}
 
           {currentUser.accessGroups.includes("loggedOutUsers") && (
             <NavLink to="/login">
@@ -135,6 +140,13 @@ function App() {
           <Route
             path="/members"
             element={<PageMembers currentUser={currentUser} />}
+          />
+        )}
+        {(currentUser.accessGroups.includes("members") ||
+          currentUser.accessGroups.includes("unconfirmedMembers")) && (
+          <Route
+            path="/profile"
+            element={<PageProfile currentUser={currentUser} />}
           />
         )}
         <Route
