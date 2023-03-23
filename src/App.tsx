@@ -19,8 +19,9 @@ import { PageMembers } from "./pages/PageMembers";
 import { FaSpinner } from "react-icons/fa";
 import { PageLogout } from "./pages/PageLogout";
 import { FiLogIn, FiUserPlus } from "react-icons/fi";
-
 import { HiOutlineLogin } from "react-icons/hi";
+import { PageTeams } from "./pages/PageTeams";
+import { PagePlayers } from "./pages/PagePlayers";
 
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -72,15 +73,19 @@ function App() {
     <div className="App">
       {/*   <h1 className="text-5xl font-bold text-blue-600">SocialPlay</h1> */}
 
-      {pageIsLoaded() && currentUser.userName !== "anonymousUser" && (
+      {/* {pageIsLoaded() && currentUser.userName !== "anonymousUser" && (
         <div className="userFullName">
           <span>
             {currentUser.firstName} {currentUser.lastName}
           </span>
         </div>
-      )}
+      )} */}
       <nav>
-        <NavLink to="/welcome">Welcome</NavLink>
+        <div className="navRow">
+          <NavLink to="/welcome">Welcome</NavLink>
+          <NavLink to="/teamSearch">TEAMS</NavLink>
+          <NavLink to="/playerSearch">PLAYERS</NavLink>
+        </div>
         {!pageIsLoaded() && (
           <span className="navCommand">
             <span className="spinner">
@@ -123,6 +128,8 @@ function App() {
       <Routes>
         <Route path="*" element={<Page404 />} />
         <Route path="/welcome" element={<PageWelcome />} />
+        <Route path="/teamSearch" element={<PageTeams />} />
+        <Route path="/playerSearch" element={<PagePlayers />} />
         {(currentUser.accessGroups.includes("members") ||
           currentUser.accessGroups.includes("unconfirmedMembers")) && (
           <Route

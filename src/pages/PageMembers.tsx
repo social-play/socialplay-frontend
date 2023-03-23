@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { IUser } from "../interfaces";
 interface IPageMembersProps {
   currentUser: IUser;
@@ -5,6 +7,7 @@ interface IPageMembersProps {
 
 export const PageMembers = (props: IPageMembersProps) => {
   const { currentUser } = props;
+
   return (
     <>
       {currentUser.accessGroups.includes("unconfirmedMembers") && (
@@ -18,6 +21,11 @@ export const PageMembers = (props: IPageMembersProps) => {
       )}
       {currentUser.accessGroups.includes("members") && (
         <>
+          <div className="userFullName">
+            <span>
+              {currentUser.firstName} {currentUser.lastName}
+            </span>
+          </div>
           <h2>Member-Only Information</h2>
           <p>This is information that only confirmed members can see.</p>
         </>

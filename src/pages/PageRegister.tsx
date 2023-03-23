@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { IUser } from "../interfaces";
-
+import { useContext } from "react";
+import { AppContext } from "../AppContext";
+import { Helmet } from "react-helmet";
 interface IPageRegisterProps {
   baseUrl: string;
   setCurrentUser: React.Dispatch<React.SetStateAction<IUser>>;
@@ -18,6 +20,7 @@ const initialFormValues = {
   captcha: false,
 };
 export const PageRegister = (props: IPageRegisterProps) => {
+  const { appTitle } = useContext(AppContext);
   const { baseUrl, setCurrentUser } = props;
   const [formValues, setFormValues] = useState(initialFormValues);
   const [registrationSuccessful, setRegistrationSuccessful] =
@@ -69,6 +72,9 @@ export const PageRegister = (props: IPageRegisterProps) => {
 
   return (
     <div className="pageRegister">
+      <Helmet>
+        <title>{appTitle} - Register</title>
+      </Helmet>
       {registrationSuccessful ? (
         <div className="registrationSuccessfulArea">
           <p>Thank you for registering!</p>

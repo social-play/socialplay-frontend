@@ -1,0 +1,103 @@
+.pageWelcome {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    .gamesPosts {
+        .gamesPost {
+            display: flex;
+            margin-bottom: 1rem;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem;
+            justify-content: space-between;
+            height: max-content;
+            .image {
+                width: 150px;
+                height: 200px;
+
+                img {
+                    width: 140px;
+                    height: 200px;
+                }
+            }
+            .showData {
+                display: flex;
+                flex-flow: column wrap;
+                row-gap: 10px;
+                width: 100%;
+                .title {
+                    a {
+                        color: gold;
+                    }
+                }
+                .description {
+                    font-size: 10px;
+                    font-style: italic;
+                    padding: 5px;
+                    word-break: break-all;
+                }
+                span {
+                    color: orange;
+                }
+            }
+            form {
+                width: 100%;
+
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                label {
+                    width: 3rem;
+                }
+
+                input,
+                textArea {
+                    width: 100%;
+                    padding: 0.5rem;
+                    color: #222;
+                }
+                textArea {
+                    resize: none;
+                    height: 5rem;
+                }
+            }
+
+            .row {
+                display: flex;
+                align-items: center;
+                column-gap: 5rem;
+            }
+        }
+    }
+    .addedArea {
+        background-color: #555;
+        height: 100%;
+        padding: 0.5rem;
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 10px 0;
+        }
+        input,
+        textArea {
+            padding: 5px;
+        }
+        textArea {
+            font-style: italic;
+            word-break: break-all;
+            height: 100px;
+        }
+    }
+}
+.buttons {
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+}
+button {
+    padding: 2px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}

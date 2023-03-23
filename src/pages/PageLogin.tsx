@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { IUser } from "../interfaces";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { useContext } from "react";
+import { AppContext } from "../AppContext";
 
 interface IPageLoginProps {
   baseUrl: string;
@@ -9,6 +12,7 @@ interface IPageLoginProps {
 }
 
 export const PageLogin = (props: IPageLoginProps) => {
+  const { appTitle } = useContext(AppContext);
   const { baseUrl, setCurrentUser } = props;
   const [formMessage, setFormMessage] = useState("");
   const [userName, setUsername] = useState("");
@@ -53,6 +57,9 @@ export const PageLogin = (props: IPageLoginProps) => {
 
   return (
     <div className="pageLogin">
+      <Helmet>
+        <title>{appTitle} - Login</title>
+      </Helmet>
       <form>
         <div className="row">
           <label>Username:</label>
