@@ -28,6 +28,7 @@ const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
   const [currentUser, setCurrentUser] = useState<IUser>({
+    _id: "",
     userName: "",
     firstName: "",
     lastName: "",

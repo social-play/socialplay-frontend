@@ -4,7 +4,7 @@ import {
   IAppContext,
   IAppProvider,
   IGamesPosts,
-  IEditBook,
+  IEditGamePost,
   blankNewBook,
 } from "./interfaces";
 import axios from "axios";
@@ -17,29 +17,30 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   const appTitle: string = "info site";
   const [gamesPosts, setGamesPosts] = useState<IGamesPosts[]>([]);
   const [isAdding, setIsAdding] = useState(false);
-  const [newGamesPost, setNewGamesPost] = useState<IEditBook>(blankNewBook);
+  const [newGamesPost, setNewGamesPost] = useState<IEditGamePost>(blankNewBook);
   const [password, setPassword] = useState("");
   const [adminIsLoggedIn, setAdminIsLoggedIn] = useState(false);
 
-  // load newBooks after adding newBook
+  // load newGamesPosts after adding newGamesPosts
 
   const loadGamesPosts = async () => {
     (async () => {
-      const _books: IGamesPosts[] = [];
-      const _rawBooks = (await axios.get(`${backendUrl}/gamesPosts`)).data;
-      _rawBooks.forEach((rawBook: any) => {
+      const _newGamesPosts: IGamesPosts[] = [];
+      const _rawNewGamesPosts = (await axios.get(`${backendUrl}/gamesPosts`))
+        .data;
+      _rawNewGamesPosts.forEach((rawNewGamesPost: any) => {
         const _newGamesPost: IGamesPosts = {
-          ...rawBook,
+          ...rawNewGamesPost,
           isBeingEdited: false,
           originalEditFields: {
-            title: rawBook.title,
-            description: rawBook.description,
-            language: rawBook.language,
+            title: rawNewGamesPost.title,
+            description: rawNewGamesPost.description,
+            language: rawNewGamesPost.language,
           },
         };
-        _books.push(_newGamesPost);
+        _newGamesPosts.push(_newGamesPost);
       });
-      setGamesPosts(_books);
+      setGamesPosts(_newGamesPosts);
     })();
   };
 
@@ -50,22 +51,23 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   // data from backend with some adds
   useEffect(() => {
     (async () => {
-      const _rawBooks = (await axios.get(`${backendUrl}/gamesPosts`)).data;
-      const _books: IGamesPosts[] = [];
-      _rawBooks.forEach((rawBook: any) => {
+      const _rawNewGamesPosts = (await axios.get(`${backendUrl}/gamesPosts`))
+        .data;
+      const _newGamesPosts: IGamesPosts[] = [];
+      _rawNewGamesPosts.forEach((rawNewGamesPost: any) => {
         const book: IGamesPosts = {
-          ...rawBook,
+          ...rawNewGamesPost,
           isBeingEdited: false,
           originalEditFields: {
-            title: rawBook.title,
-            description: rawBook.description,
-            language: rawBook.language,
+            title: rawNewGamesPost.title,
+            description: rawNewGamesPost.description,
+            language: rawNewGamesPost.language,
           },
         };
-        _books.push(book);
+        _newGamesPosts.push(book);
       });
 
-      setGamesPosts(_books);
+      setGamesPosts(_newGamesPosts);
     })();
   }, []);
 
@@ -118,7 +120,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     book: IGamesPosts,
     value: string
   ) => {
-    book.originalEditFields[fieldIdCode as keyof IEditBook] = value;
+    book.originalEditFields[fieldIdCode as keyof IEditGamePost] = value;
     setGamesPosts([...gamesPosts]);
   };
 
@@ -144,10 +146,10 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
   const handleAddBookFieldsChange = (
     fieldIdCode: string,
-    newGamesPost: IEditBook,
+    newGamesPost: IEditGamePost,
     value: string
   ) => {
-    newGamesPost[fieldIdCode as keyof IEditBook] = value;
+    newGamesPost[fieldIdCode as keyof IEditGamePost] = value;
     setNewGamesPost({ ...newGamesPost });
   };
 

@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export const Page404 = () => {
   const navigate = useNavigate();
-  navigate("/");
+  useEffect(() => {
+    navigate("/");
+  }, []);
 
-  return <div></div>;
+  return <></>;
 };

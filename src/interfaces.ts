@@ -1,4 +1,5 @@
 export interface IUser {
+  _id: string;
   userName: string;
   firstName: string;
   lastName: string;
@@ -25,10 +26,10 @@ export interface IAppContext {
   ) => void;
   handleToggleAddBook: () => void;
   isAdding: boolean;
-  newGamesPost: IEditBook;
+  newGamesPost: IEditGamePost;
   handleAddBookFieldsChange: (
     fieldIdCode: string,
-    newGamesPost: IEditBook,
+    newGamesPost: IEditGamePost,
     value: string
   ) => void;
   handleSaveNewBook: () => void;
@@ -49,16 +50,16 @@ export interface IGamesPosts {
   buyUrl: String;
   languageText: string;
   isBeingEdited: boolean;
-  originalEditFields: IEditBook;
+  originalEditFields: IEditGamePost;
 }
 
-export interface IEditBook {
+export interface IEditGamePost {
   title: string;
   description: string;
   language: string;
 }
 
-export const blankNewBook: IEditBook = {
+export const blankNewBook: IEditGamePost = {
   title: "",
   description: "",
   language: "",
