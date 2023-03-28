@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { AppContext } from "../AppContext";
 import { Helmet } from "react-helmet";
-import "../styles/pageWelcome.scss";
+import "../styles/pages/pageWelcome.scss";
 
 export const PageWelcome = () => {
   const {
     appTitle,
     gamesPosts,
-    handleEditBook,
-    handleCancelEditBook,
+    handleEditGamesPost,
+    handleCancelEditGamesPost,
     handleSaveEditBook,
     handleChangeEditBook,
     handleToggleAddBook,
@@ -146,7 +146,7 @@ export const PageWelcome = () => {
                     </button>
                     <button
                       type="button"
-                      onClick={() => handleEditBook(gamesPost)}
+                      onClick={() => handleEditGamesPost(gamesPost)}
                     >
                       Edit
                     </button>
@@ -197,7 +197,7 @@ export const PageWelcome = () => {
                   <div className="buttons">
                     <button
                       type="button"
-                      onClick={() => handleCancelEditBook(gamesPost)}
+                      onClick={() => handleCancelEditGamesPost(gamesPost)}
                     >
                       Cancel
                     </button>

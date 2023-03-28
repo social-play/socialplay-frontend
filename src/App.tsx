@@ -35,6 +35,8 @@ function App() {
     isOver16: false,
     captcha: false,
     accessGroups: [],
+    fileName: "",
+    email: "",
   });
 
   const navigate = useNavigate();

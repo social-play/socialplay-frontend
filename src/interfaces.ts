@@ -6,6 +6,8 @@ export interface IUser {
   isOver16: boolean;
   captcha: boolean;
   accessGroups: string[];
+  fileName: string;
+  email: string;
 }
 
 // gamesposts
@@ -16,9 +18,9 @@ export interface IAppProvider {
 export interface IAppContext {
   gamesPosts: IGamesPosts[];
   appTitle: string;
-  handleEditBook: (book: IGamesPosts) => void;
-  handleCancelEditBook: (book: IGamesPosts) => void;
-  handleSaveEditBook: (book: IGamesPosts) => void;
+  handleEditGamesPost: (gamesPost: IGamesPosts) => void;
+  handleCancelEditGamesPost: (gamesPost: IGamesPosts) => void;
+  handleSaveEditBook: (gamesPost: IGamesPosts) => void;
   handleChangeEditBook: (
     fieldIdCode: string,
     book: IGamesPosts,
@@ -39,7 +41,20 @@ export interface IAppContext {
   adminIsLoggedIn: boolean;
   setPassword: (password: string) => void;
   logoutAsAdmin: () => void;
+  uploadFile: IUploadFile;
+  setUploadFile: (file: IUploadFile) => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>, id: string) => void;
+  handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+export const _initialUploadFile: IUploadFile = {
+  preview: "",
+  file: null,
+};
+export interface IUploadFile {
+  file: File | null;
+  preview: string;
+}
+
 export interface IGamesPosts {
   _id: string;
   title: string;

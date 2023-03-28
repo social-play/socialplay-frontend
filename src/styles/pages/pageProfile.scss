@@ -1,0 +1,70 @@
+@use "../variables" as *;
+
+.pageProfile {
+    padding-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+    gap: 1rem;
+    span {
+        color: $Lime;
+        padding: 5px;
+        width: fit-content;
+        font-size: 1.5rem;
+    }
+
+    .userImage {
+        height: 150px;
+        width: 150px;
+        border-radius: 100%;
+        border: solid $secondMainColor;
+
+        img {
+            border-radius: 100%;
+            height: 100%;
+            width: 100%;
+        }
+    }
+    .userDetails {
+        display: flex;
+        flex-flow: column wrap;
+
+        .editIcon {
+            color: $secondMainColor;
+            font-size: 2rem;
+            padding: 0;
+            width: max-content;
+        }
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.5rem;
+
+        label {
+            width: 3rem;
+        }
+
+        input,
+        textArea {
+            width: 100%;
+            padding: 0.5rem;
+            color: #222;
+        }
+        textArea {
+            resize: none;
+            height: 5rem;
+        }
+        .preview {
+            padding: 1rem 0;
+        }
+        .buttonArea {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+    }
+}
