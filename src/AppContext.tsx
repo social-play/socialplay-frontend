@@ -5,7 +5,7 @@ import {
   IAppProvider,
   IGamesPosts,
   IEditGamePost,
-  blankNewBook,
+  blankNewGamesPost,
   IUploadFile,
   _initialUploadFile,
 } from "./interfaces";
@@ -19,7 +19,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   const appTitle: string = "info site";
   const [gamesPosts, setGamesPosts] = useState<IGamesPosts[]>([]);
   const [isAdding, setIsAdding] = useState(false);
-  const [newGamesPost, setNewGamesPost] = useState<IEditGamePost>(blankNewBook);
+  const [newGamesPost, setNewGamesPost] =
+    useState<IEditGamePost>(blankNewGamesPost);
   const [password, setPassword] = useState("");
   const [adminIsLoggedIn, setAdminIsLoggedIn] = useState(false);
 
@@ -94,7 +95,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         .data;
       const _newGamesPosts: IGamesPosts[] = [];
       _rawNewGamesPosts.forEach((rawNewGamesPost: any) => {
-        const book: IGamesPosts = {
+        const gamesPost: IGamesPosts = {
           ...rawNewGamesPost,
           isBeingEdited: false,
           originalEditFields: {
@@ -103,7 +104,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
             language: rawNewGamesPost.language,
           },
         };
-        _newGamesPosts.push(book);
+        _newGamesPosts.push(gamesPost);
       });
 
       setGamesPosts(_newGamesPosts);
@@ -111,25 +112,25 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   }, []);
 
   // edit btn
-  const handleEditGamesPost = (book: IGamesPosts) => {
-    book.isBeingEdited = true;
+  const handleEditGamesPost = (gamesPost: IGamesPosts) => {
+    gamesPost.isBeingEdited = true;
     setGamesPosts([...gamesPosts]);
   };
 
   // cancel btn
-  const handleCancelEditGamesPost = (book: IGamesPosts) => {
-    book.isBeingEdited = false;
+  const handleCancelEditGamesPost = (gamesPost: IGamesPosts) => {
+    gamesPost.isBeingEdited = false;
     // to reset any values that were changed
-    book.originalEditFields = {
-      title: book.title,
-      description: book.description,
-      language: book.language,
+    gamesPost.originalEditFields = {
+      title: gamesPost.title,
+      description: gamesPost.description,
+      language: gamesPost.language,
     };
     setGamesPosts([...gamesPosts]);
   };
 
   // save btn
-  const handleSaveEditBook = async (gamesPost: IGamesPosts) => {
+  const handleSaveEditGamesPost = async (gamesPost: IGamesPosts) => {
     try {
       // save  in backend
       await axios.patch(
@@ -154,18 +155,18 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   };
 
   // inputs
-  const handleChangeEditBook = (
+  const handleChangeEditGamesPost = (
     fieldIdCode: string,
-    book: IGamesPosts,
+    gamesPost: IGamesPosts,
     value: string
   ) => {
-    book.originalEditFields[fieldIdCode as keyof IEditGamePost] = value;
+    gamesPost.originalEditFields[fieldIdCode as keyof IEditGamePost] = value;
     setGamesPosts([...gamesPosts]);
   };
 
   // delete BTN
 
-  const handleDeleteBook = async (gamesPost: IGamesPosts) => {
+  const handleDeleteGamesPost = async (gamesPost: IGamesPosts) => {
     try {
       await axios.delete(`${backendUrl}/gamesPost/${gamesPost._id}`, {
         withCredentials: true,
@@ -177,15 +178,15 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     } catch (error) {}
   };
 
-  // add BTN new Book
-  const handleToggleAddBook = () => {
-    setNewGamesPost({ ...blankNewBook });
+  // add BTN new GamesPost
+  const handleToggleAddGamesPost = () => {
+    setNewGamesPost({ ...blankNewGamesPost });
     setIsAdding(!isAdding);
   };
 
-  // newBook inputs
+  // newGamesPost inputs
 
-  const handleAddBookFieldsChange = (
+  const handleAddGamesPostFieldsChange = (
     fieldIdCode: string,
     newGamesPost: IEditGamePost,
     value: string
@@ -194,9 +195,9 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     setNewGamesPost({ ...newGamesPost });
   };
 
-  // post a newBook by click
+  // post a newGamesPost by click
 
-  const handleSaveNewBook = async () => {
+  const handleSaveNewGamesPost = async () => {
     try {
       await axios.post(
         `${backendUrl}/gamesPost`,
@@ -213,7 +214,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       );
       loadGamesPosts();
       setIsAdding(false);
-      setNewGamesPost({ ...blankNewBook });
+      setNewGamesPost({ ...blankNewGamesPost });
     } catch (error) {
       throw new Error(`${error}`);
     }
@@ -262,14 +263,14 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         appTitle,
         handleEditGamesPost,
         handleCancelEditGamesPost,
-        handleSaveEditBook,
-        handleChangeEditBook,
-        handleToggleAddBook,
+        handleSaveEditGamesPost,
+        handleChangeEditGamesPost,
+        handleToggleAddGamesPost,
         isAdding,
         newGamesPost,
-        handleAddBookFieldsChange,
-        handleSaveNewBook,
-        handleDeleteBook,
+        handleAddGamesPostFieldsChange,
+        handleSaveNewGamesPost,
+        handleDeleteGamesPost,
         password,
         loginAsAdmin,
         adminIsLoggedIn,

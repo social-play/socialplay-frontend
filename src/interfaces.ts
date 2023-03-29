@@ -20,22 +20,22 @@ export interface IAppContext {
   appTitle: string;
   handleEditGamesPost: (gamesPost: IGamesPosts) => void;
   handleCancelEditGamesPost: (gamesPost: IGamesPosts) => void;
-  handleSaveEditBook: (gamesPost: IGamesPosts) => void;
-  handleChangeEditBook: (
+  handleSaveEditGamesPost: (gamesPost: IGamesPosts) => void;
+  handleChangeEditGamesPost: (
     fieldIdCode: string,
-    book: IGamesPosts,
+    gamesPost: IGamesPosts,
     value: string
   ) => void;
-  handleToggleAddBook: () => void;
+  handleToggleAddGamesPost: () => void;
   isAdding: boolean;
   newGamesPost: IEditGamePost;
-  handleAddBookFieldsChange: (
+  handleAddGamesPostFieldsChange: (
     fieldIdCode: string,
     newGamesPost: IEditGamePost,
     value: string
   ) => void;
-  handleSaveNewBook: () => void;
-  handleDeleteBook: (book: IGamesPosts) => void;
+  handleSaveNewGamesPost: () => void;
+  handleDeleteGamesPost: (gamesPost: IGamesPosts) => void;
   password: string;
   loginAsAdmin: (onSuccess: () => void, onFailure: () => void) => void;
   adminIsLoggedIn: boolean;
@@ -74,7 +74,7 @@ export interface IEditGamePost {
   language: string;
 }
 
-export const blankNewBook: IEditGamePost = {
+export const blankNewGamesPost: IEditGamePost = {
   title: "",
   description: "",
   language: "",

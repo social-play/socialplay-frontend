@@ -9,14 +9,14 @@ export const PageWelcome = () => {
     gamesPosts,
     handleEditGamesPost,
     handleCancelEditGamesPost,
-    handleSaveEditBook,
-    handleChangeEditBook,
-    handleToggleAddBook,
+    handleSaveEditGamesPost,
+    handleChangeEditGamesPost,
+    handleToggleAddGamesPost,
     isAdding,
     newGamesPost,
-    handleAddBookFieldsChange,
-    handleSaveNewBook,
-    handleDeleteBook,
+    handleAddGamesPostFieldsChange,
+    handleSaveNewGamesPost,
+    handleDeleteGamesPost,
   } = useContext(AppContext);
 
   return (
@@ -27,7 +27,11 @@ export const PageWelcome = () => {
       <h2>{gamesPosts.length} TEAMS IN SEARCH OF PLAYERS</h2>
 
       {!isAdding ? (
-        <button className="addBtn" type="button" onClick={handleToggleAddBook}>
+        <button
+          className="addBtn"
+          type="button"
+          onClick={handleToggleAddGamesPost}
+        >
           Create
         </button>
       ) : (
@@ -39,7 +43,11 @@ export const PageWelcome = () => {
               type="text"
               name="title"
               onChange={(e) =>
-                handleAddBookFieldsChange("title", newGamesPost, e.target.value)
+                handleAddGamesPostFieldsChange(
+                  "title",
+                  newGamesPost,
+                  e.target.value
+                )
               }
             />
           </div>
@@ -49,7 +57,7 @@ export const PageWelcome = () => {
               value={newGamesPost.description}
               name="description"
               onChange={(e) =>
-                handleAddBookFieldsChange(
+                handleAddGamesPostFieldsChange(
                   "description",
                   newGamesPost,
                   e.target.value
@@ -63,7 +71,7 @@ export const PageWelcome = () => {
               type="text"
               name="numberOfPage"
               onChange={(e) =>
-                handleAddBookFieldsChange(
+                handleAddGamesPostFieldsChange(
                   "numberOfPage",
                   newGamesPost,
                   e.target.value
@@ -78,7 +86,7 @@ export const PageWelcome = () => {
               type="text"
               name="language"
               onChange={(e) =>
-                handleAddBookFieldsChange(
+                handleAddGamesPostFieldsChange(
                   "language",
                   newGamesPost,
                   e.target.value
@@ -92,7 +100,7 @@ export const PageWelcome = () => {
               type="text"
               name="imageUrl"
               onChange={(e) =>
-                handleAddBookFieldsChange(
+                handleAddGamesPostFieldsChange(
                   "imageUrl",
                   newGamesPost,
                   e.target.value
@@ -106,7 +114,7 @@ export const PageWelcome = () => {
               type="text"
               name="buyUrl"
               onChange={(e) =>
-                handleAddBookFieldsChange(
+                handleAddGamesPostFieldsChange(
                   "buyUrl",
                   newGamesPost,
                   e.target.value
@@ -115,10 +123,10 @@ export const PageWelcome = () => {
             />
           </div>
           <div className="buttons">
-            <button type="button" onClick={handleToggleAddBook}>
+            <button type="button" onClick={handleToggleAddGamesPost}>
               Cancel
             </button>
-            <button type="button" onClick={handleSaveNewBook}>
+            <button type="button" onClick={handleSaveNewGamesPost}>
               Save
             </button>
           </div>
@@ -140,7 +148,7 @@ export const PageWelcome = () => {
                   <div className="buttons">
                     <button
                       type="button"
-                      onClick={() => handleDeleteBook(gamesPost)}
+                      onClick={() => handleDeleteGamesPost(gamesPost)}
                     >
                       Delete
                     </button>
@@ -161,7 +169,11 @@ export const PageWelcome = () => {
                       value={gamesPost.originalEditFields.title}
                       name="title"
                       onChange={(e) =>
-                        handleChangeEditBook("title", gamesPost, e.target.value)
+                        handleChangeEditGamesPost(
+                          "title",
+                          gamesPost,
+                          e.target.value
+                        )
                       }
                     />
                   </div>
@@ -171,7 +183,7 @@ export const PageWelcome = () => {
                       value={gamesPost.originalEditFields.description}
                       name="description"
                       onChange={(e) =>
-                        handleChangeEditBook(
+                        handleChangeEditGamesPost(
                           "description",
                           gamesPost,
                           e.target.value
@@ -186,7 +198,7 @@ export const PageWelcome = () => {
                       value={gamesPost.originalEditFields.language}
                       name="language"
                       onChange={(e) =>
-                        handleChangeEditBook(
+                        handleChangeEditGamesPost(
                           "language",
                           gamesPost,
                           e.target.value
@@ -203,7 +215,7 @@ export const PageWelcome = () => {
                     </button>
                     <button
                       type="button"
-                      onClick={() => handleSaveEditBook(gamesPost)}
+                      onClick={() => handleSaveEditGamesPost(gamesPost)}
                     >
                       Save
                     </button>

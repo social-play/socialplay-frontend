@@ -89,13 +89,21 @@ function App() {
           </span>
         )}
         <div className="navRow">
+          <div className="profileImage">
+            {(currentUser.accessGroups.includes("members") ||
+              currentUser.accessGroups.includes("unconfirmedMembers")) && (
+              <>
+                <img
+                  src={`${baseUrl}/images/${currentUser._id}.png`}
+                  className="userImage"
+                />
+                <NavLink to="/profile">Profile</NavLink>
+              </>
+            )}
+          </div>
           {(currentUser.accessGroups.includes("members") ||
             currentUser.accessGroups.includes("unconfirmedMembers")) && (
             <NavLink to="/members">Members</NavLink>
-          )}
-          {(currentUser.accessGroups.includes("members") ||
-            currentUser.accessGroups.includes("unconfirmedMembers")) && (
-            <NavLink to="/profile">Profile</NavLink>
           )}
 
           {currentUser.accessGroups.includes("loggedOutUsers") && (
