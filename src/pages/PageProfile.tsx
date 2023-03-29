@@ -108,10 +108,10 @@ export const PageProfile = (props: IPageMembersProps) => {
               <input
                 type="file"
                 onChange={(e) => handleFileChange(e)}
-                className="block w-full mb-5 text-xs text-blue-900 border border-blue-300 rounded-lg  bg-blue-50 dark:text-blue-400 focus:outline-none dark:bg-blue-700 dark:border-blue-600 dark:placeholder-gray-400"
+                className="block w-full mb-5 text-l text-blue-900 border border-blue-300 rounded-lg  bg-blue-50 dark:text-blue-400 focus:outline-none dark:bg-blue-700 dark:border-blue-600 dark:placeholder-gray-400"
               />
               <p
-                className="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                className="mt-1 text-gray-500 dark:text-gray-300"
                 id="file_input_help"
               >
                 {/* SVG, PNG, JPG or GIF (MAX. 800x400px). */}

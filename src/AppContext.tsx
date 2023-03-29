@@ -45,7 +45,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   });
 
   const [imageSrc, setImageSrc] = useState(
-    `${backendUrl}/images/${currentUser._id}.png`
+    `${backendUrl}/images/${currentUser.userName}.png`
   );
 
   const refreshImage = () => {
@@ -55,7 +55,13 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     // } else if (imageSrc.endsWith(".jpg")) {
     //   extension = ".jpg";
     // }
-    setImageSrc(`${backendUrl}/images/${currentUser._id}.png?${Math.random()}`);
+    if (currentUser.userName === "") {
+      setImageSrc(`${backendUrl}/images/anonymousUser.png?${Math.random()}`);
+    } else {
+      setImageSrc(
+        `${backendUrl}/images/${currentUser.userName}.png?${Math.random()}`
+      );
+    }
   };
 
   useEffect(() => {
@@ -100,11 +106,15 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       let formData = new FormData();
       formData.append("file", uploadFile.file);
       formData.append("fileName", uploadFile.file.name);
-      formData.append("id", userId);
+      formData.append("userName", currentUser.userName);
 
-      await axios.post(`${backendUrl}/uploadFile/${userId}`, formData, {
-        withCredentials: true,
-      });
+      await axios.post(
+        `${backendUrl}/uploadFile/${currentUser.userName}`,
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
 
       setUploadFile({ ..._initialUploadFile });
     }
