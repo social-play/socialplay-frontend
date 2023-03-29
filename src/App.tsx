@@ -75,15 +75,6 @@ function App() {
 
   return (
     <div className="App">
-      {/*   <h1 className="text-5xl font-bold text-blue-600">SocialPlay</h1> */}
-
-      {/* {pageIsLoaded() && currentUser.userName !== "anonymousUser" && (
-        <div className="userFullName">
-          <span>
-            {currentUser.firstName} {currentUser.lastName}
-          </span>
-        </div>
-      )} */}
       <nav>
         <div className="navRow">
           <NavLink to="/welcome">Welcome</NavLink>

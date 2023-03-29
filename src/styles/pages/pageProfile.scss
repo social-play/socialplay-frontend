@@ -13,17 +13,19 @@
         width: fit-content;
         font-size: 1.5rem;
     }
-
-    .userImage {
-        height: 150px;
-        width: 150px;
-        border-radius: 100%;
-        border: solid $secondMainColor;
-
-        img {
+    .uploadImage {
+        .userImage {
+            height: 150px;
+            width: 150px;
             border-radius: 100%;
-            height: 100%;
-            width: 100%;
+            border: solid $secondMainColor;
+
+            img {
+                border-radius: 100%;
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
         }
     }
     .userDetails {
@@ -43,21 +45,11 @@
         align-items: center;
         gap: 1rem;
         padding: 0.5rem;
-
-        label {
-            width: 3rem;
-        }
-
-        input,
-        textArea {
-            width: 100%;
+        input {
             padding: 0.5rem;
             color: #222;
         }
-        textArea {
-            resize: none;
-            height: 5rem;
-        }
+
         .preview {
             padding: 1rem 0;
         }
