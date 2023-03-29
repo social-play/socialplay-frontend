@@ -1,12 +1,6 @@
 import "./styles/App.scss";
 import "./tailwindGlobal.css";
-import {
-  NavLink,
-  Routes,
-  Route,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import { NavLink, Routes, Route, Navigate } from "react-router-dom";
 import { Page404 } from "./pages/Page404";
 import { PageWelcome } from "./pages/PageWelcome";
 import { PageRegister } from "./pages/PageRegister";
@@ -23,52 +17,54 @@ import { HiOutlineLogin } from "react-icons/hi";
 import { PageTeams } from "./pages/PageTeams";
 import { PagePlayers } from "./pages/PagePlayers";
 import { PageProfile } from "./pages/PageProfile";
+import { useContext } from "react";
+import { AppContext } from "./AppContext";
 
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
-  const [currentUser, setCurrentUser] = useState<IUser>({
-    _id: "",
-    userName: "",
-    firstName: "",
-    lastName: "",
-    isOver16: false,
-    captcha: false,
-    accessGroups: [],
-    fileName: "",
-    email: "",
-  });
+  const { handleLogoutButton, currentUser, setCurrentUser, imageSrc } =
+    useContext(AppContext);
+  // const [currentUser, setCurrentUser] = useState<IUser>({
+  //   _id: "",
+  //   userName: "",
+  //   firstName: "",
+  //   lastName: "",
+  //   isOver16: false,
+  //   captcha: false,
+  //   accessGroups: [],
+  //   fileName: "",
+  //   email: "",
+  // });
 
-  const navigate = useNavigate();
+  // useEffect(() => {
+  //   (async () => {
+  //     const data = (
+  //       await axios.get(`${baseUrl}/current-user`, {
+  //         withCredentials: true,
+  //       })
+  //     ).data;
+  //     const _currentUser = data.currentUser;
+  //     setCurrentUser(_currentUser);
+  //   })();
+  // }, []);
 
-  useEffect(() => {
-    (async () => {
-      const data = (
-        await axios.get(`${baseUrl}/current-user`, {
-          withCredentials: true,
-        })
-      ).data;
-      const _currentUser = data.currentUser;
-      setCurrentUser(_currentUser);
-    })();
-  }, []);
-
-  const handleLogoutButton = () => {
-    (async () => {
-      const data = (
-        await axios.get(`${baseUrl}/logout`, {
-          withCredentials: true,
-        })
-      ).data;
-      const _currentUser = data.currentUser;
-      if (_currentUser.userName === "anonymousUser") {
-        setCurrentUser(_currentUser);
-        navigate("/");
-      } else {
-        throw new Error("ERROR: no anonymous user");
-      }
-    })();
-  };
+  // const handleLogoutButton = () => {
+  //   (async () => {
+  //     const data = (
+  //       await axios.get(`${baseUrl}/logout`, {
+  //         withCredentials: true,
+  //       })
+  //     ).data;
+  //     const _currentUser = data.currentUser;
+  //     if (_currentUser.userName === "anonymousUser") {
+  //       setCurrentUser(_currentUser);
+  //       navigate("/");
+  //     } else {
+  //       throw new Error("ERROR: no anonymous user");
+  //     }
+  //   })();
+  // };
   const pageIsLoaded = () => {
     return currentUser.userName !== "";
   };
@@ -97,10 +93,7 @@ function App() {
             {(currentUser.accessGroups.includes("members") ||
               currentUser.accessGroups.includes("unconfirmedMembers")) && (
               <>
-                <img
-                  src={`${baseUrl}/images/${currentUser._id}.png`}
-                  className="userImage"
-                />
+                <img src={imageSrc} className="userImage" />
                 <NavLink to="/profile"> Profile</NavLink>
               </>
             )}
@@ -151,34 +144,14 @@ function App() {
             element={<PageProfile currentUser={currentUser} />}
           />
         )}
-        <Route
-          path="/register"
-          element={
-            <PageRegister baseUrl={baseUrl} setCurrentUser={setCurrentUser} />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PageLogin baseUrl={baseUrl} setCurrentUser={setCurrentUser} />
-          }
-        />
+        <Route path="/register" element={<PageRegister baseUrl={baseUrl} />} />
+        <Route path="/login" element={<PageLogin baseUrl={baseUrl} />} />
         {currentUser.accessGroups.includes("loggedInUsers") && (
-          <Route
-            path="/logout"
-            element={
-              <PageLogout baseUrl={baseUrl} setCurrentUser={setCurrentUser} />
-            }
-          />
+          <Route path="/logout" element={<PageLogout baseUrl={baseUrl} />} />
         )}
         <Route
           path="/confirm-registration/:confirmationCode"
-          element={
-            <PageConfirmRegistration
-              baseUrl={baseUrl}
-              setCurrentUser={setCurrentUser}
-            />
-          }
+          element={<PageConfirmRegistration baseUrl={baseUrl} />}
         />
         <Route path="/" element={<Navigate to="/welcome" replace />} />
       </Routes>

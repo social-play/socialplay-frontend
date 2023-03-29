@@ -6,7 +6,6 @@ import { AppContext } from "../AppContext";
 import { Helmet } from "react-helmet";
 interface IPageRegisterProps {
   baseUrl: string;
-  setCurrentUser: React.Dispatch<React.SetStateAction<IUser>>;
 }
 
 const initialFormValues = {
@@ -20,8 +19,8 @@ const initialFormValues = {
   captcha: false,
 };
 export const PageRegister = (props: IPageRegisterProps) => {
-  const { appTitle } = useContext(AppContext);
-  const { baseUrl, setCurrentUser } = props;
+  const { appTitle, setCurrentUser } = useContext(AppContext);
+  const { baseUrl } = props;
   const [formValues, setFormValues] = useState(initialFormValues);
   const [registrationSuccessful, setRegistrationSuccessful] =
     useState<boolean>(false);

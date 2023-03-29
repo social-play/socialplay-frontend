@@ -20,11 +20,12 @@ export const PageProfile = (props: IPageMembersProps) => {
   const handleEditBook = () => {
     setShowForm(true);
   };
-  const { uploadFile, handleSubmit, handleFileChange } = useContext(AppContext);
+  const { uploadFile, handleSubmit, handleFileChange, imageSrc, refreshImage } =
+    useContext(AppContext);
 
-  const [imageSrc, setImageSrc] = useState(
-    `${baseUrl}/images/${currentUser._id}.png`
-  );
+  // const [imageSrc, setImageSrc] = useState(
+  //   `${baseUrl}/images/${currentUser._id}.png`
+  // );
 
   const updateUserProfileData = async () => {
     try {
@@ -54,15 +55,15 @@ export const PageProfile = (props: IPageMembersProps) => {
     setUserFormData({ ...userFormData });
   };
 
-  const refreshImage = () => {
-    // let extension;
-    // if (imageSrc.endsWith(".png")) {
-    //   extension = ".png";
-    // } else if (imageSrc.endsWith(".jpg")) {
-    //   extension = ".jpg";
-    // }
-    setImageSrc(`${baseUrl}/images/${currentUser._id}.png?${Math.random()}`);
-  };
+  // const refreshImage = () => {
+  //   // let extension;
+  //   // if (imageSrc.endsWith(".png")) {
+  //   //   extension = ".png";
+  //   // } else if (imageSrc.endsWith(".jpg")) {
+  //   //   extension = ".jpg";
+  //   // }
+  //   setImageSrc(`${baseUrl}/images/${currentUser._id}.png?${Math.random()}`);
+  // };
 
   return (
     <div className="pageProfile">

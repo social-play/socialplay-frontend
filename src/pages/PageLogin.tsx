@@ -8,12 +8,11 @@ import { AppContext } from "../AppContext";
 
 interface IPageLoginProps {
   baseUrl: string;
-  setCurrentUser: React.Dispatch<React.SetStateAction<IUser>>;
 }
 
 export const PageLogin = (props: IPageLoginProps) => {
-  const { appTitle } = useContext(AppContext);
-  const { baseUrl, setCurrentUser } = props;
+  const { appTitle, setCurrentUser } = useContext(AppContext);
+  const { baseUrl } = props;
   const [formMessage, setFormMessage] = useState("");
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");

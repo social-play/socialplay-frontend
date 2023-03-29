@@ -45,6 +45,11 @@ export interface IAppContext {
   setUploadFile: (file: IUploadFile) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>, id: string) => void;
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  currentUser: IUser;
+  setCurrentUser: (currentUser: IUser) => void;
+  handleLogoutButton: () => void;
+  imageSrc: string;
+  refreshImage: () => void;
 }
 export const _initialUploadFile: IUploadFile = {
   preview: "",

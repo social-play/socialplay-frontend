@@ -8,8 +8,11 @@ import {
   blankNewGamesPost,
   IUploadFile,
   _initialUploadFile,
+  IUser,
 } from "./interfaces";
 import axios from "axios";
+
+import { useNavigate } from "react-router-dom";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -28,6 +31,65 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   const [uploadFile, setUploadFile] = useState<IUploadFile>({
     ..._initialUploadFile,
   });
+  // const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState<IUser>({
+    _id: "",
+    userName: "",
+    firstName: "",
+    lastName: "",
+    isOver16: false,
+    captcha: false,
+    accessGroups: [],
+    fileName: "",
+    email: "",
+  });
+
+  const [imageSrc, setImageSrc] = useState(
+    `${backendUrl}/images/${currentUser._id}.png`
+  );
+
+  const refreshImage = () => {
+    // let extension;
+    // if (imageSrc.endsWith(".png")) {
+    //   extension = ".png";
+    // } else if (imageSrc.endsWith(".jpg")) {
+    //   extension = ".jpg";
+    // }
+    setImageSrc(`${backendUrl}/images/${currentUser._id}.png?${Math.random()}`);
+  };
+
+  useEffect(() => {
+    (async () => {
+      const data = (
+        await axios.get(`${backendUrl}/current-user`, {
+          withCredentials: true,
+        })
+      ).data;
+      const _currentUser = data.currentUser;
+      setCurrentUser(_currentUser);
+    })();
+  }, []);
+
+  useEffect(() => {
+    refreshImage();
+  }, [currentUser]);
+
+  const handleLogoutButton = () => {
+    (async () => {
+      const data = (
+        await axios.get(`${backendUrl}/logout`, {
+          withCredentials: true,
+        })
+      ).data;
+      const _currentUser = data.currentUser;
+      if (_currentUser.userName === "anonymousUser") {
+        setCurrentUser(_currentUser);
+        //navigate("/");
+      } else {
+        throw new Error("ERROR: no anonymous user");
+      }
+    })();
+  };
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>,
@@ -280,6 +342,11 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         setUploadFile,
         handleSubmit,
         handleFileChange,
+        currentUser,
+        setCurrentUser,
+        handleLogoutButton,
+        imageSrc,
+        refreshImage,
       }}
     >
       {children}

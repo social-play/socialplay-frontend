@@ -1,15 +1,15 @@
 import axios from "axios";
 import { IUser } from "../interfaces";
 import { useNavigate } from "react-router-dom";
-
+import { useContext } from "react";
+import { AppContext } from "../AppContext";
 interface IPageLogoutProps {
   baseUrl: string;
-  setCurrentUser: React.Dispatch<React.SetStateAction<IUser>>;
 }
 
 export const PageLogout = (props: IPageLogoutProps) => {
-  const { baseUrl, setCurrentUser } = props;
-
+  const { baseUrl } = props;
+  const { setCurrentUser } = useContext(AppContext);
   const navigate = useNavigate();
 
   const handleLogoutButton = () => {

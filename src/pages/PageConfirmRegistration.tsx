@@ -2,10 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { IUser } from "../interfaces";
-
+import { useContext } from "react";
+import { AppContext } from "../AppContext";
 interface IPageConfirmRegistrationProps {
   baseUrl: string;
-  setCurrentUser: React.Dispatch<React.SetStateAction<IUser>>;
 }
 // enumeration
 enum ConfirmStatus {
@@ -16,8 +16,8 @@ enum ConfirmStatus {
 export const PageConfirmRegistration = (
   props: IPageConfirmRegistrationProps
 ) => {
-  const { baseUrl, setCurrentUser } = props;
-
+  const { baseUrl } = props;
+  const { setCurrentUser } = useContext(AppContext);
   const [confirmStatus, setConfirmStatus] = useState<ConfirmStatus>(
     ConfirmStatus.unconfirmed
   );
