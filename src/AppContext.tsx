@@ -48,6 +48,14 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     `${backendUrl}/images/${currentUser.userName}.png`
   );
 
+  // dropdown
+  const [isOpen, setIsOpen] = useState(false);
+  const [dropDownText, setDropDownText] = useState("Dropdown button");
+
+  const toggleDropDown = () => {
+    setIsOpen(!isOpen);
+  };
+
   const refreshImage = () => {
     // let extension;
     // if (imageSrc.endsWith(".png")) {
@@ -148,6 +156,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
             title: rawNewGamesPost.title,
             description: rawNewGamesPost.description,
             language: rawNewGamesPost.language,
+            game: rawNewGamesPost.game,
+            console: rawNewGamesPost.console,
           },
         };
         _newGamesPosts.push(_newGamesPost);
@@ -174,6 +184,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
             title: rawNewGamesPost.title,
             description: rawNewGamesPost.description,
             language: rawNewGamesPost.language,
+            game: rawNewGamesPost.game,
+            console: rawNewGamesPost.console,
           },
         };
         _newGamesPosts.push(gamesPost);
@@ -197,6 +209,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       title: gamesPost.title,
       description: gamesPost.description,
       language: gamesPost.language,
+      game: gamesPost.game,
+      console: gamesPost.console,
     };
     setGamesPosts([...gamesPosts]);
   };
@@ -211,6 +225,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           title: gamesPost.originalEditFields.title,
           description: gamesPost.originalEditFields.description,
           language: gamesPost.originalEditFields.language,
+          game: gamesPost.originalEditFields.game,
         },
         { withCredentials: true }
       );
@@ -218,7 +233,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       gamesPost.title = gamesPost.originalEditFields.title;
       gamesPost.description = gamesPost.originalEditFields.description;
       gamesPost.language = gamesPost.originalEditFields.language;
-
+      gamesPost.game = gamesPost.originalEditFields.game;
+      gamesPost.console = gamesPost.originalEditFields.console;
       setGamesPosts([...gamesPosts]);
       gamesPost.isBeingEdited = false;
     } catch (error) {
@@ -254,6 +270,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   const handleToggleAddGamesPost = () => {
     setNewGamesPost({ ...blankNewGamesPost });
     setIsAdding(!isAdding);
+    setDropDownText("Dropdown Button");
   };
 
   // newGamesPost inputs
@@ -265,6 +282,11 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   ) => {
     newGamesPost[fieldIdCode as keyof IEditGamePost] = value;
     setNewGamesPost({ ...newGamesPost });
+    console.log(value);
+    setIsOpen(false);
+    if (newGamesPost.game.length > 0) {
+      setDropDownText(newGamesPost.game);
+    }
   };
 
   // post a newGamesPost by click
@@ -278,15 +300,16 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           description: newGamesPost.description,
           language: newGamesPost.language,
           numberOfPages: 0,
-          imageUrl:
-            "https://edwardtanguay.vercel.app/share/images/books/no-image.jpg",
-          buyUrl: "",
+          imageUrl: imageSrc,
+          game: newGamesPost.game,
+          console: newGamesPost.console,
         },
         { withCredentials: true }
       );
       loadGamesPosts();
       setIsAdding(false);
       setNewGamesPost({ ...blankNewGamesPost });
+      setDropDownText("Dropdown Button");
     } catch (error) {
       throw new Error(`${error}`);
     }
@@ -357,6 +380,10 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         handleLogoutButton,
         imageSrc,
         refreshImage,
+        toggleDropDown,
+        isOpen,
+        setIsOpen,
+        dropDownText,
       }}
     >
       {children}

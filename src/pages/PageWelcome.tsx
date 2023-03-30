@@ -3,6 +3,8 @@ import { AppContext } from "../AppContext";
 import { Helmet } from "react-helmet";
 import "../styles/pages/pageWelcome.scss";
 
+import * as gamesLists from "../gamesLists/gamesLists";
+
 export const PageWelcome = () => {
   const {
     appTitle,
@@ -17,6 +19,9 @@ export const PageWelcome = () => {
     handleAddGamesPostFieldsChange,
     handleSaveNewGamesPost,
     handleDeleteGamesPost,
+    toggleDropDown,
+    isOpen,
+    dropDownText,
   } = useContext(AppContext);
 
   return (
@@ -54,6 +59,7 @@ export const PageWelcome = () => {
           <div className="column">
             <label>Description:</label>
             <textarea
+              className="rounded-lg"
               value={newGamesPost.description}
               name="description"
               onChange={(e) =>
@@ -79,24 +85,11 @@ export const PageWelcome = () => {
               }
             />
           </div>
-          <div className="column">
-            <label> Language: </label>
-            <input
-              value={newGamesPost.language}
-              type="text"
-              name="language"
-              onChange={(e) =>
-                handleAddGamesPostFieldsChange(
-                  "language",
-                  newGamesPost,
-                  e.target.value
-                )
-              }
-            />
-          </div>
-          <div className="column">
+
+          {/* <div className="column">
             <label> Image URL: </label>
             <input
+              disabled
               type="text"
               name="imageUrl"
               onChange={(e) =>
@@ -107,21 +100,139 @@ export const PageWelcome = () => {
                 )
               }
             />
-          </div>
+          </div> */}
           <div className="column">
-            <label> Buy URL: </label>
-            <input
-              type="text"
-              name="buyUrl"
+            <label>Console:</label>
+
+            <select
+              className="bg-gray-50 border-2 text-gray-900 text-sm rounded-lg hover:border-blue-500 block p-2.5 dark:focus:ring-blue-200"
               onChange={(e) =>
                 handleAddGamesPostFieldsChange(
-                  "buyUrl",
+                  "console",
                   newGamesPost,
                   e.target.value
                 )
               }
-            />
+            >
+              <option value="">Select Console...</option>
+              <option value="xbox">XBOX</option>
+              <option value="english">🇺🇸️️ - ENGLISH</option>
+              <option value="french">🇫🇷️ - FRENCH</option>
+              <option value="german">🇩🇪️ - GERMAN</option>
+              <option value="japanese">🇯🇵️️ - JAPANESE</option>
+              <option value="persian">🇮🇷️ - PERSIAN</option>
+              <option value="portuguese">🇵🇹️️ - PORTUGUESE</option>
+              <option value="russian">🇷🇺️️️ - RUSSIAN</option>
+              <option value="spanish">🇪🇸️ - SPANISH</option>
+              <option value="turkish">🇹🇷️ - TURKISH</option>
+            </select>
           </div>
+          <div className="column">
+            <label>Language:</label>
+            <div>
+              <select
+                className="bg-gray-50 border-2 text-gray-900 text-sm rounded-lg hover:border-blue-500 block p-2.5 dark:focus:ring-blue-200 w-full"
+                onChange={(e) =>
+                  handleAddGamesPostFieldsChange(
+                    "language",
+                    newGamesPost,
+                    e.target.value
+                  )
+                }
+              >
+                <option value="">Select Language...</option>
+                <option value="arabic">🇸🇦️ - ARABIC</option>
+                <option value="english">🇺🇸️️ - ENGLISH</option>
+                <option value="french">🇫🇷️ - FRENCH</option>
+                <option value="german">🇩🇪️ - GERMAN</option>
+                <option value="japanese">🇯🇵️️ - JAPANESE</option>
+                <option value="persian">🇮🇷️ - PERSIAN</option>
+                <option value="portuguese">🇵🇹️️ - PORTUGUESE</option>
+                <option value="russian">🇷🇺️️️ - RUSSIAN</option>
+                <option value="spanish">🇪🇸️ - SPANISH</option>
+                <option value="turkish">🇹🇷️ - TURKISH</option>
+              </select>
+            </div>
+          </div>
+          {/* <div className="column">
+            <label>Game:</label>
+            <div>
+              <select
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                onChange={(e) =>
+                  handleAddGamesPostFieldsChange(
+                    "game",
+                    newGamesPost,
+                    e.target.value
+                  )
+                }
+              >
+                <option value="">(Select Game...)</option>
+                <option value="pubg">PUBG</option>
+                <option value="fortnite">FORTNITE</option>
+                <option value="csgo">CSGO</option>
+                <option value="gta">GTA</option>
+                <option value="minecraft">MINECRAFT</option>
+              </select>
+            </div>
+          </div> */}
+          <section className="mt-2">
+            <label>Game:</label>
+            <div
+              id="dropdownDefaultButton"
+              data-dropdown-toggle="dropdown"
+              className="text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
+              onClick={toggleDropDown}
+            >
+              <>{dropDownText}</>
+              <svg
+                className="w-5 h-4 ml-auto"
+                aria-hidden="true"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </div>
+
+            {isOpen && (
+              <div
+                id="dropdown"
+                className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 w-full relative"
+              >
+                <ul
+                  className="bg-white rounded-lg text-sm px-4 py-2.5 text-center items-center mt-1 absolute inline-flex w-full"
+                  aria-labelledby="dropdownDefaultButton"
+                >
+                  {gamesLists.gamesLists.map((gameList, i) => {
+                    return (
+                      <li
+                        className="gamesList hover:bg-gray-200"
+                        key={i}
+                        onClick={() =>
+                          handleAddGamesPostFieldsChange(
+                            "game",
+                            newGamesPost,
+                            gameList.value
+                          )
+                        }
+                      >
+                        <img src={gameList.image} />
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+          </section>
+
           <div className="buttons">
             <button type="button" onClick={handleToggleAddGamesPost}>
               Cancel
@@ -145,6 +256,7 @@ export const PageWelcome = () => {
                   <div className="title">{gamesPost.title}</div>
                   <p className="description">{gamesPost.description}</p>
                   <span>{gamesPost.languageText}</span>
+
                   <div className="buttons">
                     <button
                       type="button"
@@ -158,6 +270,9 @@ export const PageWelcome = () => {
                     >
                       Edit
                     </button>
+                  </div>
+                  <div className="displayGameImage">
+                    <img src={gamesPost.game} />
                   </div>
                 </div>
               ) : (
