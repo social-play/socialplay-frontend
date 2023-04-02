@@ -20,7 +20,7 @@ export const gamesLists = [
     image: "icons/csgo.png",
   },
   {
-    value: "callOfDuty",
+    value: "callofduty",
     image: "icons/callofduty.png",
   },
   {
@@ -28,15 +28,15 @@ export const gamesLists = [
     image: "icons/fifa.png",
   },
   {
-    value: "amongUs",
+    value: "amongus",
     image: "icons/amongus.png",
   },
   {
-    value: "leagueOfLegend",
+    value: "leagueoflegend",
     image: "icons/leagueoflegend.png",
   },
   {
-    value: "worldOfWarcraft",
+    value: "worldofwarcraft",
     image: "icons/worldofwarcraft.png",
   },
 ];
