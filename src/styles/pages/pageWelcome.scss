@@ -4,6 +4,11 @@
     align-items: center;
     width: 100%;
     .gamesPosts {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
         .gamesPost {
             display: flex;
             margin-bottom: 1rem;
@@ -21,6 +26,7 @@
                     height: 130px;
                 }
             }
+
             .showData {
                 display: flex;
                 flex-flow: column wrap;
@@ -47,6 +53,10 @@
                     img {
                         width: 100px;
                         height: 80px;
+                    }
+                    .pubg {
+                        width: 100px;
+                        height: 100px;
                     }
                 }
             }

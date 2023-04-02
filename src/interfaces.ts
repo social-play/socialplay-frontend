@@ -53,7 +53,10 @@ export interface IAppContext {
   toggleDropDown: () => void;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  isConsoleOpen: boolean;
+  toggleDropDownConsole: () => void;
   dropDownText: string;
+  dropDownTextConsole: string;
 }
 export const _initialUploadFile: IUploadFile = {
   preview: "",
@@ -68,7 +71,7 @@ export interface IGamesPosts {
   _id: string;
   title: string;
   description: string;
-  numberOfPages: number;
+  numberOfPlayers: string;
   language: string;
   imageUrl: string;
   console: string;
@@ -84,6 +87,7 @@ export interface IEditGamePost {
   language: string;
   game: string;
   console: string;
+  numberOfPlayers: string;
 }
 
 export const blankNewGamesPost: IEditGamePost = {
@@ -92,4 +96,5 @@ export const blankNewGamesPost: IEditGamePost = {
   language: "",
   game: "",
   console: "",
+  numberOfPlayers: "",
 };

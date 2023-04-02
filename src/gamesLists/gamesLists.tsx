@@ -40,3 +40,22 @@ export const gamesLists = [
     image: "icons/worldofwarcraft.png",
   },
 ];
+
+export const consoleLists = [
+  {
+    value: "xbox",
+    image: "icons/xbox.png",
+  },
+  {
+    value: "pc",
+    image: "icons/pc.png",
+  },
+  {
+    value: "playstation",
+    image: "icons/playstation.png",
+  },
+  {
+    value: "nintendo",
+    image: "icons/nintendo.png",
+  },
+];

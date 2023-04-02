@@ -50,10 +50,17 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
   // dropdown
   const [isOpen, setIsOpen] = useState(false);
-  const [dropDownText, setDropDownText] = useState("Dropdown button");
+  const [isConsoleOpen, setIsConsoleOpen] = useState(false);
+  const [dropDownText, setDropDownText] = useState("Select Game...");
+  const [dropDownTextConsole, setDropDownTextConsole] =
+    useState("Select Console...");
 
   const toggleDropDown = () => {
     setIsOpen(!isOpen);
+  };
+
+  const toggleDropDownConsole = () => {
+    setIsConsoleOpen(!isConsoleOpen);
   };
 
   const refreshImage = () => {
@@ -158,6 +165,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
             language: rawNewGamesPost.language,
             game: rawNewGamesPost.game,
             console: rawNewGamesPost.console,
+            numberOfPlayers: rawNewGamesPost.numberOfPlayers,
           },
         };
         _newGamesPosts.push(_newGamesPost);
@@ -186,6 +194,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
             language: rawNewGamesPost.language,
             game: rawNewGamesPost.game,
             console: rawNewGamesPost.console,
+            numberOfPlayers: rawNewGamesPost.numberOfPlayers,
           },
         };
         _newGamesPosts.push(gamesPost);
@@ -211,6 +220,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       language: gamesPost.language,
       game: gamesPost.game,
       console: gamesPost.console,
+      numberOfPlayers: gamesPost.numberOfPlayers,
     };
     setGamesPosts([...gamesPosts]);
   };
@@ -226,6 +236,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           description: gamesPost.originalEditFields.description,
           language: gamesPost.originalEditFields.language,
           game: gamesPost.originalEditFields.game,
+          numberOfPlayers: gamesPost.originalEditFields.numberOfPlayers,
         },
         { withCredentials: true }
       );
@@ -235,7 +246,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       gamesPost.language = gamesPost.originalEditFields.language;
       gamesPost.game = gamesPost.originalEditFields.game;
       gamesPost.console = gamesPost.originalEditFields.console;
-
+      gamesPost.numberOfPlayers = gamesPost.originalEditFields.numberOfPlayers;
       setGamesPosts([...gamesPosts]);
       gamesPost.isBeingEdited = false;
     } catch (error) {
@@ -271,7 +282,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   const handleToggleAddGamesPost = () => {
     setNewGamesPost({ ...blankNewGamesPost });
     setIsAdding(!isAdding);
-    setDropDownText("Dropdown Button");
+    setDropDownText("Select Game...");
   };
 
   // newGamesPost inputs
@@ -283,8 +294,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   ) => {
     newGamesPost[fieldIdCode as keyof IEditGamePost] = value;
     setNewGamesPost({ ...newGamesPost });
-
     setIsOpen(false);
+    setIsConsoleOpen(false);
     if (newGamesPost.game.length > 0) {
       setDropDownText(newGamesPost.game);
     }
@@ -300,7 +311,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           title: newGamesPost.title,
           description: newGamesPost.description,
           language: newGamesPost.language,
-          numberOfPages: 0,
+          numberOfPlayers: newGamesPost.numberOfPlayers,
           imageUrl: imageSrc,
           game: newGamesPost.game,
           console: newGamesPost.console,
@@ -311,7 +322,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       loadGamesPosts();
       setIsAdding(false);
       setNewGamesPost({ ...blankNewGamesPost });
-      setDropDownText("Dropdown Button");
+      setDropDownText("Select Game...");
     } catch (error) {
       throw new Error(`${error}`);
     }
@@ -383,9 +394,12 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         imageSrc,
         refreshImage,
         toggleDropDown,
+        toggleDropDownConsole,
         isOpen,
+        isConsoleOpen,
         setIsOpen,
         dropDownText,
+        dropDownTextConsole,
       }}
     >
       {children}

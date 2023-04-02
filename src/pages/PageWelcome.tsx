@@ -20,8 +20,11 @@ export const PageWelcome = () => {
     handleSaveNewGamesPost,
     handleDeleteGamesPost,
     toggleDropDown,
+    toggleDropDownConsole,
     isOpen,
+    isConsoleOpen,
     dropDownText,
+    dropDownTextConsole,
   } = useContext(AppContext);
 
   return (
@@ -72,13 +75,13 @@ export const PageWelcome = () => {
             />
           </div>
           <div className="column">
-            <label> NumberOfPage: </label>
+            <label> Number Of Players: </label>
             <input
-              type="text"
-              name="numberOfPage"
+              type="number"
+              name="numberOfPlayers"
               onChange={(e) =>
                 handleAddGamesPostFieldsChange(
-                  "numberOfPage",
+                  "numberOfPlayers",
                   newGamesPost,
                   e.target.value
                 )
@@ -86,47 +89,62 @@ export const PageWelcome = () => {
             />
           </div>
 
-          {/* <div className="column">
-            <label> Image URL: </label>
-            <input
-              disabled
-              type="text"
-              name="imageUrl"
-              onChange={(e) =>
-                handleAddGamesPostFieldsChange(
-                  "imageUrl",
-                  newGamesPost,
-                  e.target.value
-                )
-              }
-            />
-          </div> */}
-          <div className="column">
+          <section className="mt-2">
             <label>Console:</label>
-
-            <select
-              className="bg-gray-50 border-2 text-gray-900 text-sm rounded-lg hover:border-blue-500 block p-2.5 dark:focus:ring-blue-200"
-              onChange={(e) =>
-                handleAddGamesPostFieldsChange(
-                  "console",
-                  newGamesPost,
-                  e.target.value
-                )
-              }
+            <div
+              id="dropdownDefaultButton"
+              data-dropdown-toggle="dropdown"
+              className="text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
+              onClick={toggleDropDownConsole}
             >
-              <option value="">Select Console...</option>
-              <option value="xbox">XBOX</option>
-              <option value="english">🇺🇸️️ - ENGLISH</option>
-              <option value="french">🇫🇷️ - FRENCH</option>
-              <option value="german">🇩🇪️ - GERMAN</option>
-              <option value="japanese">🇯🇵️️ - JAPANESE</option>
-              <option value="persian">🇮🇷️ - PERSIAN</option>
-              <option value="portuguese">🇵🇹️️ - PORTUGUESE</option>
-              <option value="russian">🇷🇺️️️ - RUSSIAN</option>
-              <option value="spanish">🇪🇸️ - SPANISH</option>
-              <option value="turkish">🇹🇷️ - TURKISH</option>
-            </select>
-          </div>
+              <>{dropDownTextConsole}</>
+              <svg
+                className="w-5 h-4 ml-auto"
+                aria-hidden="true"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M25 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </div>
+
+            {isConsoleOpen && (
+              <div
+                id="dropdown"
+                className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 w-full relative"
+              >
+                <ul
+                  className="bg-white rounded-lg text-sm px-4 py-2.5 text-center items-center mt-1 absolute inline-flex w-full"
+                  aria-labelledby="dropdownDefaultButton"
+                >
+                  {gamesLists.consoleLists.map((consoleList, i) => {
+                    return (
+                      <li
+                        className="gamesList hover:bg-gray-200"
+                        key={i}
+                        onClick={() => {
+                          handleAddGamesPostFieldsChange(
+                            "console",
+                            newGamesPost,
+                            consoleList.value
+                          );
+                        }}
+                      >
+                        <img src={`${consoleList.image}`} />
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+          </section>
+
           <div className="column">
             <label>Language:</label>
             <div>
@@ -170,13 +188,12 @@ export const PageWelcome = () => {
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M19 9l-7 7-7-7"
+                  d="M25 9l-7 7-7-7"
                 ></path>
               </svg>
             </div>
@@ -196,8 +213,6 @@ export const PageWelcome = () => {
                         className="gamesList hover:bg-gray-200"
                         key={i}
                         onClick={() => {
-                          console.log(gameList.image);
-
                           handleAddGamesPostFieldsChange(
                             "game",
                             newGamesPost,
@@ -253,7 +268,10 @@ export const PageWelcome = () => {
                     </button>
                   </div>
                   <div className="displayGameImage">
-                    <img src={`icons/${gamesPost.game}.png`} />
+                    <img
+                      className={gamesPost.game}
+                      src={`icons/${gamesPost.game}.png`}
+                    />
                   </div>
                 </div>
               ) : (
