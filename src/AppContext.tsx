@@ -235,6 +235,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       gamesPost.language = gamesPost.originalEditFields.language;
       gamesPost.game = gamesPost.originalEditFields.game;
       gamesPost.console = gamesPost.originalEditFields.console;
+
       setGamesPosts([...gamesPosts]);
       gamesPost.isBeingEdited = false;
     } catch (error) {
@@ -282,7 +283,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   ) => {
     newGamesPost[fieldIdCode as keyof IEditGamePost] = value;
     setNewGamesPost({ ...newGamesPost });
-    console.log(value);
+
     setIsOpen(false);
     if (newGamesPost.game.length > 0) {
       setDropDownText(newGamesPost.game);
@@ -306,6 +307,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         },
         { withCredentials: true }
       );
+
       loadGamesPosts();
       setIsAdding(false);
       setNewGamesPost({ ...blankNewGamesPost });

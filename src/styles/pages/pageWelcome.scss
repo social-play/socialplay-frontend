@@ -2,6 +2,7 @@
     display: flex;
     flex-flow: column wrap;
     align-items: center;
+    width: 100%;
     .gamesPosts {
         .gamesPost {
             display: flex;
@@ -9,13 +10,14 @@
             align-items: center;
             gap: 1rem;
             padding: 0.5rem;
-            justify-content: space-between;
-            height: max-content;
+            justify-content: space-evenly;
+            background-color: blue;
             .image {
-                width: 150px;
+                width: 200px;
                 height: 150px;
+
                 img {
-                    width: 130px;
+                    width: 150px;
                     height: 130px;
                 }
             }

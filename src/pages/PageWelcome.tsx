@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../AppContext";
 import { Helmet } from "react-helmet";
 import "../styles/pages/pageWelcome.scss";
@@ -154,28 +154,7 @@ export const PageWelcome = () => {
               </select>
             </div>
           </div>
-          {/* <div className="column">
-            <label>Game:</label>
-            <div>
-              <select
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                onChange={(e) =>
-                  handleAddGamesPostFieldsChange(
-                    "game",
-                    newGamesPost,
-                    e.target.value
-                  )
-                }
-              >
-                <option value="">(Select Game...)</option>
-                <option value="pubg">PUBG</option>
-                <option value="fortnite">FORTNITE</option>
-                <option value="csgo">CSGO</option>
-                <option value="gta">GTA</option>
-                <option value="minecraft">MINECRAFT</option>
-              </select>
-            </div>
-          </div> */}
+
           <section className="mt-2">
             <label>Game:</label>
             <div
@@ -216,15 +195,17 @@ export const PageWelcome = () => {
                       <li
                         className="gamesList hover:bg-gray-200"
                         key={i}
-                        onClick={() =>
+                        onClick={() => {
+                          console.log(gameList.image);
+
                           handleAddGamesPostFieldsChange(
                             "game",
                             newGamesPost,
                             gameList.value
-                          )
-                        }
+                          );
+                        }}
                       >
-                        <img src={gameList.image} />
+                        <img src={`${gameList.image}`} />
                       </li>
                     );
                   })}
@@ -272,7 +253,7 @@ export const PageWelcome = () => {
                     </button>
                   </div>
                   <div className="displayGameImage">
-                    <img src={gamesPost.game} />
+                    <img src={`icons/${gamesPost.game}.png`} />
                   </div>
                 </div>
               ) : (
