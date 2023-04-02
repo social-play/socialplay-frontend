@@ -47,16 +47,17 @@
                     color: orange;
                 }
                 .displayGameImage {
-                    width: 100px;
-                    height: 100px;
+                    width: 120px;
+                    height: 120px;
 
                     img {
                         width: 100px;
-                        height: 80px;
-                    }
-                    .pubg {
-                        width: 100px;
                         height: 100px;
+                    }
+                    .pubg,
+                    .minecraft {
+                        width: 120px;
+                        height: 120px;
                     }
                 }
             }
