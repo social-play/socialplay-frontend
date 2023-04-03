@@ -50,6 +50,13 @@ export interface IAppContext {
   handleLogoutButton: () => void;
   imageSrc: string;
   refreshImage: () => void;
+  toggleDropDown: () => void;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+  isConsoleOpen: boolean;
+  toggleDropDownConsole: () => void;
+  dropDownText: string;
+  dropDownTextConsole: string;
 }
 export const _initialUploadFile: IUploadFile = {
   preview: "",
@@ -63,24 +70,37 @@ export interface IUploadFile {
 export interface IGamesPosts {
   _id: string;
   title: string;
-  description: string;
-  numberOfPages: number;
+  WeSearch: string;
+  weOffer: string;
+  contact: string;
+  numberOfPlayers: string;
   language: string;
   imageUrl: string;
-  buyUrl: String;
+  console: string;
   languageText: string;
   isBeingEdited: boolean;
   originalEditFields: IEditGamePost;
+  game: string;
 }
 
 export interface IEditGamePost {
   title: string;
-  description: string;
+  WeSearch: string;
+  weOffer: string;
+  contact: string;
   language: string;
+  game: string;
+  console: string;
+  numberOfPlayers: string;
 }
 
 export const blankNewGamesPost: IEditGamePost = {
   title: "",
-  description: "",
+  WeSearch: "",
   language: "",
+  game: "",
+  console: "",
+  numberOfPlayers: "",
+  weOffer: "",
+  contact: "",
 };

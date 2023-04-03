@@ -48,6 +48,21 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     `${backendUrl}/images/${currentUser.userName}.png`
   );
 
+  // dropdown
+  const [isOpen, setIsOpen] = useState(false);
+  const [isConsoleOpen, setIsConsoleOpen] = useState(false);
+  const [dropDownText, setDropDownText] = useState("Select Game...");
+  const [dropDownTextConsole, setDropDownTextConsole] =
+    useState("Select Console...");
+
+  const toggleDropDown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const toggleDropDownConsole = () => {
+    setIsConsoleOpen(!isConsoleOpen);
+  };
+
   const refreshImage = () => {
     // let extension;
     // if (imageSrc.endsWith(".png")) {
@@ -146,8 +161,13 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           isBeingEdited: false,
           originalEditFields: {
             title: rawNewGamesPost.title,
-            description: rawNewGamesPost.description,
+            WeSearch: rawNewGamesPost.WeSearch,
+            weOffer: rawNewGamesPost.weOffer,
+            contact: rawNewGamesPost.contact,
             language: rawNewGamesPost.language,
+            game: rawNewGamesPost.game,
+            console: rawNewGamesPost.console,
+            numberOfPlayers: rawNewGamesPost.numberOfPlayers,
           },
         };
         _newGamesPosts.push(_newGamesPost);
@@ -172,8 +192,13 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           isBeingEdited: false,
           originalEditFields: {
             title: rawNewGamesPost.title,
-            description: rawNewGamesPost.description,
+            WeSearch: rawNewGamesPost.WeSearch,
+            weOffer: rawNewGamesPost.weOffer,
+            contact: rawNewGamesPost.contact,
             language: rawNewGamesPost.language,
+            game: rawNewGamesPost.game,
+            console: rawNewGamesPost.console,
+            numberOfPlayers: rawNewGamesPost.numberOfPlayers,
           },
         };
         _newGamesPosts.push(gamesPost);
@@ -195,8 +220,13 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     // to reset any values that were changed
     gamesPost.originalEditFields = {
       title: gamesPost.title,
-      description: gamesPost.description,
+      WeSearch: gamesPost.WeSearch,
+      weOffer: gamesPost.weOffer,
+      contact: gamesPost.contact,
       language: gamesPost.language,
+      game: gamesPost.game,
+      console: gamesPost.console,
+      numberOfPlayers: gamesPost.numberOfPlayers,
     };
     setGamesPosts([...gamesPosts]);
   };
@@ -209,16 +239,24 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         `${backendUrl}/gamesPost/${gamesPost._id}`,
         {
           title: gamesPost.originalEditFields.title,
-          description: gamesPost.originalEditFields.description,
+          WeSearch: gamesPost.originalEditFields.WeSearch,
+          weOffer: gamesPost.originalEditFields.weOffer,
+          contact: gamesPost.originalEditFields.contact,
           language: gamesPost.originalEditFields.language,
+          game: gamesPost.originalEditFields.game,
+          numberOfPlayers: gamesPost.originalEditFields.numberOfPlayers,
         },
         { withCredentials: true }
       );
       // if saved in backend, update in frontend
       gamesPost.title = gamesPost.originalEditFields.title;
-      gamesPost.description = gamesPost.originalEditFields.description;
+      gamesPost.WeSearch = gamesPost.originalEditFields.WeSearch;
+      gamesPost.weOffer = gamesPost.originalEditFields.weOffer;
+      gamesPost.contact = gamesPost.originalEditFields.contact;
       gamesPost.language = gamesPost.originalEditFields.language;
-
+      gamesPost.game = gamesPost.originalEditFields.game;
+      gamesPost.console = gamesPost.originalEditFields.console;
+      gamesPost.numberOfPlayers = gamesPost.originalEditFields.numberOfPlayers;
       setGamesPosts([...gamesPosts]);
       gamesPost.isBeingEdited = false;
     } catch (error) {
@@ -254,6 +292,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   const handleToggleAddGamesPost = () => {
     setNewGamesPost({ ...blankNewGamesPost });
     setIsAdding(!isAdding);
+    setDropDownText("Select Game...");
   };
 
   // newGamesPost inputs
@@ -265,28 +304,54 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   ) => {
     newGamesPost[fieldIdCode as keyof IEditGamePost] = value;
     setNewGamesPost({ ...newGamesPost });
+    setIsOpen(false);
+    setIsConsoleOpen(false);
+    if (newGamesPost.game.length > 0) {
+      setDropDownText(newGamesPost.game);
+    }
+    if (newGamesPost.console.length > 0) {
+      setDropDownTextConsole(newGamesPost.console);
+    }
   };
 
   // post a newGamesPost by click
 
   const handleSaveNewGamesPost = async () => {
+    if (
+      !newGamesPost.title ||
+      !newGamesPost.WeSearch ||
+      !newGamesPost.weOffer ||
+      !newGamesPost.contact ||
+      !newGamesPost.language ||
+      !newGamesPost.numberOfPlayers ||
+      !newGamesPost.game ||
+      !newGamesPost.console
+    ) {
+      alert("Please fill all required fields");
+      return;
+    }
+
     try {
       await axios.post(
         `${backendUrl}/gamesPost`,
         {
           title: newGamesPost.title,
-          description: newGamesPost.description,
+          WeSearch: newGamesPost.WeSearch,
+          weOffer: newGamesPost.weOffer,
+          contact: newGamesPost.contact,
           language: newGamesPost.language,
-          numberOfPages: 0,
-          imageUrl:
-            "https://edwardtanguay.vercel.app/share/images/books/no-image.jpg",
-          buyUrl: "",
+          numberOfPlayers: newGamesPost.numberOfPlayers,
+          imageUrl: imageSrc,
+          game: newGamesPost.game,
+          console: newGamesPost.console,
         },
         { withCredentials: true }
       );
+
       loadGamesPosts();
       setIsAdding(false);
       setNewGamesPost({ ...blankNewGamesPost });
+      setDropDownText("Select Game...");
     } catch (error) {
       throw new Error(`${error}`);
     }
@@ -357,6 +422,13 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         handleLogoutButton,
         imageSrc,
         refreshImage,
+        toggleDropDown,
+        toggleDropDownConsole,
+        isOpen,
+        isConsoleOpen,
+        setIsOpen,
+        dropDownText,
+        dropDownTextConsole,
       }}
     >
       {children}

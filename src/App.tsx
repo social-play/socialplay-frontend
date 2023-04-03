@@ -5,9 +5,6 @@ import { Page404 } from "./pages/Page404";
 import { PageWelcome } from "./pages/PageWelcome";
 import { PageRegister } from "./pages/PageRegister";
 import { PageLogin } from "./pages/PageLogin";
-import { IUser } from "./interfaces";
-import { useState, useEffect } from "react";
-import axios from "axios";
 import { PageConfirmRegistration } from "./pages/PageConfirmRegistration";
 import { PageMembers } from "./pages/PageMembers";
 import { FaSpinner } from "react-icons/fa";
@@ -23,54 +20,21 @@ import { AppContext } from "./AppContext";
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
-  const { handleLogoutButton, currentUser, setCurrentUser, imageSrc } =
-    useContext(AppContext);
-  // const [currentUser, setCurrentUser] = useState<IUser>({
-  //   _id: "",
-  //   userName: "",
-  //   firstName: "",
-  //   lastName: "",
-  //   isOver16: false,
-  //   captcha: false,
-  //   accessGroups: [],
-  //   fileName: "",
-  //   email: "",
-  // });
+  const {
+    handleLogoutButton,
+    currentUser,
+    setCurrentUser,
+    imageSrc,
+    isOpen,
+    setIsOpen,
+  } = useContext(AppContext);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const data = (
-  //       await axios.get(`${baseUrl}/current-user`, {
-  //         withCredentials: true,
-  //       })
-  //     ).data;
-  //     const _currentUser = data.currentUser;
-  //     setCurrentUser(_currentUser);
-  //   })();
-  // }, []);
-
-  // const handleLogoutButton = () => {
-  //   (async () => {
-  //     const data = (
-  //       await axios.get(`${baseUrl}/logout`, {
-  //         withCredentials: true,
-  //       })
-  //     ).data;
-  //     const _currentUser = data.currentUser;
-  //     if (_currentUser.userName === "anonymousUser") {
-  //       setCurrentUser(_currentUser);
-  //       navigate("/");
-  //     } else {
-  //       throw new Error("ERROR: no anonymous user");
-  //     }
-  //   })();
-  // };
   const pageIsLoaded = () => {
     return currentUser.userName !== "";
   };
 
   return (
-    <div className="App">
+    <div className="App" onClick={() => isOpen && setIsOpen(false)}>
       <nav>
         <div className="navRow">
           <NavLink to="/welcome">Welcome</NavLink>
@@ -85,16 +49,16 @@ function App() {
           </span>
         )}
         <div className="navRow">
-          {/* {(currentUser.accessGroups.includes("members") ||
+          {(currentUser.accessGroups.includes("members") ||
             currentUser.accessGroups.includes("unconfirmedMembers")) && (
             <NavLink to="/members">Members</NavLink>
-          )} */}
+          )}
           <div className="profileImage">
             {(currentUser.accessGroups.includes("members") ||
               currentUser.accessGroups.includes("unconfirmedMembers")) && (
               <>
                 <img src={imageSrc} className="userImage" />
-                <NavLink to="/profile"> Profile</NavLink>
+                <NavLink to="/profile">{currentUser.userName}</NavLink>
               </>
             )}
           </div>
@@ -127,7 +91,10 @@ function App() {
       </nav>
       <Routes>
         <Route path="*" element={<Page404 />} />
-        <Route path="/welcome" element={<PageWelcome />} />
+        <Route
+          path="/welcome"
+          element={<PageWelcome currentUser={currentUser} />}
+        />
         <Route path="/teamSearch" element={<PageTeams />} />
         <Route path="/playerSearch" element={<PagePlayers />} />
         {(currentUser.accessGroups.includes("members") ||

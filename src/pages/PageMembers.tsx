@@ -24,6 +24,7 @@ export const PageMembers = (props: IPageMembersProps) => {
               {currentUser.firstName} {currentUser.lastName}
             </span>
           </div>
+          <h2>Thank you for confirming your account</h2>
           <h2>Member-Only Information</h2>
           <p>This is information that only confirmed members can see.</p>
         </>

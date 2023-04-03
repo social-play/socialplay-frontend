@@ -1,36 +1,60 @@
+@use "../variables" as *;
 .pageWelcome {
     display: flex;
     flex-flow: column wrap;
     align-items: center;
+    width: 100%;
+    h2 {
+        font-size: 2rem;
+        color: orange;
+    }
     .gamesPosts {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
         .gamesPost {
             display: flex;
+            flex-direction: column;
             margin-bottom: 1rem;
+            justify-content: center;
+            text-align: center;
             align-items: center;
             gap: 1rem;
             padding: 0.5rem;
-            justify-content: space-between;
-            height: max-content;
+            justify-content: space-evenly;
+            background-color: blue;
+            width: 400px;
             .image {
-                width: 150px;
-                height: 200px;
+                display: flex;
+                justify-content: center;
+                width: 200px;
+                height: 150px;
 
                 img {
-                    width: 140px;
-                    height: 200px;
+                    width: 150px;
+                    height: 130px;
                 }
             }
+
             .showData {
                 display: flex;
                 flex-flow: column wrap;
+                justify-content: center;
+                align-content: center;
                 row-gap: 10px;
-                width: 100%;
+
+                h2 {
+                    color: $mainColor;
+                    font-family: "Courier New", Courier, monospace;
+                }
                 .title {
                     a {
                         color: gold;
                     }
                 }
-                .description {
+                .WeSearch {
                     font-size: 10px;
                     font-style: italic;
                     padding: 5px;
@@ -39,10 +63,28 @@
                 span {
                     color: orange;
                 }
+                .displayGameImage {
+                    display: flex;
+                    justify-content: center;
+
+                    width: 100%;
+                    height: 120px;
+
+                    img {
+                        width: 150px;
+                        height: 120px;
+                    }
+                }
+                .buttons {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    column-gap: 1rem;
+                    padding: 1rem 0;
+                }
             }
             form {
                 width: 100%;
-
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
@@ -55,10 +97,6 @@
                     width: 100%;
                     padding: 0.5rem;
                     color: #222;
-                }
-                textArea {
-                    resize: none;
-                    height: 5rem;
                 }
             }
 
@@ -77,7 +115,15 @@
             flex-direction: column;
             gap: 0.5rem;
             padding: 10px 0;
+            select {
+                outline: none;
+                &::after {
+                    content: "ss";
+                    margin-right: 50px;
+                }
+            }
         }
+
         input,
         textArea {
             padding: 5px;
@@ -87,12 +133,40 @@
             word-break: break-all;
             height: 100px;
         }
+        section {
+            ul {
+                .gamesList {
+                    width: 100%;
+                    img {
+                        width: 100px;
+                        height: 100px;
+                    }
+                }
+            }
+        }
+    }
+    @media (max-width: 767px) {
+        .gamesPosts {
+            .gamesPost {
+                width: 100%;
+            }
+        }
+    }
+}
+textArea {
+    resize: none;
+    height: 5rem;
+    color: #222;
+    outline: none;
+    &:focus {
+        border: 2px solid blue;
     }
 }
 .buttons {
     display: flex;
     align-items: center;
     column-gap: 1rem;
+    padding: 1rem 0;
 }
 button {
     padding: 2px 5px;

@@ -3,7 +3,16 @@ import { AppContext } from "../AppContext";
 import { Helmet } from "react-helmet";
 import "../styles/pages/pageWelcome.scss";
 
-export const PageWelcome = () => {
+import * as gamesLists from "../components/gamesLists";
+import { popUp } from "../components/popUp";
+import { IUser } from "../interfaces";
+
+interface IPageMembersProps {
+  currentUser: IUser;
+}
+
+export const PageWelcome = (props: IPageMembersProps) => {
+  const { currentUser } = props;
   const {
     appTitle,
     gamesPosts,
@@ -17,6 +26,12 @@ export const PageWelcome = () => {
     handleAddGamesPostFieldsChange,
     handleSaveNewGamesPost,
     handleDeleteGamesPost,
+    toggleDropDown,
+    toggleDropDownConsole,
+    isOpen,
+    isConsoleOpen,
+    dropDownText,
+    dropDownTextConsole,
   } = useContext(AppContext);
 
   return (
@@ -52,13 +67,14 @@ export const PageWelcome = () => {
             />
           </div>
           <div className="column">
-            <label>Description:</label>
+            <label>We search:</label>
             <textarea
-              value={newGamesPost.description}
-              name="description"
+              className="rounded-lg"
+              value={newGamesPost.WeSearch}
+              name="WeSearch"
               onChange={(e) =>
                 handleAddGamesPostFieldsChange(
-                  "description",
+                  "WeSearch",
                   newGamesPost,
                   e.target.value
                 )
@@ -66,13 +82,14 @@ export const PageWelcome = () => {
             />
           </div>
           <div className="column">
-            <label> NumberOfPage: </label>
-            <input
-              type="text"
-              name="numberOfPage"
+            <label>We offer:</label>
+            <textarea
+              className="rounded-lg"
+              value={newGamesPost.weOffer}
+              name="weOffer"
               onChange={(e) =>
                 handleAddGamesPostFieldsChange(
-                  "numberOfPage",
+                  "weOffer",
                   newGamesPost,
                   e.target.value
                 )
@@ -80,48 +97,176 @@ export const PageWelcome = () => {
             />
           </div>
           <div className="column">
-            <label> Language: </label>
-            <input
-              value={newGamesPost.language}
-              type="text"
-              name="language"
+            <label>Contact:</label>
+            <textarea
+              className="rounded-lg"
+              value={newGamesPost.contact}
+              name="contact"
               onChange={(e) =>
                 handleAddGamesPostFieldsChange(
-                  "language",
+                  "contact",
                   newGamesPost,
                   e.target.value
                 )
               }
             />
           </div>
+
           <div className="column">
-            <label> Image URL: </label>
+            <label> Number Of Players: </label>
             <input
-              type="text"
-              name="imageUrl"
+              type="number"
+              name="numberOfPlayers"
               onChange={(e) =>
                 handleAddGamesPostFieldsChange(
-                  "imageUrl",
+                  "numberOfPlayers",
                   newGamesPost,
                   e.target.value
                 )
               }
             />
           </div>
+
+          <section className="mt-2">
+            <label>Console:</label>
+            <div
+              id="dropdownDefaultButton"
+              data-dropdown-toggle="dropdown"
+              className="text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
+              onClick={toggleDropDownConsole}
+            >
+              <>{dropDownTextConsole}</>
+              <svg
+                className="w-5 h-4 ml-auto"
+                aria-hidden="true"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M25 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </div>
+
+            {isConsoleOpen && (
+              <div
+                id="dropdown"
+                className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 w-full relative"
+              >
+                <ul
+                  className="bg-white rounded-lg text-sm px-4 py-2.5 text-center items-center mt-1 absolute inline-flex w-full"
+                  aria-labelledby="dropdownDefaultButton"
+                >
+                  {gamesLists.consoleLists.map((consoleList, i) => {
+                    return (
+                      <li
+                        className="gamesList hover:bg-gray-200"
+                        key={i}
+                        onClick={() => {
+                          handleAddGamesPostFieldsChange(
+                            "console",
+                            newGamesPost,
+                            consoleList.value
+                          );
+                        }}
+                      >
+                        <img src={`${consoleList.image}`} />
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+          </section>
+
           <div className="column">
-            <label> Buy URL: </label>
-            <input
-              type="text"
-              name="buyUrl"
-              onChange={(e) =>
-                handleAddGamesPostFieldsChange(
-                  "buyUrl",
-                  newGamesPost,
-                  e.target.value
-                )
-              }
-            />
+            <label>Language:</label>
+            <div>
+              <select
+                className="bg-gray-50 border-2 text-gray-900 text-sm rounded-lg hover:border-blue-500 block p-2.5 dark:focus:ring-blue-200 w-full"
+                onChange={(e) =>
+                  handleAddGamesPostFieldsChange(
+                    "language",
+                    newGamesPost,
+                    e.target.value
+                  )
+                }
+              >
+                <option value="">Select Language...</option>
+                <option value="arabic">🇸🇦️ - ARABIC</option>
+                <option value="english">🇺🇸️️ - ENGLISH</option>
+                <option value="french">🇫🇷️ - FRENCH</option>
+                <option value="german">🇩🇪️ - GERMAN</option>
+                <option value="japanese">🇯🇵️️ - JAPANESE</option>
+                <option value="persian">🇮🇷️ - PERSIAN</option>
+                <option value="portuguese">🇵🇹️️ - PORTUGUESE</option>
+                <option value="russian">🇷🇺️️️ - RUSSIAN</option>
+                <option value="spanish">🇪🇸️ - SPANISH</option>
+                <option value="turkish">🇹🇷️ - TURKISH</option>
+              </select>
+            </div>
           </div>
+
+          <section className="mt-2">
+            <label>Game:</label>
+            <div
+              id="dropdownDefaultButton"
+              data-dropdown-toggle="dropdown"
+              className="text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
+              onClick={toggleDropDown}
+            >
+              <>{dropDownText}</>
+              <svg
+                className="w-5 h-4 ml-auto"
+                aria-hidden="true"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M25 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </div>
+
+            {isOpen && (
+              <div
+                id="dropdown"
+                className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 w-full relative"
+              >
+                <ul
+                  className="bg-white rounded-lg text-sm px-4 py-2.5 text-center items-center mt-1 absolute inline-flex w-full"
+                  aria-labelledby="dropdownDefaultButton"
+                >
+                  {gamesLists.gamesLists.map((gameList, i) => {
+                    return (
+                      <li
+                        className="gamesList hover:bg-gray-200"
+                        key={i}
+                        onClick={() => {
+                          handleAddGamesPostFieldsChange(
+                            "game",
+                            newGamesPost,
+                            gameList.value
+                          );
+                        }}
+                      >
+                        <img src={`${gameList.image}`} />
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+          </section>
+
           <div className="buttons">
             <button type="button" onClick={handleToggleAddGamesPost}>
               Cancel
@@ -142,9 +287,18 @@ export const PageWelcome = () => {
               </div>
               {!gamesPost.isBeingEdited ? (
                 <div className="showData">
-                  <div className="title">{gamesPost.title}</div>
-                  <p className="description">{gamesPost.description}</p>
-                  <span>{gamesPost.languageText}</span>
+                  <div className="displayGameImage">
+                    <img
+                      className={gamesPost.game}
+                      src={`icons/${gamesPost.game}.png`}
+                    />
+                  </div>
+                  <h2>{currentUser.userName}</h2>
+                  <div>
+                    <button onClick={() => popUp(gamesPost, currentUser)}>
+                      SHOW
+                    </button>
+                  </div>
                   <div className="buttons">
                     <button
                       type="button"
@@ -178,13 +332,13 @@ export const PageWelcome = () => {
                     />
                   </div>
                   <div className="row">
-                    <label> description: </label>
+                    <label> WeSearch: </label>
                     <textarea
-                      value={gamesPost.originalEditFields.description}
-                      name="description"
+                      value={gamesPost.originalEditFields.WeSearch}
+                      name="WeSearch"
                       onChange={(e) =>
                         handleChangeEditGamesPost(
-                          "description",
+                          "WeSearch",
                           gamesPost,
                           e.target.value
                         )
