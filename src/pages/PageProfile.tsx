@@ -23,10 +23,6 @@ export const PageProfile = (props: IPageMembersProps) => {
   const { uploadFile, handleSubmit, handleFileChange, imageSrc, refreshImage } =
     useContext(AppContext);
 
-  // const [imageSrc, setImageSrc] = useState(
-  //   `${baseUrl}/images/${currentUser._id}.png`
-  // );
-
   const updateUserProfileData = async () => {
     try {
       await axios.patch(
@@ -54,16 +50,6 @@ export const PageProfile = (props: IPageMembersProps) => {
     currentUser[fieldName as keyof IUser] = value;
     setUserFormData({ ...userFormData });
   };
-
-  // const refreshImage = () => {
-  //   // let extension;
-  //   // if (imageSrc.endsWith(".png")) {
-  //   //   extension = ".png";
-  //   // } else if (imageSrc.endsWith(".jpg")) {
-  //   //   extension = ".jpg";
-  //   // }
-  //   setImageSrc(`${baseUrl}/images/${currentUser._id}.png?${Math.random()}`);
-  // };
 
   return (
     <div className="pageProfile">

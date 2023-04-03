@@ -49,16 +49,16 @@ function App() {
           </span>
         )}
         <div className="navRow">
-          {/* {(currentUser.accessGroups.includes("members") ||
+          {(currentUser.accessGroups.includes("members") ||
             currentUser.accessGroups.includes("unconfirmedMembers")) && (
             <NavLink to="/members">Members</NavLink>
-          )} */}
+          )}
           <div className="profileImage">
             {(currentUser.accessGroups.includes("members") ||
               currentUser.accessGroups.includes("unconfirmedMembers")) && (
               <>
                 <img src={imageSrc} className="userImage" />
-                <NavLink to="/profile"> Profile</NavLink>
+                <NavLink to="/profile">{currentUser.userName}</NavLink>
               </>
             )}
           </div>
@@ -91,7 +91,10 @@ function App() {
       </nav>
       <Routes>
         <Route path="*" element={<Page404 />} />
-        <Route path="/welcome" element={<PageWelcome />} />
+        <Route
+          path="/welcome"
+          element={<PageWelcome currentUser={currentUser} />}
+        />
         <Route path="/teamSearch" element={<PageTeams />} />
         <Route path="/playerSearch" element={<PagePlayers />} />
         {(currentUser.accessGroups.includes("members") ||

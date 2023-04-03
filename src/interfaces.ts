@@ -70,7 +70,7 @@ export interface IUploadFile {
 export interface IGamesPosts {
   _id: string;
   title: string;
-  description: string;
+  WeSearch: string;
   weOffer: string;
   contact: string;
   numberOfPlayers: string;
@@ -85,7 +85,7 @@ export interface IGamesPosts {
 
 export interface IEditGamePost {
   title: string;
-  description: string;
+  WeSearch: string;
   weOffer: string;
   contact: string;
   language: string;
@@ -96,7 +96,7 @@ export interface IEditGamePost {
 
 export const blankNewGamesPost: IEditGamePost = {
   title: "",
-  description: "",
+  WeSearch: "",
   language: "",
   game: "",
   console: "",

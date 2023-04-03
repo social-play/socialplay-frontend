@@ -5,7 +5,14 @@ import "../styles/pages/pageWelcome.scss";
 
 import * as gamesLists from "../components/gamesLists";
 import { popUp } from "../components/popUp";
-export const PageWelcome = () => {
+import { IUser } from "../interfaces";
+
+interface IPageMembersProps {
+  currentUser: IUser;
+}
+
+export const PageWelcome = (props: IPageMembersProps) => {
+  const { currentUser } = props;
   const {
     appTitle,
     gamesPosts,
@@ -63,11 +70,11 @@ export const PageWelcome = () => {
             <label>We search:</label>
             <textarea
               className="rounded-lg"
-              value={newGamesPost.description}
-              name="description"
+              value={newGamesPost.WeSearch}
+              name="WeSearch"
               onChange={(e) =>
                 handleAddGamesPostFieldsChange(
-                  "description",
+                  "WeSearch",
                   newGamesPost,
                   e.target.value
                 )
@@ -280,18 +287,17 @@ export const PageWelcome = () => {
               </div>
               {!gamesPost.isBeingEdited ? (
                 <div className="showData">
-                  <div className="title">{gamesPost.title}</div>
-                  {/* <p className="description">{gamesPost.description}</p> */}
-                  <span>{gamesPost.languageText}</span>
-
                   <div className="displayGameImage">
                     <img
                       className={gamesPost.game}
                       src={`icons/${gamesPost.game}.png`}
                     />
                   </div>
+                  <h2>{currentUser.userName}</h2>
                   <div>
-                    <button onClick={() => popUp(gamesPost)}>SHOW</button>
+                    <button onClick={() => popUp(gamesPost, currentUser)}>
+                      SHOW
+                    </button>
                   </div>
                   <div className="buttons">
                     <button
@@ -326,13 +332,13 @@ export const PageWelcome = () => {
                     />
                   </div>
                   <div className="row">
-                    <label> description: </label>
+                    <label> WeSearch: </label>
                     <textarea
-                      value={gamesPost.originalEditFields.description}
-                      name="description"
+                      value={gamesPost.originalEditFields.WeSearch}
+                      name="WeSearch"
                       onChange={(e) =>
                         handleChangeEditGamesPost(
-                          "description",
+                          "WeSearch",
                           gamesPost,
                           e.target.value
                         )

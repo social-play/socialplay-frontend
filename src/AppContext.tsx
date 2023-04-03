@@ -161,7 +161,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           isBeingEdited: false,
           originalEditFields: {
             title: rawNewGamesPost.title,
-            description: rawNewGamesPost.description,
+            WeSearch: rawNewGamesPost.WeSearch,
             weOffer: rawNewGamesPost.weOffer,
             contact: rawNewGamesPost.contact,
             language: rawNewGamesPost.language,
@@ -192,7 +192,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           isBeingEdited: false,
           originalEditFields: {
             title: rawNewGamesPost.title,
-            description: rawNewGamesPost.description,
+            WeSearch: rawNewGamesPost.WeSearch,
             weOffer: rawNewGamesPost.weOffer,
             contact: rawNewGamesPost.contact,
             language: rawNewGamesPost.language,
@@ -220,7 +220,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     // to reset any values that were changed
     gamesPost.originalEditFields = {
       title: gamesPost.title,
-      description: gamesPost.description,
+      WeSearch: gamesPost.WeSearch,
       weOffer: gamesPost.weOffer,
       contact: gamesPost.contact,
       language: gamesPost.language,
@@ -239,7 +239,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         `${backendUrl}/gamesPost/${gamesPost._id}`,
         {
           title: gamesPost.originalEditFields.title,
-          description: gamesPost.originalEditFields.description,
+          WeSearch: gamesPost.originalEditFields.WeSearch,
           weOffer: gamesPost.originalEditFields.weOffer,
           contact: gamesPost.originalEditFields.contact,
           language: gamesPost.originalEditFields.language,
@@ -250,7 +250,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       );
       // if saved in backend, update in frontend
       gamesPost.title = gamesPost.originalEditFields.title;
-      gamesPost.description = gamesPost.originalEditFields.description;
+      gamesPost.WeSearch = gamesPost.originalEditFields.WeSearch;
       gamesPost.weOffer = gamesPost.originalEditFields.weOffer;
       gamesPost.contact = gamesPost.originalEditFields.contact;
       gamesPost.language = gamesPost.originalEditFields.language;
@@ -317,12 +317,26 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   // post a newGamesPost by click
 
   const handleSaveNewGamesPost = async () => {
+    if (
+      !newGamesPost.title ||
+      !newGamesPost.WeSearch ||
+      !newGamesPost.weOffer ||
+      !newGamesPost.contact ||
+      !newGamesPost.language ||
+      !newGamesPost.numberOfPlayers ||
+      !newGamesPost.game ||
+      !newGamesPost.console
+    ) {
+      alert("Please fill all required fields");
+      return;
+    }
+
     try {
       await axios.post(
         `${backendUrl}/gamesPost`,
         {
           title: newGamesPost.title,
-          description: newGamesPost.description,
+          WeSearch: newGamesPost.WeSearch,
           weOffer: newGamesPost.weOffer,
           contact: newGamesPost.contact,
           language: newGamesPost.language,
