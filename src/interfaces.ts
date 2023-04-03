@@ -71,6 +71,8 @@ export interface IGamesPosts {
   _id: string;
   title: string;
   description: string;
+  weOffer: string;
+  contact: string;
   numberOfPlayers: string;
   language: string;
   imageUrl: string;
@@ -84,6 +86,8 @@ export interface IGamesPosts {
 export interface IEditGamePost {
   title: string;
   description: string;
+  weOffer: string;
+  contact: string;
   language: string;
   game: string;
   console: string;
@@ -97,4 +101,6 @@ export const blankNewGamesPost: IEditGamePost = {
   game: "",
   console: "",
   numberOfPlayers: "",
+  weOffer: "",
+  contact: "",
 };

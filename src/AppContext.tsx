@@ -162,6 +162,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           originalEditFields: {
             title: rawNewGamesPost.title,
             description: rawNewGamesPost.description,
+            weOffer: rawNewGamesPost.weOffer,
+            contact: rawNewGamesPost.contact,
             language: rawNewGamesPost.language,
             game: rawNewGamesPost.game,
             console: rawNewGamesPost.console,
@@ -191,6 +193,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           originalEditFields: {
             title: rawNewGamesPost.title,
             description: rawNewGamesPost.description,
+            weOffer: rawNewGamesPost.weOffer,
+            contact: rawNewGamesPost.contact,
             language: rawNewGamesPost.language,
             game: rawNewGamesPost.game,
             console: rawNewGamesPost.console,
@@ -217,6 +221,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     gamesPost.originalEditFields = {
       title: gamesPost.title,
       description: gamesPost.description,
+      weOffer: gamesPost.weOffer,
+      contact: gamesPost.contact,
       language: gamesPost.language,
       game: gamesPost.game,
       console: gamesPost.console,
@@ -234,6 +240,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         {
           title: gamesPost.originalEditFields.title,
           description: gamesPost.originalEditFields.description,
+          weOffer: gamesPost.originalEditFields.weOffer,
+          contact: gamesPost.originalEditFields.contact,
           language: gamesPost.originalEditFields.language,
           game: gamesPost.originalEditFields.game,
           numberOfPlayers: gamesPost.originalEditFields.numberOfPlayers,
@@ -243,6 +251,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       // if saved in backend, update in frontend
       gamesPost.title = gamesPost.originalEditFields.title;
       gamesPost.description = gamesPost.originalEditFields.description;
+      gamesPost.weOffer = gamesPost.originalEditFields.weOffer;
+      gamesPost.contact = gamesPost.originalEditFields.contact;
       gamesPost.language = gamesPost.originalEditFields.language;
       gamesPost.game = gamesPost.originalEditFields.game;
       gamesPost.console = gamesPost.originalEditFields.console;
@@ -299,6 +309,9 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     if (newGamesPost.game.length > 0) {
       setDropDownText(newGamesPost.game);
     }
+    if (newGamesPost.console.length > 0) {
+      setDropDownTextConsole(newGamesPost.console);
+    }
   };
 
   // post a newGamesPost by click
@@ -310,6 +323,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         {
           title: newGamesPost.title,
           description: newGamesPost.description,
+          weOffer: newGamesPost.weOffer,
+          contact: newGamesPost.contact,
           language: newGamesPost.language,
           numberOfPlayers: newGamesPost.numberOfPlayers,
           imageUrl: imageSrc,

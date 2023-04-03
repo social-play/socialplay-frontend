@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "../AppContext";
 import { Helmet } from "react-helmet";
 import "../styles/pages/pageWelcome.scss";
 
-import * as gamesLists from "../gamesLists/gamesLists";
-
+import * as gamesLists from "../components/gamesLists";
+import { popUp } from "../components/popUp";
 export const PageWelcome = () => {
   const {
     appTitle,
@@ -60,7 +60,7 @@ export const PageWelcome = () => {
             />
           </div>
           <div className="column">
-            <label>Description:</label>
+            <label>We search:</label>
             <textarea
               className="rounded-lg"
               value={newGamesPost.description}
@@ -74,6 +74,37 @@ export const PageWelcome = () => {
               }
             />
           </div>
+          <div className="column">
+            <label>We offer:</label>
+            <textarea
+              className="rounded-lg"
+              value={newGamesPost.weOffer}
+              name="weOffer"
+              onChange={(e) =>
+                handleAddGamesPostFieldsChange(
+                  "weOffer",
+                  newGamesPost,
+                  e.target.value
+                )
+              }
+            />
+          </div>
+          <div className="column">
+            <label>Contact:</label>
+            <textarea
+              className="rounded-lg"
+              value={newGamesPost.contact}
+              name="contact"
+              onChange={(e) =>
+                handleAddGamesPostFieldsChange(
+                  "contact",
+                  newGamesPost,
+                  e.target.value
+                )
+              }
+            />
+          </div>
+
           <div className="column">
             <label> Number Of Players: </label>
             <input
@@ -250,9 +281,18 @@ export const PageWelcome = () => {
               {!gamesPost.isBeingEdited ? (
                 <div className="showData">
                   <div className="title">{gamesPost.title}</div>
-                  <p className="description">{gamesPost.description}</p>
+                  {/* <p className="description">{gamesPost.description}</p> */}
                   <span>{gamesPost.languageText}</span>
 
+                  <div className="displayGameImage">
+                    <img
+                      className={gamesPost.game}
+                      src={`icons/${gamesPost.game}.png`}
+                    />
+                  </div>
+                  <div>
+                    <button onClick={() => popUp(gamesPost)}>SHOW</button>
+                  </div>
                   <div className="buttons">
                     <button
                       type="button"
@@ -266,12 +306,6 @@ export const PageWelcome = () => {
                     >
                       Edit
                     </button>
-                  </div>
-                  <div className="displayGameImage">
-                    <img
-                      className={gamesPost.game}
-                      src={`icons/${gamesPost.game}.png`}
-                    />
                   </div>
                 </div>
               ) : (

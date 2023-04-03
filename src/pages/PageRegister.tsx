@@ -4,6 +4,7 @@ import { IUser } from "../interfaces";
 import { useContext } from "react";
 import { AppContext } from "../AppContext";
 import { Helmet } from "react-helmet";
+
 interface IPageRegisterProps {
   baseUrl: string;
 }

@@ -1,0 +1,53 @@
+.myPopup {
+    height: 95vh;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+
+    .popupTitle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: red;
+        padding: 0;
+        margin: 0;
+        border-radius: 20px 20px 0 0;
+        .popupContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: green;
+
+            .popupImage {
+                display: flex;
+                width: 150px;
+                height: 150px;
+
+                img {
+                    width: 150px;
+                    height: 150px;
+                }
+            }
+            .gameImagePopup {
+                display: flex;
+                width: 100px;
+                height: 100px;
+                .gameImage {
+                    width: 100px;
+                    height: 100px;
+                }
+            }
+        }
+    }
+
+    .swal2-styled.swal2-confirm {
+        background-color: green;
+
+        margin: 0;
+    }
+    .swal2-html-container {
+        background-color: yellow;
+        margin: 0;
+    }
+}
