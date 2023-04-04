@@ -81,7 +81,9 @@ export interface IGamesPosts {
   isBeingEdited: boolean;
   originalEditFields: IEditGamePost;
   game: string;
+
   author: string;
+
 }
 
 export interface IEditGamePost {
@@ -93,7 +95,9 @@ export interface IEditGamePost {
   game: string;
   console: string;
   numberOfPlayers: string;
+
   author: string;
+
 }
 
 export const blankNewGamesPost: IEditGamePost = {
@@ -105,5 +109,7 @@ export const blankNewGamesPost: IEditGamePost = {
   numberOfPlayers: "",
   weOffer: "",
   contact: "",
+
   author: "",
+
 };
