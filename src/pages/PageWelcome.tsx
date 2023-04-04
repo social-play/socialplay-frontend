@@ -209,7 +209,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
                 <option value="persian">🇮🇷️ - فارسی</option>
                 <option value="portuguese">🇵🇹️️ - PORTUGUÊS</option>
                 <option value="russian">🇷🇺️️️ - РУССКИЙ</option>
-                <option value="turkish">🇹🇷️ - TÜRKÇE</option>
+                <option value="turkish">🇹🇷️ - TÜRKÇEs</option>
               </select>
             </div>
           </div>
