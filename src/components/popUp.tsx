@@ -11,7 +11,9 @@ export const popUp = (gamesPost: IGamesPosts, currentUser: IUser) => {
       </div>
       <h2>${currentUser.userName}</h2>
       <div class="gameImagePopup">
-      <img  src=${`icons/${gamesPost.console}.png`} class="consoleImage"/>
+      <img  src=${`icons/${gamesPost.console}.png`} class="consoleImage" title=${
+      gamesPost.console
+    } />
       <img  src=${`icons/${gamesPost.game}.png`} class="gameImage"/>
       </div>
       <section>

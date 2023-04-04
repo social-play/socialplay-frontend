@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { AppContext } from "../AppContext";
 import { Helmet } from "react-helmet";
 import "../styles/pages/pageWelcome.scss";
-
 import * as gamesLists from "../components/gamesLists";
 import { popUp } from "../components/popUp";
 import { IUser } from "../interfaces";
+import { GoMail } from "react-icons/go";
 
 interface IPageMembersProps {
   currentUser: IUser;
@@ -268,10 +268,18 @@ export const PageWelcome = (props: IPageMembersProps) => {
           </section>
 
           <div className="buttons">
-            <button type="button" onClick={handleToggleAddGamesPost}>
+            <button
+              type="button"
+              onClick={handleToggleAddGamesPost}
+              className="text-xl text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+            >
               Cancel
             </button>
-            <button type="button" onClick={handleSaveNewGamesPost}>
+            <button
+              type="button"
+              onClick={handleSaveNewGamesPost}
+              className="text-xl text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+            >
               Save
             </button>
           </div>
@@ -282,6 +290,16 @@ export const PageWelcome = (props: IPageMembersProps) => {
         {gamesPosts.map((gamesPost) => {
           return (
             <div className="gamesPost" key={gamesPost._id}>
+              <div className="gameAndMail">
+                <img
+                  className={gamesPost.console}
+                  title={gamesPost.console}
+                  src={`icons/${gamesPost.console}.png`}
+                />
+                <span>
+                  <GoMail />
+                </span>
+              </div>
               <div className="image">
                 <img src={gamesPost.imageUrl} />
               </div>
@@ -295,7 +313,10 @@ export const PageWelcome = (props: IPageMembersProps) => {
                   </div>
                   <h2>{currentUser.userName}</h2>
                   <div>
-                    <button onClick={() => popUp(gamesPost, currentUser)}>
+                    <button
+                      onClick={() => popUp(gamesPost, currentUser)}
+                      className="text-xl text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+                    >
                       SHOW
                     </button>
                   </div>
