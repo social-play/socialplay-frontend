@@ -62,8 +62,9 @@
                 padding-top: 1rem;
                 background-color: rgba($mainColor, 0.8);
                 img {
+                    border-radius: 100%;
                     width: 150px;
-                    height: 130px;
+                    height: 150px;
                 }
             }
 
@@ -75,6 +76,7 @@
                 row-gap: 10px;
                 width: 100%;
                 background-color: rgba(purple, 0.1);
+
                 h2 {
                     color: #aaa;
                     font-family: "Kanit", sans-serif;

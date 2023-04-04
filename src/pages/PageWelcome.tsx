@@ -312,7 +312,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
                       src={`icons/${gamesPost.game}.png`}
                     />
                   </div>
-                  <h2>{currentUser.userName}</h2>
+                  <h2>{gamesPost.author}</h2>
                   <div>
                     <button
                       onClick={() => popUp(gamesPost, currentUser)}

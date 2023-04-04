@@ -10,7 +10,7 @@ export const popUp = (gamesPost: IGamesPosts, currentUser: IUser) => {
       <div class="popupImage">
       <img src=${gamesPost.imageUrl}/>
       </div>
-      <h2>${currentUser.userName}</h2>
+      <h2>${gamesPost.author}</h2>
       <div class="gameImagePopup">
       <img  src=${`icons/${gamesPost.console}.png`} class="consoleImage" title=${
       gamesPost.console
@@ -27,14 +27,14 @@ export const popUp = (gamesPost: IGamesPosts, currentUser: IUser) => {
     <p>${gamesPost.weOffer}</p>
     </div>
     <div class="popupRow">
-    <h2>CONTACT:</h2>
+    <h2>JOIN US:</h2>
     <p>${gamesPost.contact}</p>
     </div>
     </section>
     </div>
       `,
 
-    background: "rgba(34,34,34,0.8)",
+    background: "rgba(0,0,80,0.8)",
     confirmButtonText: "close",
     padding: "0",
     customClass: {
