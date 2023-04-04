@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { IUser } from "../interfaces";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useContext } from "react";
