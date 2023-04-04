@@ -8,6 +8,17 @@ export const popUp = (gamesPost: IGamesPosts, currentUser: IUser) => {
     <div class="popupContainer">
 
     <h1>${gamesPost.title}</h1>
+      <div class="popupImage">
+      <img src=${gamesPost.imageUrl}/>
+      </div>
+      <h2>${gamesPost.author}</h2>
+      <div class="gameImagePopup">
+      <img  src=${`icons/${gamesPost.console}.png`} class="consoleImage" title=${
+      gamesPost.console
+    } />
+
+
+    <h1>${gamesPost.title}</h1>
 
       <div class="popupImage">
       <img src=${gamesPost.imageUrl}/>
@@ -21,6 +32,7 @@ export const popUp = (gamesPost: IGamesPosts, currentUser: IUser) => {
 
       <img  src=${`icons/${gamesPost.console}.png`} class="consoleImage"/>
 
+
       <img  src=${`icons/${gamesPost.game}.png`} class="gameImage"/>
       </div>
       <section>
@@ -33,14 +45,22 @@ export const popUp = (gamesPost: IGamesPosts, currentUser: IUser) => {
     <p>${gamesPost.weOffer}</p>
     </div>
     <div class="popupRow">
+
+    <h2>JOIN US:</h2>
+
     <h2>CONTACT:</h2>
+
     <p>${gamesPost.contact}</p>
     </div>
     </section>
     </div>
       `,
 
+
+    background: "rgba(0,0,80,0.8)",
+
     background: "rgba(34,34,34,0.8)",
+
     confirmButtonText: "close",
     padding: "0",
     customClass: {
