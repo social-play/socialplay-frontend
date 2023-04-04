@@ -1,13 +1,5 @@
 @use "../variables" as *;
-
 @import url("https://fonts.googleapis.com/css2?family=Kanit&family=Silkscreen:wght@700&display=swap");
-
-
-
-@import url("https://fonts.googleapis.com/css2?family=Kanit&family=Silkscreen:wght@700&display=swap");
-
-
-
 
 .pageWelcome {
     display: flex;
@@ -15,20 +7,11 @@
     align-items: center;
     width: 100%;
 
-
-
-
     h2 {
         font-size: 2rem;
         color: orange;
         font-family: "Kanit", sans-serif;
-        padding: 2rem 0;
-
-
-    h2 {
-        font-size: 2rem;
-        color: orange;
-
+        padding: 1rem 0;
     }
     .gamesPosts {
         display: flex;
@@ -36,7 +19,6 @@
         justify-content: center;
         align-items: center;
         gap: 1rem;
-
 
         .gamesPost {
             display: flex;
@@ -48,9 +30,6 @@
             gap: 1rem;
             padding: 0.5rem;
             justify-content: space-evenly;
-
-
-
             background-color: rgba($mainColor, 0.5);
             width: 400px;
             &:hover {
@@ -82,26 +61,10 @@
                 height: 200px;
                 padding-top: 1rem;
                 background-color: rgba($mainColor, 0.8);
-
                 img {
                     border-radius: 100%;
                     width: 150px;
                     height: 150px;
-
-
-            background-color: blue;
-            width: 400px;
-            .image {
-                display: flex;
-                justify-content: center;
-                width: 200px;
-                height: 150px;
-
-
-                img {
-                    width: 150px;
-                    height: 130px;
-
                 }
             }
 
@@ -111,25 +74,12 @@
                 justify-content: center;
                 align-content: center;
                 row-gap: 10px;
-
                 width: 100%;
                 background-color: rgba(purple, 0.1);
 
-
                 h2 {
                     color: #aaa;
                     font-family: "Kanit", sans-serif;
-
-                h2 {
-                    color: #aaa;
-                    font-family: "Kanit", sans-serif;
-
-
-                h2 {
-                    color: $mainColor;
-                    font-family: "Courier New", Courier, monospace;
-
-
                 }
                 .title {
                     a {
@@ -160,7 +110,6 @@
                 .buttons {
                     display: flex;
                     align-items: center;
-
                     justify-content: space-evenly;
                     column-gap: 1rem;
                     padding: 1rem 0;
@@ -178,36 +127,48 @@
                             filter: brightness(1.7);
                         }
                     }
-
-
-                    justify-content: center;
-                    column-gap: 1rem;
-                    padding: 1rem 0;
-
-
                 }
             }
-            form {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                label {
-                    width: 3rem;
-                }
 
+            .editArea {
+                display: flex;
+                flex-flow: column wrap;
+                justify-content: space-between;
+                align-content: center;
+                width: 100%;
+                background-color: rgba(purple, 0.1);
+                gap: 10px;
+
+                .row {
+                    display: flex;
+                    flex-direction: column;
+                    label {
+                        background-color: rgba($Lime, 0.3);
+                    }
+                }
+                .buttons {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-evenly;
+                    .delete {
+                        color: tomato;
+                        font-size: 1.5rem;
+                        &:hover {
+                            filter: brightness(1.7);
+                        }
+                    }
+                    .save {
+                        color: green;
+                        font-size: 1.5rem;
+                        &:hover {
+                            filter: brightness(1.7);
+                        }
+                    }
+                }
                 input,
                 textArea {
                     width: 100%;
-                    padding: 0.5rem;
-                    color: #222;
                 }
-            }
-
-            .row {
-                display: flex;
-                align-items: center;
-                column-gap: 5rem;
             }
         }
     }
@@ -272,9 +233,9 @@ textArea {
     align-items: center;
     column-gap: 1rem;
     padding: 1rem 0;
-}
-button {
-    padding: 2px 5px;
-    border-radius: 5px;
-    cursor: pointer;
+
+    button {
+        border-radius: 5px;
+        cursor: pointer;
+    }
 }

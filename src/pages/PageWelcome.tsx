@@ -8,21 +8,10 @@ import { IUser } from "../interfaces";
 import { GoMail } from "react-icons/go";
 import { MdDelete } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
+import { FaCheck, FaTimes } from "react-icons/fa";
 interface IPageMembersProps {
   currentUser: IUser;
 }
-
-
-
-import * as gamesLists from "../components/gamesLists";
-import { popUp } from "../components/popUp";
-import { IUser } from "../interfaces";
-
-interface IPageMembersProps {
-  currentUser: IUser;
-}
-
-
 
 export const PageWelcome = (props: IPageMembersProps) => {
   const { currentUser } = props;
@@ -56,7 +45,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
       <h2>{gamesPosts.length} REQUESTS IN SEARCH FOR PLAYERS OR TEAMS</h2>
       {!isAdding ? (
         <button
-          className="text-xl text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+          className="text-xl text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-2 mb-5"
           type="button"
           onClick={handleToggleAddGamesPost}
         >
@@ -110,7 +99,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
             />
           </div>
           <div className="column">
-            <label>Contact:</label>
+            <label>Join Us:</label>
             <textarea
               className="rounded-lg"
               value={newGamesPost.contact}
@@ -145,15 +134,12 @@ export const PageWelcome = (props: IPageMembersProps) => {
             <div
               id="dropdownDefaultButton"
               data-dropdown-toggle="dropdown"
+       
+
 
               className="text-xl text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
 
-
-              className="text-xl text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
-
-              className="text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
-
-
+        
               onClick={toggleDropDownConsole}
             >
               <>{dropDownTextConsole}</>
@@ -209,14 +195,11 @@ export const PageWelcome = (props: IPageMembersProps) => {
             <div>
               <select
 
-                className="text-xl bg-gray-50 border-2 text-gray-900 text-sm rounded-lg hover:border-blue-500 block p-2.5 dark:focus:ring-blue-200 w-full"
 
 
                 className="text-xl bg-gray-50 border-2 text-gray-900 text-sm rounded-lg hover:border-blue-500 block p-2.5 dark:focus:ring-blue-200 w-full"
 
-                className="bg-gray-50 border-2 text-gray-900 text-sm rounded-lg hover:border-blue-500 block p-2.5 dark:focus:ring-blue-200 w-full"
-
-
+      
                 onChange={(e) =>
                   handleAddGamesPostFieldsChange(
                     "language",
@@ -226,16 +209,17 @@ export const PageWelcome = (props: IPageMembersProps) => {
                 }
               >
                 <option value="">Select Language...</option>
-                <option value="arabic">🇸🇦️ - ARABIC</option>
+                <option value="arabic">🇸🇦️ - العربية</option>
+                <option value="german">🇩🇪️ - DEUTSCH</option>
                 <option value="english">🇺🇸️️ - ENGLISH</option>
-                <option value="french">🇫🇷️ - FRENCH</option>
-                <option value="german">🇩🇪️ - GERMAN</option>
-                <option value="japanese">🇯🇵️️ - JAPANESE</option>
-                <option value="persian">🇮🇷️ - PERSIAN</option>
-                <option value="portuguese">🇵🇹️️ - PORTUGUESE</option>
-                <option value="russian">🇷🇺️️️ - RUSSIAN</option>
-                <option value="spanish">🇪🇸️ - SPANISH</option>
-                <option value="turkish">🇹🇷️ - TURKISH</option>
+                <option value="spanish">🇪🇸️ - ESPAÑOL</option>
+                <option value="french">🇫🇷️ - FRANÇAIS</option>
+                <option value="french">🇮🇹️ - ITALIANO</option>
+                <option value="japanese">🇯🇵️️ - 日本語</option>
+                <option value="persian">🇮🇷️ - فارسی</option>
+                <option value="portuguese">🇵🇹️️ - PORTUGUÊS</option>
+                <option value="russian">🇷🇺️️️ - РУССКИЙ</option>
+                <option value="turkish">🇹🇷️ - TÜRKÇE</option>
               </select>
             </div>
           </div>
@@ -245,15 +229,11 @@ export const PageWelcome = (props: IPageMembersProps) => {
             <div
               id="dropdownDefaultButton"
               data-dropdown-toggle="dropdown"
+    
 
               className="text-xl text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
 
-
-              className="text-xl text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
-
-              className="text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
-
-
+         
               onClick={toggleDropDown}
             >
               <>{dropDownText}</>
@@ -350,19 +330,11 @@ export const PageWelcome = (props: IPageMembersProps) => {
                   </div>
 
                   <h2>{gamesPost.author}</h2>
-                  <div>
-
-                  <h2>{currentUser.userName}</h2>
-                  <div>
-
+  
                     <button
                       onClick={() => popUp(gamesPost, currentUser)}
                       className="text-xl text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
                     >
-
-
-                    <button onClick={() => popUp(gamesPost, currentUser)}>
-
 
                       SHOW
                     </button>
@@ -389,22 +361,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
               ) : (
                 <form className="editArea">
                   <div className="row">
-                    <label>title:</label>
-                    <input
-                      type="text"
-                      value={gamesPost.originalEditFields.title}
-                      name="title"
-                      onChange={(e) =>
-                        handleChangeEditGamesPost(
-                          "title",
-                          gamesPost,
-                          e.target.value
-                        )
-                      }
-                    />
-                  </div>
-                  <div className="row">
-                    <label> WeSearch: </label>
+                    <label>WE SEARCH:</label>
                     <textarea
                       value={gamesPost.originalEditFields.WeSearch}
                       name="WeSearch"
@@ -418,32 +375,51 @@ export const PageWelcome = (props: IPageMembersProps) => {
                     />
                   </div>
                   <div className="row">
-                    <label> language: </label>
+                    <label>WE OFFER:</label>
                     <input
                       type="text"
-                      value={gamesPost.originalEditFields.language}
-                      name="language"
+                      value={gamesPost.originalEditFields.weOffer}
+                      name="weOffer"
                       onChange={(e) =>
                         handleChangeEditGamesPost(
-                          "language",
+                          "weOffer",
                           gamesPost,
                           e.target.value
                         )
                       }
                     />
                   </div>
+                  <div className="row">
+                    <label>JOIN US:</label>
+                    <div>
+                      <input
+                        type="text"
+                        value={gamesPost.originalEditFields.contact}
+                        name="contact"
+                        onChange={(e) =>
+                          handleChangeEditGamesPost(
+                            "contact",
+                            gamesPost,
+                            e.target.value
+                          )
+                        }
+                      />
+                    </div>
+                  </div>
                   <div className="buttons">
                     <button
+                      className="delete"
                       type="button"
                       onClick={() => handleCancelEditGamesPost(gamesPost)}
                     >
-                      Cancel
+                      <FaTimes />
                     </button>
                     <button
+                      className="save"
                       type="button"
                       onClick={() => handleSaveEditGamesPost(gamesPost)}
                     >
-                      Save
+                      <FaCheck />
                     </button>
                   </div>
                 </form>

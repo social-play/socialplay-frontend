@@ -171,6 +171,10 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
             author: rawNewGamesPost.author,
 
+
+            author: rawNewGamesPost.author,
+
+
           },
         };
         _newGamesPosts.push(_newGamesPost);
@@ -232,6 +236,10 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
       author: gamesPost.author,
 
+
+      author: gamesPost.author,
+
+
       numberOfPlayers: gamesPost.numberOfPlayers,
     };
     setGamesPosts([...gamesPosts]);
@@ -254,6 +262,10 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
           author: gamesPost.originalEditFields.author,
 
+
+          author: gamesPost.originalEditFields.author,
+
+
         },
         { withCredentials: true }
       );
@@ -268,6 +280,10 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       gamesPost.numberOfPlayers = gamesPost.originalEditFields.numberOfPlayers;
 
       gamesPost.author = gamesPost.originalEditFields.author;
+
+
+      gamesPost.author = gamesPost.originalEditFields.author;
+
 
       setGamesPosts([...gamesPosts]);
       gamesPost.isBeingEdited = false;
@@ -356,6 +372,9 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           imageUrl: imageSrc,
           game: newGamesPost.game,
           console: newGamesPost.console,
+
+          author: currentUser.userName,
+
 
           author: currentUser.userName,
 

@@ -84,6 +84,8 @@ export interface IGamesPosts {
 
   author: string;
 
+
+
 }
 
 export interface IEditGamePost {
@@ -109,6 +111,7 @@ export const blankNewGamesPost: IEditGamePost = {
   numberOfPlayers: "",
   weOffer: "",
   contact: "",
+
 
   author: "",
 
