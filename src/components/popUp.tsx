@@ -34,7 +34,7 @@ export const popUp = (gamesPost: IGamesPosts, currentUser: IUser) => {
     </div>
       `,
 
-    background: "rgba(0,0,80,0.8)",
+    background: "rgba(0,0,50,0.9)",
     confirmButtonText: "close",
     padding: "0",
     customClass: {

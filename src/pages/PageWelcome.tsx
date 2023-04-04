@@ -8,6 +8,7 @@ import { IUser } from "../interfaces";
 import { GoMail } from "react-icons/go";
 import { MdDelete } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
+import { FaCheck, FaTimes } from "react-icons/fa";
 interface IPageMembersProps {
   currentUser: IUser;
 }
@@ -44,7 +45,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
       <h2>{gamesPosts.length} REQUESTS IN SEARCH FOR PLAYERS OR TEAMS</h2>
       {!isAdding ? (
         <button
-          className="text-xl text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+          className="text-xl text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-2 mb-5"
           type="button"
           onClick={handleToggleAddGamesPost}
         >
@@ -98,7 +99,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
             />
           </div>
           <div className="column">
-            <label>Contact:</label>
+            <label>Join Us:</label>
             <textarea
               className="rounded-lg"
               value={newGamesPost.contact}
@@ -198,16 +199,17 @@ export const PageWelcome = (props: IPageMembersProps) => {
                 }
               >
                 <option value="">Select Language...</option>
-                <option value="arabic">🇸🇦️ - ARABIC</option>
+                <option value="arabic">🇸🇦️ - العربية</option>
+                <option value="german">🇩🇪️ - DEUTSCH</option>
                 <option value="english">🇺🇸️️ - ENGLISH</option>
-                <option value="french">🇫🇷️ - FRENCH</option>
-                <option value="german">🇩🇪️ - GERMAN</option>
-                <option value="japanese">🇯🇵️️ - JAPANESE</option>
-                <option value="persian">🇮🇷️ - PERSIAN</option>
-                <option value="portuguese">🇵🇹️️ - PORTUGUESE</option>
-                <option value="russian">🇷🇺️️️ - RUSSIAN</option>
-                <option value="spanish">🇪🇸️ - SPANISH</option>
-                <option value="turkish">🇹🇷️ - TURKISH</option>
+                <option value="spanish">🇪🇸️ - ESPAÑOL</option>
+                <option value="french">🇫🇷️ - FRANÇAIS</option>
+                <option value="french">🇮🇹️ - ITALIANO</option>
+                <option value="japanese">🇯🇵️️ - 日本語</option>
+                <option value="persian">🇮🇷️ - فارسی</option>
+                <option value="portuguese">🇵🇹️️ - PORTUGUÊS</option>
+                <option value="russian">🇷🇺️️️ - РУССКИЙ</option>
+                <option value="turkish">🇹🇷️ - TÜRKÇE</option>
               </select>
             </div>
           </div>
@@ -343,22 +345,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
               ) : (
                 <form className="editArea">
                   <div className="row">
-                    <label>title:</label>
-                    <input
-                      type="text"
-                      value={gamesPost.originalEditFields.title}
-                      name="title"
-                      onChange={(e) =>
-                        handleChangeEditGamesPost(
-                          "title",
-                          gamesPost,
-                          e.target.value
-                        )
-                      }
-                    />
-                  </div>
-                  <div className="row">
-                    <label> WeSearch: </label>
+                    <label>WE SEARCH:</label>
                     <textarea
                       value={gamesPost.originalEditFields.WeSearch}
                       name="WeSearch"
@@ -372,32 +359,51 @@ export const PageWelcome = (props: IPageMembersProps) => {
                     />
                   </div>
                   <div className="row">
-                    <label> language: </label>
+                    <label>WE OFFER:</label>
                     <input
                       type="text"
-                      value={gamesPost.originalEditFields.language}
-                      name="language"
+                      value={gamesPost.originalEditFields.weOffer}
+                      name="weOffer"
                       onChange={(e) =>
                         handleChangeEditGamesPost(
-                          "language",
+                          "weOffer",
                           gamesPost,
                           e.target.value
                         )
                       }
                     />
                   </div>
+                  <div className="row">
+                    <label>JOIN US:</label>
+                    <div>
+                      <input
+                        type="text"
+                        value={gamesPost.originalEditFields.contact}
+                        name="contact"
+                        onChange={(e) =>
+                          handleChangeEditGamesPost(
+                            "contact",
+                            gamesPost,
+                            e.target.value
+                          )
+                        }
+                      />
+                    </div>
+                  </div>
                   <div className="buttons">
                     <button
+                      className="delete"
                       type="button"
                       onClick={() => handleCancelEditGamesPost(gamesPost)}
                     >
-                      Cancel
+                      <FaTimes />
                     </button>
                     <button
+                      className="save"
                       type="button"
                       onClick={() => handleSaveEditGamesPost(gamesPost)}
                     >
-                      Save
+                      <FaCheck />
                     </button>
                   </div>
                 </form>
