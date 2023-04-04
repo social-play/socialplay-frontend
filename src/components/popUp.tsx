@@ -6,6 +6,7 @@ export const popUp = (gamesPost: IGamesPosts, currentUser: IUser) => {
   Swal.fire({
     title: `
     <div class="popupContainer">
+    <h1>${gamesPost.title}</h1>
       <div class="popupImage">
       <img src=${gamesPost.imageUrl}/>
       </div>

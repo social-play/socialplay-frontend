@@ -6,7 +6,8 @@ import * as gamesLists from "../components/gamesLists";
 import { popUp } from "../components/popUp";
 import { IUser } from "../interfaces";
 import { GoMail } from "react-icons/go";
-
+import { MdDelete } from "react-icons/md";
+import { BiEdit } from "react-icons/bi";
 interface IPageMembersProps {
   currentUser: IUser;
 }
@@ -39,15 +40,15 @@ export const PageWelcome = (props: IPageMembersProps) => {
       <Helmet>
         <title>{appTitle} - Welcome</title>
       </Helmet>
-      <h2>{gamesPosts.length} TEAMS IN SEARCH OF PLAYERS</h2>
 
+      <h2>{gamesPosts.length} TEAMS IN SEARCH OF PLAYERS</h2>
       {!isAdding ? (
         <button
-          className="addBtn"
+          className="text-xl text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
           type="button"
           onClick={handleToggleAddGamesPost}
         >
-          Create
+          Create Post!
         </button>
       ) : (
         <form className="addedArea">
@@ -132,7 +133,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
             <div
               id="dropdownDefaultButton"
               data-dropdown-toggle="dropdown"
-              className="text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
+              className="text-xl text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
               onClick={toggleDropDownConsole}
             >
               <>{dropDownTextConsole}</>
@@ -187,7 +188,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
             <label>Language:</label>
             <div>
               <select
-                className="bg-gray-50 border-2 text-gray-900 text-sm rounded-lg hover:border-blue-500 block p-2.5 dark:focus:ring-blue-200 w-full"
+                className="text-xl bg-gray-50 border-2 text-gray-900 text-sm rounded-lg hover:border-blue-500 block p-2.5 dark:focus:ring-blue-200 w-full"
                 onChange={(e) =>
                   handleAddGamesPostFieldsChange(
                     "language",
@@ -216,7 +217,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
             <div
               id="dropdownDefaultButton"
               data-dropdown-toggle="dropdown"
-              className="text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
+              className="text-xl text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
               onClick={toggleDropDown}
             >
               <>{dropDownText}</>
@@ -325,13 +326,17 @@ export const PageWelcome = (props: IPageMembersProps) => {
                       type="button"
                       onClick={() => handleDeleteGamesPost(gamesPost)}
                     >
-                      Delete
+                      <span className="delete">
+                        <MdDelete />
+                      </span>
                     </button>
                     <button
                       type="button"
                       onClick={() => handleEditGamesPost(gamesPost)}
                     >
-                      Edit
+                      <span className="edit">
+                        <BiEdit />
+                      </span>
                     </button>
                   </div>
                 </div>
