@@ -168,7 +168,13 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
             game: rawNewGamesPost.game,
             console: rawNewGamesPost.console,
             numberOfPlayers: rawNewGamesPost.numberOfPlayers,
+
             author: rawNewGamesPost.author,
+
+
+            author: rawNewGamesPost.author,
+
+
           },
         };
         _newGamesPosts.push(_newGamesPost);
@@ -227,7 +233,13 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       language: gamesPost.language,
       game: gamesPost.game,
       console: gamesPost.console,
+
       author: gamesPost.author,
+
+
+      author: gamesPost.author,
+
+
       numberOfPlayers: gamesPost.numberOfPlayers,
     };
     setGamesPosts([...gamesPosts]);
@@ -247,7 +259,13 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           language: gamesPost.originalEditFields.language,
           game: gamesPost.originalEditFields.game,
           numberOfPlayers: gamesPost.originalEditFields.numberOfPlayers,
+
           author: gamesPost.originalEditFields.author,
+
+
+          author: gamesPost.originalEditFields.author,
+
+
         },
         { withCredentials: true }
       );
@@ -260,7 +278,13 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       gamesPost.game = gamesPost.originalEditFields.game;
       gamesPost.console = gamesPost.originalEditFields.console;
       gamesPost.numberOfPlayers = gamesPost.originalEditFields.numberOfPlayers;
+
       gamesPost.author = gamesPost.originalEditFields.author;
+
+
+      gamesPost.author = gamesPost.originalEditFields.author;
+
+
       setGamesPosts([...gamesPosts]);
       gamesPost.isBeingEdited = false;
     } catch (error) {
@@ -348,7 +372,12 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           imageUrl: imageSrc,
           game: newGamesPost.game,
           console: newGamesPost.console,
+
           author: currentUser.userName,
+
+
+          author: currentUser.userName,
+
         },
         { withCredentials: true }
       );
