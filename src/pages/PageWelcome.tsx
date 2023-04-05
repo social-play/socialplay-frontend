@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../AppContext";
 import { Helmet } from "react-helmet";
 import "../styles/pages/pageWelcome.scss";
@@ -9,11 +9,31 @@ import { GoMail } from "react-icons/go";
 import { MdDelete } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
 import { FaCheck, FaTimes } from "react-icons/fa";
+import { io, Socket } from "socket.io-client";
+import Chat from "../components/Chat";
+import { BsChatDots } from "react-icons/bs";
+
 interface IPageMembersProps {
   currentUser: IUser;
 }
+const baseUrl = import.meta.env.VITE_BACKEND_URL;
+
+const socket: Socket = io(`${baseUrl}`);
 
 export const PageWelcome = (props: IPageMembersProps) => {
+  // socket.io
+
+  const [room, setRoom] = useState("");
+  const [showChat, setShowChat] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [gamePostUserName, setGamePostUserName] = useState<string>("");
+  const joinRoom = () => {
+    if (room !== "") {
+      socket.emit("join_room", room);
+      setShowChat(true);
+    }
+  };
+
   const { currentUser } = props;
   const {
     appTitle,
@@ -36,6 +56,10 @@ export const PageWelcome = (props: IPageMembersProps) => {
     dropDownTextConsole,
   } = useContext(AppContext);
 
+  const openChat = (gamesPost: string) => {
+    setIsChatOpen(!isChatOpen);
+    setGamePostUserName(gamesPost);
+  };
   return (
     <div className="pageWelcome">
       <Helmet>
@@ -54,14 +78,15 @@ export const PageWelcome = (props: IPageMembersProps) => {
       ) : (
         <form className="addedArea">
           <div className="column">
-            <label>Title:</label>
+            <label>Room ID:</label>
             <input
-              value={newGamesPost.title}
+              placeholder="Room ID for chatting..."
+              value={newGamesPost.roomId}
               type="text"
-              name="title"
+              name="roomId"
               onChange={(e) =>
                 handleAddGamesPostFieldsChange(
-                  "title",
+                  "roomId",
                   newGamesPost,
                   e.target.value
                 )
@@ -71,6 +96,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
           <div className="column">
             <label>We search:</label>
             <textarea
+              placeholder="for example your challenge..."
               className="rounded-lg"
               value={newGamesPost.WeSearch}
               name="WeSearch"
@@ -86,6 +112,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
           <div className="column">
             <label>We offer:</label>
             <textarea
+              placeholder="your offer for playing..."
               className="rounded-lg"
               value={newGamesPost.weOffer}
               name="weOffer"
@@ -101,6 +128,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
           <div className="column">
             <label>Join Us:</label>
             <textarea
+              placeholder="for example Discord, Steam, Twitch etc..."
               className="rounded-lg"
               value={newGamesPost.contact}
               name="contact"
@@ -117,6 +145,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
           <div className="column">
             <label> Number Of Players: </label>
             <input
+              placeholder="if you are searching for a player, how many?..."
               type="number"
               name="numberOfPlayers"
               onChange={(e) =>
@@ -299,9 +328,9 @@ export const PageWelcome = (props: IPageMembersProps) => {
                   title={gamesPost.console}
                   src={`icons/${gamesPost.console}.png`}
                 />
-                <span>
+                <button onClick={() => openChat(gamesPost.author)}>
                   <GoMail />
-                </span>
+                </button>
               </div>
               <div className="image">
                 <img src={gamesPost.imageUrl} />
@@ -317,7 +346,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
                   <h2>{gamesPost.author}</h2>
                   <div>
                     <button
-                      onClick={() => popUp(gamesPost, currentUser)}
+                      onClick={() => popUp(gamesPost)}
                       className="text-xl text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
                     >
                       SHOW
@@ -412,6 +441,33 @@ export const PageWelcome = (props: IPageMembersProps) => {
           );
         })}
       </div>
+      {!isChatOpen ? (
+        <div className="openChat">
+          <BsChatDots />
+        </div>
+      ) : (
+        <div className="chat">
+          {!showChat ? (
+            <div className="joinChatContainer">
+              <input
+                type="text"
+                placeholder="Room ID..."
+                onChange={(event) => {
+                  setRoom(event.target.value);
+                }}
+              />
+              <button onClick={joinRoom}>Join A Room</button>
+            </div>
+          ) : (
+            <Chat
+              socket={socket}
+              gamePostUserName={gamePostUserName}
+              room={room}
+              setIsChatOpen={setIsChatOpen}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 };

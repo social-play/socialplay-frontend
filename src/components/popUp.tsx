@@ -1,12 +1,12 @@
 import Swal from "sweetalert2";
-import { IGamesPosts, IUser } from "../interfaces";
+import { IGamesPosts } from "../interfaces";
 import "../styles/pages/popup.scss";
 
-export const popUp = (gamesPost: IGamesPosts, currentUser: IUser) => {
+export const popUp = (gamesPost: IGamesPosts) => {
   Swal.fire({
     title: `
     <div class="popupContainer">
-    <h1>${gamesPost.title}</h1>
+      <h1>Room ID: ${gamesPost.roomId}</h1>
       <div class="popupImage">
       <img src=${gamesPost.imageUrl}/>
       </div>

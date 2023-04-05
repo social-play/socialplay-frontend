@@ -10,16 +10,14 @@ import {
   _initialUploadFile,
   IUser,
 } from "./interfaces";
-import axios, { AxiosResponse } from "axios";
-
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 export const AppContext = createContext<IAppContext>({} as IAppContext);
 
 export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
-  const appTitle: string = "info site";
+  const appTitle: string = "Social Play";
   const [gamesPosts, setGamesPosts] = useState<IGamesPosts[]>([]);
   const [isAdding, setIsAdding] = useState(false);
   const [newGamesPost, setNewGamesPost] =
@@ -105,7 +103,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       const _currentUser = data.currentUser;
       if (_currentUser.userName === "anonymousUser") {
         setCurrentUser(_currentUser);
-        //navigate("/");
       } else {
         throw new Error("ERROR: no anonymous user");
       }
@@ -160,7 +157,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           ...rawNewGamesPost,
           isBeingEdited: false,
           originalEditFields: {
-            title: rawNewGamesPost.title,
+            roomId: rawNewGamesPost.roomId,
             WeSearch: rawNewGamesPost.WeSearch,
             weOffer: rawNewGamesPost.weOffer,
             contact: rawNewGamesPost.contact,
@@ -192,7 +189,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           ...rawNewGamesPost,
           isBeingEdited: false,
           originalEditFields: {
-            title: rawNewGamesPost.title,
+            roomId: rawNewGamesPost.roomId,
             WeSearch: rawNewGamesPost.WeSearch,
             weOffer: rawNewGamesPost.weOffer,
             contact: rawNewGamesPost.contact,
@@ -220,7 +217,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     gamesPost.isBeingEdited = false;
     // to reset any values that were changed
     gamesPost.originalEditFields = {
-      title: gamesPost.title,
+      roomId: gamesPost.roomId,
       WeSearch: gamesPost.WeSearch,
       weOffer: gamesPost.weOffer,
       contact: gamesPost.contact,
@@ -240,19 +237,20 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       await axios.patch(
         `${backendUrl}/gamesPost/${gamesPost._id}`,
         {
-          title: gamesPost.originalEditFields.title,
+          roomId: gamesPost.originalEditFields.roomId,
           WeSearch: gamesPost.originalEditFields.WeSearch,
           weOffer: gamesPost.originalEditFields.weOffer,
           contact: gamesPost.originalEditFields.contact,
           language: gamesPost.originalEditFields.language,
           game: gamesPost.originalEditFields.game,
+          console: gamesPost.originalEditFields.console,
           numberOfPlayers: gamesPost.originalEditFields.numberOfPlayers,
           author: gamesPost.originalEditFields.author,
         },
         { withCredentials: true }
       );
       // if saved in backend, update in frontend
-      gamesPost.title = gamesPost.originalEditFields.title;
+      gamesPost.roomId = gamesPost.originalEditFields.roomId;
       gamesPost.WeSearch = gamesPost.originalEditFields.WeSearch;
       gamesPost.weOffer = gamesPost.originalEditFields.weOffer;
       gamesPost.contact = gamesPost.originalEditFields.contact;
@@ -297,6 +295,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     setNewGamesPost({ ...blankNewGamesPost });
     setIsAdding(!isAdding);
     setDropDownText("Select Game...");
+    setDropDownTextConsole("Select Console...");
   };
 
   // newGamesPost inputs
@@ -322,7 +321,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
   const handleSaveNewGamesPost = async () => {
     if (
-      !newGamesPost.title ||
+      !newGamesPost.roomId ||
       !newGamesPost.WeSearch ||
       !newGamesPost.weOffer ||
       !newGamesPost.contact ||
@@ -339,7 +338,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       await axios.post(
         `${backendUrl}/gamesPost`,
         {
-          title: newGamesPost.title,
+          roomId: newGamesPost.roomId,
           WeSearch: newGamesPost.WeSearch,
           weOffer: newGamesPost.weOffer,
           contact: newGamesPost.contact,
@@ -357,6 +356,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       setIsAdding(false);
       setNewGamesPost({ ...blankNewGamesPost });
       setDropDownText("Select Game...");
+      setDropDownTextConsole("Select Console...");
     } catch (error) {
       throw new Error(`${error}`);
     }
