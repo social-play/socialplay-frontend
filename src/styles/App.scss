@@ -40,7 +40,16 @@ body {
       display: flex;
       gap: 1rem;
       justify-content: space-between;
+      align-items: center;
       width: 70%;
+      img {
+        width: 100px;
+      }
+
+      .member {
+        color: green;
+        font-size: 1.5rem;
+      }
       a {
         color: #eee;
         text-decoration: none;
@@ -50,6 +59,7 @@ body {
       }
       .navRow {
         display: flex;
+        align-items: center;
         gap: 20px;
         .navCommand {
           cursor: pointer;

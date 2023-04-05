@@ -5,7 +5,6 @@ import { IGamesPosts } from "../interfaces";
 
 interface IProps {
   socket: Socket;
-
   room: string;
   setIsChatOpen: React.Dispatch<React.SetStateAction<boolean>>;
   gamePostUserName: string;
@@ -18,13 +17,7 @@ interface IMessage {
   time: string;
 }
 
-function Chat({
-  socket,
-
-  room,
-  setIsChatOpen,
-  gamePostUserName,
-}: IProps) {
+function Chat({ socket, room, setIsChatOpen, gamePostUserName }: IProps) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState<IMessage[]>([]);
 

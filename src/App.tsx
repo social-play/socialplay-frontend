@@ -16,7 +16,7 @@ import { PagePlayers } from "./pages/PagePlayers";
 import { PageProfile } from "./pages/PageProfile";
 import { useContext } from "react";
 import { AppContext } from "./AppContext";
-
+import { MdCardMembership } from "react-icons/md";
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
@@ -37,7 +37,9 @@ function App() {
     <div className="App" onClick={() => isOpen && setIsOpen(false)}>
       <nav>
         <div className="navRow">
-          <NavLink to="/welcome">Welcome</NavLink>
+          <NavLink to="/welcome">
+            <img src="images/logo.png" />
+          </NavLink>
           <NavLink to="/teamSearch">TEAMS</NavLink>
           <NavLink to="/playerSearch">PLAYERS</NavLink>
         </div>
@@ -51,7 +53,9 @@ function App() {
         <div className="navRow">
           {(currentUser.accessGroups.includes("members") ||
             currentUser.accessGroups.includes("unconfirmedMembers")) && (
-            <NavLink to="/members">Members</NavLink>
+            <NavLink to="/members">
+              <MdCardMembership className="member" />
+            </NavLink>
           )}
           <div className="profileImage">
             {(currentUser.accessGroups.includes("members") ||
