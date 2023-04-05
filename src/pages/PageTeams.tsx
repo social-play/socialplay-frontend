@@ -1,7 +1,7 @@
-export const PageTeams =()=>{
-        return (
-            <>
-            <p>welcome to the Teams page</p>
-            </>
-        );
-    }
+export const PageTeams = () => {
+  return (
+    <>
+      <p>Site updates in progress.....</p>
+    </>
+  );
+};

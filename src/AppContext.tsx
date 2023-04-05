@@ -334,6 +334,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       return;
     }
 
+    // TODO Check if roomId already exists
     try {
       await axios.post(
         `${backendUrl}/gamesPost`,

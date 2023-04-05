@@ -5,33 +5,26 @@ import { IGamesPosts } from "../interfaces";
 
 interface IProps {
   socket: Socket;
-
-  room: string;
+  roomId: string;
   setIsChatOpen: React.Dispatch<React.SetStateAction<boolean>>;
   gamePostUserName: string;
 }
 
 interface IMessage {
-  room: string;
+  roomId: string;
   author: string;
   message: string;
   time: string;
 }
 
-function Chat({
-  socket,
-
-  room,
-  setIsChatOpen,
-  gamePostUserName,
-}: IProps) {
+function Chat({ socket, roomId, setIsChatOpen, gamePostUserName }: IProps) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState<IMessage[]>([]);
 
   const sendMessage = () => {
     if (currentMessage !== "") {
       const messageData = {
-        room: room,
+        roomId: roomId,
         author: gamePostUserName,
         message: currentMessage,
 
@@ -53,10 +46,14 @@ function Chat({
     });
   }, [socket]);
 
+  console.log(roomId);
+
   return (
     <div className="chat-window">
       <div className="chat-header" onClick={() => setIsChatOpen(false)}>
-        <p>Live Chat</p>
+        <p>
+          Live Chat <span>{roomId}</span>{" "}
+        </p>
       </div>
       <div className="chat-body">
         <ScrollToBottom className="message-container">

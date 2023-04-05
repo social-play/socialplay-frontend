@@ -23,15 +23,23 @@ const socket: Socket = io(`${baseUrl}`);
 export const PageWelcome = (props: IPageMembersProps) => {
   // socket.io
 
-  const [room, setRoom] = useState("");
+  const [roomId, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [gamePostUserName, setGamePostUserName] = useState<string>("");
-  const joinRoom = () => {
-    if (room !== "") {
-      socket.emit("join_room", room);
-      setShowChat(true);
-    }
+  // const joinRoom = () => {
+  //   if (room !== "") {
+  //     socket.emit("join_room", room);
+  //     setShowChat(true);
+  //   }
+  // };
+
+  const openChat = (userName: string, roomId: string) => {
+    socket.emit("join_room", roomId);
+    setShowChat(true);
+    setIsChatOpen(!isChatOpen);
+    setGamePostUserName(userName);
+    setRoom(roomId);
   };
 
   const { currentUser } = props;
@@ -56,14 +64,10 @@ export const PageWelcome = (props: IPageMembersProps) => {
     dropDownTextConsole,
   } = useContext(AppContext);
 
-  const openChat = (gamesPost: string) => {
-    setIsChatOpen(!isChatOpen);
-    setGamePostUserName(gamesPost);
-  };
   return (
     <div className="pageWelcome">
       <Helmet>
-        <title>{appTitle} - Welcome</title>
+        <title>{appTitle} - Home</title>
       </Helmet>
 
       <h2>{gamesPosts.length} REQUESTS IN SEARCH FOR PLAYERS OR TEAMS</h2>
@@ -228,17 +232,17 @@ export const PageWelcome = (props: IPageMembersProps) => {
                 }
               >
                 <option value="">Select Language...</option>
-                <option value="arabic">🇸🇦️ - العربية</option>
-                <option value="german">🇩🇪️ - DEUTSCH</option>
-                <option value="english">🇺🇸️️ - ENGLISH</option>
-                <option value="spanish">🇪🇸️ - ESPAÑOL</option>
-                <option value="french">🇫🇷️ - FRANÇAIS</option>
-                <option value="french">🇮🇹️ - ITALIANO</option>
-                <option value="japanese">🇯🇵️️ - 日本語</option>
-                <option value="persian">🇮🇷️ - فارسی</option>
-                <option value="portuguese">🇵🇹️️ - PORTUGUÊS</option>
-                <option value="russian">🇷🇺️️️ - РУССКИЙ</option>
-                <option value="turkish">🇹🇷️ - TÜRKÇE</option>
+                <option value="🇸🇦 arabic">🇸🇦️ - العربية</option>
+                <option value="🇩🇪 german">🇩🇪️ - DEUTSCH</option>
+                <option value="🇺🇸️ english">🇺🇸️️ - ENGLISH</option>
+                <option value="🇪🇸 spanish">🇪🇸️ - ESPAÑOL</option>
+                <option value="🇫🇷 french">🇫🇷️ - FRANÇAIS</option>
+                <option value="🇮🇹️ Italian">🇮🇹️ - ITALIANO</option>
+                <option value="🇯🇵️ japanese">🇯🇵️️ - 日本語</option>
+                <option value="🇮🇷 persian">🇮🇷️ - فارسی</option>
+                <option value="🇵🇹️ portuguese">🇵🇹️️ - PORTUGUÊS</option>
+                <option value="🇷🇺 russian">🇷🇺️️️ - РУССКИЙ</option>
+                <option value="🇹🇷 turkish">🇹🇷️ - TÜRKÇE</option>
               </select>
             </div>
           </div>
@@ -328,12 +332,17 @@ export const PageWelcome = (props: IPageMembersProps) => {
                   title={gamesPost.console}
                   src={`icons/${gamesPost.console}.png`}
                 />
-                <button onClick={() => openChat(gamesPost.author)}>
+                <button
+                  onClick={() =>
+                    openChat(currentUser.userName, gamesPost.roomId)
+                  }
+                >
                   <GoMail />
                 </button>
               </div>
               <div className="image">
                 <img src={gamesPost.imageUrl} />
+                <span>{gamesPost.language.substring(0, 4)}</span>
               </div>
               {!gamesPost.isBeingEdited ? (
                 <div className="showData">
@@ -452,17 +461,16 @@ export const PageWelcome = (props: IPageMembersProps) => {
               <input
                 type="text"
                 placeholder="Room ID..."
-                onChange={(event) => {
-                  setRoom(event.target.value);
+                onChange={() => {
+                  setRoom(roomId);
                 }}
               />
-              <button onClick={joinRoom}>Join A Room</button>
             </div>
           ) : (
             <Chat
               socket={socket}
               gamePostUserName={gamePostUserName}
-              room={room}
+              roomId={roomId}
               setIsChatOpen={setIsChatOpen}
             />
           )}

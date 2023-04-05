@@ -1,7 +1,7 @@
-export const PagePlayers =()=>{
-        return (
-            <>
-            <p>welcome to the Players page</p>
-            </>
-        );
-    }
+export const PagePlayers = () => {
+  return (
+    <>
+      <p>Site updates in progress.....</p>
+    </>
+  );
+};
