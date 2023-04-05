@@ -22,7 +22,6 @@ const socket: Socket = io(`${baseUrl}`);
 
 export const PageWelcome = (props: IPageMembersProps) => {
   // socket.io
-
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
