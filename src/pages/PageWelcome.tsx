@@ -23,24 +23,10 @@ const socket: Socket = io(`${baseUrl}`);
 export const PageWelcome = (props: IPageMembersProps) => {
   // socket.io
 
-  const [roomId, setRoom] = useState("");
+  const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [gamePostUserName, setGamePostUserName] = useState<string>("");
-  // const joinRoom = () => {
-  //   if (room !== "") {
-  //     socket.emit("join_room", room);
-  //     setShowChat(true);
-  //   }
-  // };
-
-  const openChat = (userName: string, roomId: string) => {
-    socket.emit("join_room", roomId);
-    setShowChat(true);
-    setIsChatOpen(!isChatOpen);
-    setGamePostUserName(userName);
-    setRoom(roomId);
-  };
 
   const { currentUser } = props;
   const {
@@ -64,10 +50,20 @@ export const PageWelcome = (props: IPageMembersProps) => {
     dropDownTextConsole,
   } = useContext(AppContext);
 
+  const openChat = (gamesPost: string, roomId: string) => {
+    if (roomId !== "") {
+      socket.emit("join_room", roomId);
+      setRoom(roomId);
+    }
+
+    setShowChat(true);
+    setIsChatOpen(!isChatOpen);
+    setGamePostUserName(gamesPost);
+  };
   return (
     <div className="pageWelcome">
       <Helmet>
-        <title>{appTitle} - Home</title>
+        <title>{appTitle} - Welcome</title>
       </Helmet>
 
       <h2>{gamesPosts.length} REQUESTS IN SEARCH FOR PLAYERS OR TEAMS</h2>
@@ -456,21 +452,22 @@ export const PageWelcome = (props: IPageMembersProps) => {
         </div>
       ) : (
         <div className="chat">
-          {!showChat ? (
-            <div className="joinChatContainer">
-              <input
-                type="text"
-                placeholder="Room ID..."
-                onChange={() => {
-                  setRoom(roomId);
-                }}
-              />
-            </div>
-          ) : (
+          {showChat && (
+            //   <div className="joinChatContainer">
+            //     <input
+            //       type="text"
+            //       placeholder="Room ID..."
+            //       onChange={(event) => {
+            //         setRoom(event.target.value);
+            //       }}
+            //     />
+            //     <button onClick={joinRoom}>Join A Room</button>
+            //   </div>
+            // ) : (
             <Chat
               socket={socket}
               gamePostUserName={gamePostUserName}
-              roomId={roomId}
+              room={room}
               setIsChatOpen={setIsChatOpen}
             />
           )}
