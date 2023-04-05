@@ -1,12 +1,12 @@
 {
-  "name": "gamehub-frontend",
+  "name": "socialplay-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc --build --clean && vite build",
-    "start": "vite serve --host --port 3628",
+    "start": "vite serve --host --port 4988",
     "setup": "npm i && npm run build && pm2 start --name socialplay-frontend npm -- start --update-env --time && pm2 save",
     "deploy": "git pull --no-rebase && npm run build && pm2 restart socialplay-frontend --update-env --time && pm2 save",
     "cp": "node cli/cp.mjs"
