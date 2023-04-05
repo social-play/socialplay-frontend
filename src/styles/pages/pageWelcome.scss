@@ -230,26 +230,6 @@
         bottom: 1rem;
         right: 2rem;
 
-        .joinChatContainer {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .joinChatContainer h3 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .joinChatContainer input {
-            width: 210px;
-            height: 40px;
-            margin: 7px;
-            border: 2px solid #43a047;
-            border-radius: 5px;
-            padding: 5px;
-            font-size: 16px;
-        }
-
         .joinChatContainer button {
             width: 225px;
             height: 50px;
@@ -259,7 +239,7 @@
             padding: 5px;
             font-size: 16px;
             background: #43a047;
-            color: #fff;
+            color: #aaa;
             cursor: pointer;
         }
 
@@ -282,12 +262,15 @@
             background: #263238;
             position: relative;
             cursor: pointer;
+            span {
+                color: red;
+            }
         }
 
         .chat-window .chat-header p {
             display: block;
             padding: 0 1em 0 2em;
-            color: #fff;
+            color: #aaa;
             font-weight: 700;
             line-height: 45px;
         }
@@ -295,7 +278,7 @@
         .chat-window .chat-body {
             height: calc(450px - (45px + 70px));
             border: 1px solid #263238;
-            background: #fff;
+            background: #aaa;
 
             position: relative;
         }
@@ -380,18 +363,6 @@
             display: flex;
         }
 
-        .chat-window .chat-footer input {
-            height: 100%;
-            flex: 85%;
-            border: 0;
-            padding: 0 0.7em;
-            font-size: 1em;
-            border-right: 1px dotted #607d8b;
-
-            outline: none;
-            font-family: "Open Sans", sans-serif;
-        }
-
         .chat-window .chat-footer button {
             border: 0;
             display: grid;
@@ -404,10 +375,6 @@
             font-size: 25px;
             background-color: #263238;
             color: #fff;
-        }
-
-        .chat-window .chat-footer button:hover {
-            color: #43a047;
         }
 
         .hide {

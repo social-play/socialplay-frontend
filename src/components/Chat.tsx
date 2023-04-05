@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { Socket } from "socket.io-client";
-import { IGamesPosts } from "../interfaces";
 
 interface IProps {
   socket: Socket;
@@ -49,7 +48,9 @@ function Chat({ socket, room, setIsChatOpen, gamePostUserName }: IProps) {
   return (
     <div className="chat-window">
       <div className="chat-header" onClick={() => setIsChatOpen(false)}>
-        <p>Live Chat</p>
+        <p>
+          Live Chat <span>{room}</span>
+        </p>
       </div>
       <div className="chat-body">
         <ScrollToBottom className="message-container">

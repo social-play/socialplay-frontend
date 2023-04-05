@@ -452,17 +452,6 @@ export const PageWelcome = (props: IPageMembersProps) => {
       ) : (
         <div className="chat">
           {showChat && (
-            //   <div className="joinChatContainer">
-            //     <input
-            //       type="text"
-            //       placeholder="Room ID..."
-            //       onChange={(event) => {
-            //         setRoom(event.target.value);
-            //       }}
-            //     />
-            //     <button onClick={joinRoom}>Join A Room</button>
-            //   </div>
-            // ) : (
             <Chat
               socket={socket}
               gamePostUserName={gamePostUserName}
