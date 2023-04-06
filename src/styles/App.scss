@@ -39,9 +39,9 @@ body {
       padding: 0.5rem;
       display: flex;
       gap: 1rem;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
-      width: 70%;
+      width: 100%;
       img {
         width: 200px;
       }
@@ -81,6 +81,26 @@ body {
         align-items: center;
         gap: 5px;
       }
+    }
+    .burgerMenu {
+      transition: all 0.3s ease;
+      position: sticky;
+      left: 100%;
+      padding-right: 4rem;
+      width: 50px;
+      height: 50px;
+      display: none;
+      .menuIcon {
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+      }
+    }
+    .menuOpen {
+      transform: translateX(0%);
+      height: auto;
+      z-index: 2;
+      width: 100%;
     }
     .page404 {
       color: $mainColor;
@@ -240,6 +260,54 @@ body {
 
     to {
       transform: rotate(360deg);
+    }
+  }
+  @media (max-width: 1200px) {
+    .App .burgerMenu {
+      display: block;
+
+      .menuIcon {
+        color: $Lime;
+      }
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba($backgroundColor, 0.9);
+      position: fixed;
+      row-gap: 1rem;
+      top: 10%;
+      right: 0;
+      transition: all 0.3s linear;
+      transform: translateX(100%);
+      height: auto;
+      z-index: 2;
+
+      .navRow {
+        display: flex;
+        flex-direction: column;
+
+        a {
+          box-shadow: rgba($Lime, 0.25) 0px 6px 12px -2px, rgba($mainColor, 0.3) 0px 3px 7px -3px;
+          font-size: 2rem;
+
+          &:hover {
+            box-shadow: rgba($Lime, 0.25) 0px 30px 60px -12px inset,
+              rgba(rgba($mainColor, 0.3), 0.3) 0px 18px 36px -18px inset;
+          }
+          img {
+            width: 80%;
+          }
+        }
+      }
+    }
+    .pageWelcome {
+      h2 {
+        text-align: center;
+      }
     }
   }
 }

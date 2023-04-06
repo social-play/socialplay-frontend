@@ -14,9 +14,12 @@ import { HiOutlineLogin } from "react-icons/hi";
 import { PageTeams } from "./pages/PageTeams";
 import { PagePlayers } from "./pages/PagePlayers";
 import { PageProfile } from "./pages/PageProfile";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "./AppContext";
 import { MdCardMembership } from "react-icons/md";
+import { AiOutlineMenu } from "react-icons/ai";
+import { BsXLg } from "react-icons/bs";
+
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
@@ -27,15 +30,35 @@ function App() {
     imageSrc,
     isOpen,
     setIsOpen,
+    setIsConsoleOpen,
+    isConsoleOpen,
   } = useContext(AppContext);
 
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const handleMenuOpen = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   const pageIsLoaded = () => {
     return currentUser.userName !== "";
   };
 
   return (
-    <div className="App" onClick={() => isOpen && setIsOpen(false)}>
-      <nav>
+    <div
+      className="App"
+      onClick={() => {
+        isOpen && setIsOpen(false);
+        isMenuOpen && setIsMenuOpen(false);
+        isConsoleOpen && setIsConsoleOpen(false);
+      }}
+    >
+      <div className="burgerMenu" onClick={handleMenuOpen}>
+        {!isMenuOpen ? (
+          <AiOutlineMenu className="menuIcon" />
+        ) : (
+          <BsXLg className="menuIcon" />
+        )}
+      </div>
+      <nav className={`menu ${isMenuOpen ? "menuOpen" : ""}`}>
         <div className="navRow">
           <NavLink to="/welcome">
             <img src="images/logo.png" />

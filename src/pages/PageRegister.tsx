@@ -121,7 +121,7 @@ export const PageRegister = (props: IPageRegisterProps) => {
               <div className="password row">
                 <label>Password:</label>
                 <input
-                  type="text"
+                  type="password"
                   value={formValues.password}
                   onChange={(e) =>
                     setFormValues({ ...formValues, password: e.target.value })

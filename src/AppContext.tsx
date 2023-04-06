@@ -435,6 +435,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         setIsOpen,
         dropDownText,
         dropDownTextConsole,
+        setIsConsoleOpen,
       }}
     >
       {children}

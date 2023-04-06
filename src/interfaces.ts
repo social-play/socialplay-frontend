@@ -53,6 +53,7 @@ export interface IAppContext {
   toggleDropDown: () => void;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  setIsConsoleOpen: (isConsoleOpen: boolean) => void;
   isConsoleOpen: boolean;
   toggleDropDownConsole: () => void;
   dropDownText: string;
@@ -83,9 +84,6 @@ export interface IGamesPosts {
   game: string;
 
   author: string;
-
-
-
 }
 
 export interface IEditGamePost {
@@ -99,7 +97,6 @@ export interface IEditGamePost {
   numberOfPlayers: string;
 
   author: string;
-
 }
 
 export const blankNewGamesPost: IEditGamePost = {
@@ -112,7 +109,5 @@ export const blankNewGamesPost: IEditGamePost = {
   weOffer: "",
   contact: "",
 
-
   author: "",
-
 };
