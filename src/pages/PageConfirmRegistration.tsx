@@ -23,6 +23,8 @@ export const PageConfirmRegistration = (
   );
   const { confirmationCode } = useParams();
 
+  // confirm registration
+
   useEffect(() => {
     (async () => {
       const data = (
