@@ -28,6 +28,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
   const [gamePostUserName, setGamePostUserName] = useState<string>("");
 
   const { currentUser } = props;
+
   const {
     appTitle,
     gamesPosts,
@@ -47,6 +48,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
     isConsoleOpen,
     dropDownText,
     dropDownTextConsole,
+    adminIsLoggedIn,
   } = useContext(AppContext);
 
   const openChat = (gamesPost: string, roomId: string) => {
@@ -70,8 +72,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
         <button
           className="text-xl text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-2 mb-5"
           type="button"
-          onClick={handleToggleAddGamesPost}
-        >
+          onClick={handleToggleAddGamesPost}>
           Create Post!
         </button>
       ) : (
@@ -163,34 +164,29 @@ export const PageWelcome = (props: IPageMembersProps) => {
               id="dropdownDefaultButton"
               data-dropdown-toggle="dropdown"
               className="text-xl text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
-              onClick={toggleDropDownConsole}
-            >
+              onClick={toggleDropDownConsole}>
               <>{dropDownTextConsole}</>
               <svg
                 className="w-5 h-4 ml-auto"
                 aria-hidden="true"
                 fill="none"
                 stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+                viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M25 9l-7 7-7-7"
-                ></path>
+                  d="M25 9l-7 7-7-7"></path>
               </svg>
             </div>
 
             {isConsoleOpen && (
               <div
                 id="dropdown"
-                className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 w-full relative"
-              >
+                className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 w-full relative">
                 <ul
                   className="bg-white rounded-lg text-sm px-4 py-2.5 text-center items-center mt-1 absolute inline-flex w-full"
-                  aria-labelledby="dropdownDefaultButton"
-                >
+                  aria-labelledby="dropdownDefaultButton">
                   {gamesLists.consoleLists.map((consoleList, i) => {
                     return (
                       <li
@@ -202,8 +198,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
                             newGamesPost,
                             consoleList.value
                           );
-                        }}
-                      >
+                        }}>
                         <img src={`${consoleList.image}`} />
                       </li>
                     );
@@ -224,8 +219,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
                     newGamesPost,
                     e.target.value
                   )
-                }
-              >
+                }>
                 <option value="">Select Language...</option>
                 <option value="🇸🇦 arabic">🇸🇦️ - العربية</option>
                 <option value="🇩🇪 german">🇩🇪️ - DEUTSCH</option>
@@ -248,34 +242,29 @@ export const PageWelcome = (props: IPageMembersProps) => {
               id="dropdownDefaultButton"
               data-dropdown-toggle="dropdown"
               className="text-xl text-black bg-gray-200 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-full hover:border-blue-500 border-2 mt-2"
-              onClick={toggleDropDown}
-            >
+              onClick={toggleDropDown}>
               <>{dropDownText}</>
               <svg
                 className="w-5 h-4 ml-auto"
                 aria-hidden="true"
                 fill="none"
                 stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+                viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M25 9l-7 7-7-7"
-                ></path>
+                  d="M25 9l-7 7-7-7"></path>
               </svg>
             </div>
 
             {isOpen && (
               <div
                 id="dropdown"
-                className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 w-full relative"
-              >
+                className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 w-full relative">
                 <ul
                   className="bg-white rounded-lg text-sm px-4 py-2.5 text-center items-center mt-1 absolute inline-flex w-full"
-                  aria-labelledby="dropdownDefaultButton"
-                >
+                  aria-labelledby="dropdownDefaultButton">
                   {gamesLists.gamesLists.map((gameList, i) => {
                     return (
                       <li
@@ -287,8 +276,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
                             newGamesPost,
                             gameList.value
                           );
-                        }}
-                      >
+                        }}>
                         <img src={`${gameList.image}`} />
                       </li>
                     );
@@ -302,15 +290,13 @@ export const PageWelcome = (props: IPageMembersProps) => {
             <button
               type="button"
               onClick={handleToggleAddGamesPost}
-              className="text-xl text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
-            >
+              className="text-xl text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
               Cancel
             </button>
             <button
               type="button"
               onClick={handleSaveNewGamesPost}
-              className="text-xl text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
-            >
+              className="text-xl text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
               Save
             </button>
           </div>
@@ -330,8 +316,7 @@ export const PageWelcome = (props: IPageMembersProps) => {
                 <button
                   onClick={() =>
                     openChat(currentUser.userName, gamesPost.roomId)
-                  }
-                >
+                  }>
                   <GoMail />
                 </button>
               </div>
@@ -351,29 +336,28 @@ export const PageWelcome = (props: IPageMembersProps) => {
                   <div>
                     <button
                       onClick={() => popUp(gamesPost)}
-                      className="text-xl text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
-                    >
+                      className="text-xl text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
                       SHOW
                     </button>
                   </div>
-                  <div className="buttons">
-                    <button
-                      type="button"
-                      onClick={() => handleDeleteGamesPost(gamesPost)}
-                    >
-                      <span className="delete">
-                        <MdDelete />
-                      </span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleEditGamesPost(gamesPost)}
-                    >
-                      <span className="edit">
-                        <BiEdit />
-                      </span>
-                    </button>
-                  </div>
+                  {adminIsLoggedIn && (
+                    <div className="buttons">
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteGamesPost(gamesPost)}>
+                        <span className="delete">
+                          <MdDelete />
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleEditGamesPost(gamesPost)}>
+                        <span className="edit">
+                          <BiEdit />
+                        </span>
+                      </button>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <form className="editArea">
@@ -427,15 +411,13 @@ export const PageWelcome = (props: IPageMembersProps) => {
                     <button
                       className="delete"
                       type="button"
-                      onClick={() => handleCancelEditGamesPost(gamesPost)}
-                    >
+                      onClick={() => handleCancelEditGamesPost(gamesPost)}>
                       <FaTimes />
                     </button>
                     <button
                       className="save"
                       type="button"
-                      onClick={() => handleSaveEditGamesPost(gamesPost)}
-                    >
+                      onClick={() => handleSaveEditGamesPost(gamesPost)}>
                       <FaCheck />
                     </button>
                   </div>

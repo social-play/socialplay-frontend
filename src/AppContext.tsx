@@ -249,6 +249,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         },
         { withCredentials: true }
       );
+
       // if saved in backend, update in frontend
       gamesPost.roomId = gamesPost.originalEditFields.roomId;
       gamesPost.WeSearch = gamesPost.originalEditFields.WeSearch;
@@ -259,6 +260,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       gamesPost.console = gamesPost.originalEditFields.console;
       gamesPost.numberOfPlayers = gamesPost.originalEditFields.numberOfPlayers;
       gamesPost.author = gamesPost.originalEditFields.author;
+
       setGamesPosts([...gamesPosts]);
       gamesPost.isBeingEdited = false;
     } catch (error) {
@@ -283,6 +285,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       await axios.delete(`${backendUrl}/gamesPost/${gamesPost._id}`, {
         withCredentials: true,
       });
+      //filter undeleted gamePosts
       const _gamesPosts = gamesPosts.filter(
         (m: IGamesPosts) => m._id !== gamesPost._id
       );
@@ -335,6 +338,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     }
 
     // TODO Check if roomId already exists
+    //
+
     try {
       await axios.post(
         `${backendUrl}/gamesPost`,
@@ -363,41 +368,43 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     }
   };
 
-  const loginAsAdmin = async (onSuccess: () => void, onFailure: () => void) => {
-    try {
-      await axios.post(
-        `${backendUrl}/login`,
-        { password },
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-      setAdminIsLoggedIn(true);
-      onSuccess();
-    } catch (error: any) {
-      switch (error.code) {
-        case "ERR_BAD_REQUEST":
-          onFailure();
-          break;
-        default:
-          break;
-      }
-      setAdminIsLoggedIn(false);
-    }
-    setPassword("");
-  };
+  // const loginAsAdmin = async (onSuccess: () => void, onFailure: () => void) => {
+  //   try {
+  //     await axios.post(
+  //       `${backendUrl}/login`,
+  //       {
+  //         password,
+  //         //safeOriginCode: import.meta.env.VITE_SAFE_ORIGIN_CODE,
+  //       },
+  //       { withCredentials: true }
+  //     );
+  //     setAdminIsLoggedIn(true);
 
-  const logoutAsAdmin = () => {
-    (async () => {
-      try {
-        setAdminIsLoggedIn(false);
-        await axios.get(`${backendUrl}/logout`, { withCredentials: true });
-      } catch (error) {
-        console.log("GENERAL ERROR");
-      }
-    })();
-  };
+  //     onSuccess();
+  //   } catch (error: any) {
+  //     switch (error.code) {
+  //       case "ERR_BAD_REQUEST":
+  //         onFailure();
+
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //     setAdminIsLoggedIn(false);
+  //   }
+  //   setPassword("");
+  // };
+
+  // const logoutAsAdmin = () => {
+  //   (async () => {
+  //     try {
+  //       await axios.get(`${backendUrl}/logout`, { withCredentials: true });
+  //       setAdminIsLoggedIn(false);
+  //     } catch (error) {
+  //       console.log("GENERAL ERROR");
+  //     }
+  //   })();
+  // };
 
   return (
     <AppContext.Provider
@@ -415,10 +422,11 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         handleSaveNewGamesPost,
         handleDeleteGamesPost,
         password,
-        loginAsAdmin,
+        // loginAsAdmin,
+        // logoutAsAdmin,
         adminIsLoggedIn,
+        setAdminIsLoggedIn,
         setPassword,
-        logoutAsAdmin,
         uploadFile,
         setUploadFile,
         handleSubmit,
@@ -436,8 +444,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         dropDownText,
         dropDownTextConsole,
         setIsConsoleOpen,
-      }}
-    >
+      }}>
       {children}
     </AppContext.Provider>
   );

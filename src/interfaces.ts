@@ -8,6 +8,7 @@ export interface IUser {
   accessGroups: string[];
   fileName: string;
   email: string;
+
 }
 
 // gamesposts
@@ -37,10 +38,11 @@ export interface IAppContext {
   handleSaveNewGamesPost: () => void;
   handleDeleteGamesPost: (gamesPost: IGamesPosts) => void;
   password: string;
-  loginAsAdmin: (onSuccess: () => void, onFailure: () => void) => void;
+  // loginAsAdmin: (onSuccess: () => void, onFailure: () => void) => void;
+  // logoutAsAdmin: () => void;
   adminIsLoggedIn: boolean;
+  setAdminIsLoggedIn :(adminIsLoggedIn:boolean)=>void;
   setPassword: (password: string) => void;
-  logoutAsAdmin: () => void;
   uploadFile: IUploadFile;
   setUploadFile: (file: IUploadFile) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>, id: string) => void;
@@ -82,8 +84,13 @@ export interface IGamesPosts {
   isBeingEdited: boolean;
   originalEditFields: IEditGamePost;
   game: string;
-
   author: string;
+
+
+}
+
+export interface IGamesPostsEdit extends IGamesPosts {
+  isAdminLogin:boolean
 }
 
 export interface IEditGamePost {
@@ -95,8 +102,8 @@ export interface IEditGamePost {
   game: string;
   console: string;
   numberOfPlayers: string;
-
   author: string;
+
 }
 
 export const blankNewGamesPost: IEditGamePost = {
@@ -108,6 +115,6 @@ export const blankNewGamesPost: IEditGamePost = {
   numberOfPlayers: "",
   weOffer: "",
   contact: "",
-
   author: "",
+
 };
