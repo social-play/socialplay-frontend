@@ -14,6 +14,7 @@
 //   background-attachment: fixed;
 //   height: 100%;
 // }
+
 * {
   padding: 0;
   margin: 0;
@@ -212,7 +213,13 @@ body {
       align-items: center;
       width: max-content;
       height: 50px;
-      background: linear-gradient(to right, $backgroundColor, $Lime, $mainColor, $backgroundColor);
+      background: linear-gradient(
+        to right,
+        $backgroundColor,
+        $Lime,
+        $mainColor,
+        $backgroundColor
+      );
       padding: 1rem;
       width: 100%;
       input {
@@ -290,7 +297,8 @@ body {
         flex-direction: column;
         padding: 5rem;
         a {
-          box-shadow: rgba($Lime, 0.25) 0px 6px 12px -2px, rgba($mainColor, 0.3) 0px 3px 7px -3px;
+          box-shadow: rgba($Lime, 0.25) 0px 6px 12px -2px,
+            rgba($mainColor, 0.3) 0px 3px 7px -3px;
           font-size: 2rem;
 
           &:hover {
