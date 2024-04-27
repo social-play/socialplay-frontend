@@ -49,8 +49,7 @@ function App() {
         isOpen && setIsOpen(false);
         isMenuOpen && setIsMenuOpen(false);
         isConsoleOpen && setIsConsoleOpen(false);
-      }}
-    >
+      }}>
       <div className="burgerMenu" onClick={handleMenuOpen}>
         {!isMenuOpen ? (
           <AiOutlineMenu className="menuIcon" />
@@ -60,7 +59,7 @@ function App() {
       </div>
       <nav className={`menu ${isMenuOpen ? "menuOpen" : ""}`}>
         <div className="navRow">
-          <NavLink to="/welcome">
+          <NavLink to="/">
             <img src="images/logo.png" />
           </NavLink>
           <NavLink to="/teamSearch">TEAMS</NavLink>
@@ -118,10 +117,7 @@ function App() {
       </nav>
       <Routes>
         <Route path="*" element={<Page404 />} />
-        <Route
-          path="/welcome"
-          element={<PageWelcome currentUser={currentUser} />}
-        />
+        <Route path="/" element={<PageWelcome currentUser={currentUser} />} />
         <Route path="/teamSearch" element={<PageTeams />} />
         <Route path="/playerSearch" element={<PagePlayers />} />
         {(currentUser.accessGroups.includes("members") ||
@@ -147,7 +143,7 @@ function App() {
           path="/confirm-registration/:confirmationCode"
           element={<PageConfirmRegistration baseUrl={baseUrl} />}
         />
-        <Route path="/" element={<Navigate to="/welcome" replace />} />
+        <Route path="/" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
   );
