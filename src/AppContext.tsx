@@ -43,7 +43,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     email: "",
   });
 
-  //local
+  //local wegen bilder wird den link überschrieben
   // const [imageSrc, setImageSrc] = useState(
   //   `${backendUrl}/images/${currentUser.userName}.png`
   // );
@@ -75,10 +75,14 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     //   extension = ".jpg";
     // }
     if (currentUser.userName === "") {
-      setImageSrc(`${backendUrl}/images/anonymousUser.png?${Math.random()}`);
+      setImageSrc(
+        `${backendUrlOnline}/images/anonymousUser.png?${Math.random()}`
+      );
     } else {
       setImageSrc(
-        `${backendUrl}/images/${currentUser.userName}.png?${Math.random()}`
+        `${backendUrlOnline}/images/${
+          currentUser.userName
+        }.png?${Math.random()}`
       );
     }
   };
