@@ -43,7 +43,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   });
 
   const [imageSrc, setImageSrc] = useState(
-    `${backendUrl}/images/${currentUser.userName}.png`
+    `${backendUrl}/public/images/${currentUser.userName}.png`
   );
 
   // dropdown
