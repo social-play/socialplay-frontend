@@ -49,7 +49,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   // );
 
   const [imageSrc, setImageSrc] = useState(
-    `${backendUrlOnline}/public/images/${currentUser.userName}.png`
+    `${backendUrlOnline}/images/${currentUser.userName}.png`
   );
 
   // dropdown
@@ -131,7 +131,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       formData.append("userName", currentUser.userName);
 
       await axios.post(
-        `${backendUrl}/uploadFile/${currentUser.userName}`,
+        `${backendUrlOnline}/uploadFile/${currentUser.userName}`,
         formData,
         {
           withCredentials: true,
