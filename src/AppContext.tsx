@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
+const backendUrlOnline = import.meta.env.VITE_BACKEND_URL_ONLINE;
 
 export const AppContext = createContext<IAppContext>({} as IAppContext);
 
@@ -42,8 +43,13 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     email: "",
   });
 
+  //local
+  // const [imageSrc, setImageSrc] = useState(
+  //   `${backendUrl}/images/${currentUser.userName}.png`
+  // );
+
   const [imageSrc, setImageSrc] = useState(
-    `${backendUrl}/public/images/${currentUser.userName}.png`
+    `${backendUrlOnline}/public/images/${currentUser.userName}.png`
   );
 
   // dropdown
