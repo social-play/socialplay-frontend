@@ -207,6 +207,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
             game: rawNewGamesPost.game,
             console: rawNewGamesPost.console,
             numberOfPlayers: rawNewGamesPost.numberOfPlayers,
+            author: rawNewGamesPost.author,
           },
         };
         _newGamesPosts.push(gamesPost);
@@ -355,7 +356,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       await axios.post(
         `${backendUrl}/gamesPost`,
         {
-          _id: currentUser._id,
           roomId: newGamesPost.roomId,
           WeSearch: newGamesPost.WeSearch,
           weOffer: newGamesPost.weOffer,
