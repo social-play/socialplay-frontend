@@ -76,11 +76,11 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     // }
     if (currentUser.userName === "") {
       setImageSrc(
-        `${backendUrlOnline}/images/anonymousUser.png?${Math.random()}`
+        `${backendUrlOnline}/public/images/anonymousUser.png?${Math.random()}`
       );
     } else {
       setImageSrc(
-        `${backendUrlOnline}/images/${
+        `${backendUrlOnline}/public/images/${
           currentUser.userName
         }.png?${Math.random()}`
       );
