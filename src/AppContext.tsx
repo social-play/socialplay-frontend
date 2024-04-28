@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
-const backendUrlOnline = import.meta.env.VITE_BACKEND_URL_ONLINE;
+//const backendUrl = import.meta.env.VITE_BACKEND_URL_ONLINE;
 
 export const AppContext = createContext<IAppContext>({} as IAppContext);
 
@@ -49,7 +49,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   // );
 
   const [imageSrc, setImageSrc] = useState(
-    `${backendUrlOnline}/images/${currentUser.userName}.png`
+    `${backendUrl}/images/${currentUser.userName}.png`
   );
 
   // dropdown
@@ -75,14 +75,10 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     //   extension = ".jpg";
     // }
     if (currentUser.userName === "") {
-      setImageSrc(
-        `${backendUrlOnline}/images/anonymousUser.png?${Math.random()}`
-      );
+      setImageSrc(`${backendUrl}/images/anonymousUser.png?${Math.random()}`);
     } else {
       setImageSrc(
-        `${backendUrlOnline}/images/${
-          currentUser.userName
-        }.png?${Math.random()}`
+        `${backendUrl}/images/${currentUser.userName}.png?${Math.random()}`
       );
     }
   };
