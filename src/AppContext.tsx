@@ -261,6 +261,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       );
 
       // if saved in backend, update in frontend
+
       gamesPost.roomId = gamesPost.originalEditFields.roomId;
       gamesPost.WeSearch = gamesPost.originalEditFields.WeSearch;
       gamesPost.weOffer = gamesPost.originalEditFields.weOffer;
@@ -354,6 +355,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       await axios.post(
         `${backendUrl}/gamesPost`,
         {
+          _id: currentUser._id,
           roomId: newGamesPost.roomId,
           WeSearch: newGamesPost.WeSearch,
           weOffer: newGamesPost.weOffer,
