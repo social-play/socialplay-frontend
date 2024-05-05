@@ -49,7 +49,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   // );
 
   const [imageSrc, setImageSrc] = useState(
-    `${backendUrlOnline}/images/${currentUser.userName}.png`
+    `${backendUrl}/images/${currentUser.userName}.png`
   );
 
   // dropdown
@@ -75,14 +75,10 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     //   extension = ".jpg";
     // }
     if (currentUser.userName === "") {
-      setImageSrc(
-        `${backendUrlOnline}/public/images/anonymousUser.png?${Math.random()}`
-      );
+      setImageSrc(`${backendUrl}/images/anonymousUser.png?${Math.random()}`);
     } else {
       setImageSrc(
-        `${backendUrlOnline}/public/images/${
-          currentUser.userName
-        }.png?${Math.random()}`
+        `${backendUrl}/images/${currentUser.userName}.png?${Math.random()}`
       );
     }
   };
@@ -131,7 +127,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       formData.append("userName", currentUser.userName);
 
       await axios.post(
-        `${backendUrlOnline}/uploadFile/${currentUser.userName}`,
+        `${backendUrl}/uploadFile/${currentUser.userName}`,
         formData,
         {
           withCredentials: true,
