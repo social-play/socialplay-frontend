@@ -27,7 +27,7 @@ export const PageLogin = (props: IPageLoginProps) => {
           {
             userName,
             password,
-            //safeOriginCode: import.meta.env.VITE_SAFE_ORIGIN_CODE,
+            safeOriginCode: import.meta.env.VITE_SAFE_ORIGIN_CODE,
           },
           { withCredentials: true }
         )
