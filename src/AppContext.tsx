@@ -42,8 +42,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     email: "",
   });
 
-  const [currentGamePost, setCurrentGamePost] = useState("");
-
   //local wegen bilder wird den link überschrieben
   // const [imageSrc, setImageSrc] = useState(
   //   `${backendUrl}/images/${currentUser.userName}.png`
