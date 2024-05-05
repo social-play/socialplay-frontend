@@ -4,16 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useContext } from "react";
 import { AppContext } from "../AppContext";
-import { IGamesPosts, IGamesPostsEdit } from "../interfaces";
 
 interface IPageLoginProps {
   baseUrl: string;
 }
 
 export const PageLogin = (props: IPageLoginProps) => {
-  const { appTitle, setCurrentUser, setAdminIsLoggedIn, gamesPosts } =
-    useContext(AppContext);
   const { baseUrl } = props;
+  const { appTitle, setCurrentUser } = useContext(AppContext);
   const [formMessage, setFormMessage] = useState("");
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +27,7 @@ export const PageLogin = (props: IPageLoginProps) => {
           {
             userName,
             password,
-            //safeOriginCode: import.meta.env.VITE_SAFE_ORIGIN_CODE,
+            safeOriginCode: import.meta.env.VITE_SAFE_ORIGIN_CODE,
           },
           { withCredentials: true }
         )
@@ -38,14 +36,12 @@ export const PageLogin = (props: IPageLoginProps) => {
 
       if (_currentUser.userName === "anonymousUser") {
         setFormMessage("username or Password incorrect");
-        setAdminIsLoggedIn(false);
       } else {
         setCurrentUser(_currentUser);
         setFormMessage("");
         setUsername("");
         setPassword("");
         navigate("/members");
-        setAdminIsLoggedIn(true);
       }
     })();
   };
@@ -88,7 +84,7 @@ export const PageLogin = (props: IPageLoginProps) => {
         <div className="buttonRow">
           <button
             onClick={(e) => handleLoginButton(e)}
-            className="py-2 px-4 text-xl font-bold text-blue-200 active:outline-none bg-blue-900 rounded-lg    hover:bg-blue-400 hover:text-blue-700 active:z-10 active:ring-4 active:ring-blue-500 dark:active:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            className="py-2 px-4 text-xl font-bold text-blue-200 bg-blue-800 rounded-lg hover:bg-blue-500 hover:text-blue-800">
             Login
           </button>
           <div className="orLine pt-3">
@@ -97,7 +93,7 @@ export const PageLogin = (props: IPageLoginProps) => {
           <button
             type="button"
             onClick={handleGoToRegister}
-            className="py-2 px-4 text-xl font-bold text-green-200 active:outline-none bg-green-900 rounded-lg hover:bg-green-400 hover:text-green-700 active:z-10 active:ring-4 active:ring-green-500 dark:active:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            className="py-2 px-4 text-xl font-bold text-green-200 bg-green-800 rounded-lg hover:bg-green-400 hover:text-green-800">
             Create new account
           </button>
         </div>

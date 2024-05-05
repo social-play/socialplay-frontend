@@ -24,7 +24,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   const [newGamesPost, setNewGamesPost] =
     useState<IEditGamePost>(blankNewGamesPost);
   const [password, setPassword] = useState("");
-  const [adminIsLoggedIn, setAdminIsLoggedIn] = useState(false);
 
   // upload file MULTER
   const [uploadFile, setUploadFile] = useState<IUploadFile>({
@@ -42,6 +41,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     fileName: "",
     email: "",
   });
+
+  const [currentGamePost, setCurrentGamePost] = useState("");
 
   //local wegen bilder wird den link überschrieben
   // const [imageSrc, setImageSrc] = useState(
@@ -94,6 +95,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           withCredentials: true,
         })
       ).data;
+
       const _currentUser = data.currentUser;
       setCurrentUser(_currentUser);
     })();
@@ -162,6 +164,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       const _newGamesPosts: IGamesPosts[] = [];
       const _rawNewGamesPosts = (await axios.get(`${backendUrl}/gamesPosts`))
         .data;
+
       _rawNewGamesPosts.forEach((rawNewGamesPost: any) => {
         const _newGamesPost: IGamesPosts = {
           ...rawNewGamesPost,
@@ -194,6 +197,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       const _rawNewGamesPosts = (await axios.get(`${backendUrl}/gamesPosts`))
         .data;
       const _newGamesPosts: IGamesPosts[] = [];
+
       _rawNewGamesPosts.forEach((rawNewGamesPost: any) => {
         const gamesPost: IGamesPosts = {
           ...rawNewGamesPost,
@@ -436,8 +440,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         password,
         // loginAsAdmin,
         // logoutAsAdmin,
-        adminIsLoggedIn,
-        setAdminIsLoggedIn,
+        // adminIsLoggedIn,
+        // setAdminIsLoggedIn,
         setPassword,
         uploadFile,
         setUploadFile,

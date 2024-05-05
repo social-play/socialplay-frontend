@@ -17,7 +17,6 @@ export const PageConfirmRegistration = (
   props: IPageConfirmRegistrationProps
 ) => {
   const { baseUrl } = props;
-  const { setCurrentUser } = useContext(AppContext);
   const [confirmStatus, setConfirmStatus] = useState<ConfirmStatus>(
     ConfirmStatus.unconfirmed
   );

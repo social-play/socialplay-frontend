@@ -40,8 +40,8 @@ export interface IAppContext {
   password: string;
   // loginAsAdmin: (onSuccess: () => void, onFailure: () => void) => void;
   // logoutAsAdmin: () => void;
-  adminIsLoggedIn: boolean;
-  setAdminIsLoggedIn :(adminIsLoggedIn:boolean)=>void;
+  //adminIsLoggedIn: boolean;
+  //setAdminIsLoggedIn :(adminIsLoggedIn:boolean)=>void;
   setPassword: (password: string) => void;
   uploadFile: IUploadFile;
   setUploadFile: (file: IUploadFile) => void;
@@ -89,9 +89,9 @@ export interface IGamesPosts {
 
 }
 
-export interface IGamesPostsEdit extends IGamesPosts {
-  isAdminLogin:boolean
-}
+// export interface IGamesPostsEdit extends IGamesPosts {
+//   isAdminLogin:boolean
+// }
 
 export interface IEditGamePost {
   roomId: string;

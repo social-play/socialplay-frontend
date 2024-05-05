@@ -155,8 +155,7 @@ export const PageRegister = (props: IPageRegisterProps) => {
               <div className="buttonRow ">
                 <button
                   onClick={(e) => handleRegisterButton(e)}
-                  className="py-2 px-4 text-xl font-bold text-blue-200 active:outline-none bg-blue-900 rounded-lg  hover:bg-blue-400 hover:text-blue-700 active:z-10 active:ring-4 active:ring-blue-500 dark:active:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                >
+                  className="py-2 px-4 text-xl font-bold text-red-200 bg-red-800 rounded-lg hover:bg-red-500 hover:text-red-800">
                   Register
                 </button>
 

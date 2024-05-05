@@ -48,7 +48,6 @@ export const PageWelcome = (props: IPageMembersProps) => {
     isConsoleOpen,
     dropDownText,
     dropDownTextConsole,
-    adminIsLoggedIn,
   } = useContext(AppContext);
 
   const openChat = (gamesPost: string, roomId: string) => {
@@ -333,31 +332,35 @@ export const PageWelcome = (props: IPageMembersProps) => {
                     />
                   </div>
                   <h2>{gamesPost.author}</h2>
-                  <div>
+                  <div className="flex justify-center items-center ">
                     <button
                       onClick={() => popUp(gamesPost)}
                       className="text-xl text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
                       SHOW
                     </button>
                   </div>
-                  {adminIsLoggedIn && (
-                    <div className="buttons">
-                      <button
-                        type="button"
-                        onClick={() => handleDeleteGamesPost(gamesPost)}>
-                        <span className="delete">
-                          <MdDelete />
-                        </span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleEditGamesPost(gamesPost)}>
-                        <span className="edit">
-                          <BiEdit />
-                        </span>
-                      </button>
-                    </div>
-                  )}
+                  <div className="flex justify-center items-center h-8">
+                    {currentUser &&
+                      currentUser.userName === gamesPost.author &&
+                      currentUser.userName !== "anonymousUser" && (
+                        <div className="buttons">
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteGamesPost(gamesPost)}>
+                            <span className="delete">
+                              <MdDelete />
+                            </span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleEditGamesPost(gamesPost)}>
+                            <span className="edit">
+                              <BiEdit />
+                            </span>
+                          </button>
+                        </div>
+                      )}
+                  </div>
                 </div>
               ) : (
                 <form className="editArea">
