@@ -20,7 +20,7 @@ const initialFormValues = {
   captcha: false,
 };
 export const PageRegister = (props: IPageRegisterProps) => {
-  const { appTitle, setCurrentUser } = useContext(AppContext);
+  const { appTitle } = useContext(AppContext);
   const { baseUrl } = props;
   const [formValues, setFormValues] = useState(initialFormValues);
   const [registrationSuccessful, setRegistrationSuccessful] =
