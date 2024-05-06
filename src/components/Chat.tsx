@@ -15,9 +15,8 @@ interface IMessage {
   message: string;
   time: string;
 }
-
 function Chat({ socket, room, setIsChatOpen, gamePostUserName }: IProps) {
-  const [currentMessage, setCurrentMessage] = useState("");
+  const [currentMessage, setCurrentMessage] = useState<string>("");
   const [messageList, setMessageList] = useState<IMessage[]>([]);
 
   const sendMessage = () => {
@@ -40,10 +39,24 @@ function Chat({ socket, room, setIsChatOpen, gamePostUserName }: IProps) {
   };
 
   useEffect(() => {
+    // load chat
+    const storedMessage = localStorage.getItem("conversation");
+    if (storedMessage) {
+      setMessageList(JSON.parse(storedMessage));
+    }
+
     socket.on("receive_message", (data: IMessage) => {
       setMessageList((list) => [...list, data]);
+      //localstorage save chat
+      localStorage.setItem(
+        "conversation",
+        JSON.stringify([...messageList, data])
+      );
     });
-  }, [socket]);
+    return () => {
+      socket.off("receive_message");
+    };
+  }, [socket, messageList]);
 
   return (
     <div className="chat-window">
@@ -61,8 +74,7 @@ function Chat({ socket, room, setIsChatOpen, gamePostUserName }: IProps) {
                 key={i}
                 id={
                   gamePostUserName === messageContent.author ? "other" : "you"
-                }
-              >
+                }>
                 <div>
                   <div className="message-content">
                     <p>{messageContent.message}</p>
