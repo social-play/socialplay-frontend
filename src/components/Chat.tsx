@@ -53,9 +53,6 @@ function Chat({ socket, room, setIsChatOpen, gamePostUserName }: IProps) {
         JSON.stringify([...messageList, data])
       );
     });
-    return () => {
-      socket.off("receive_message");
-    };
   }, [socket, messageList]);
 
   return (
