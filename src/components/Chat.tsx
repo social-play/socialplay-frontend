@@ -53,7 +53,10 @@ function Chat({ socket, room, setIsChatOpen, gamePostUserName }: IProps) {
         JSON.stringify([...messageList, data])
       );
     });
-  }, [socket, messageList]);
+    return () => {
+      socket.off("receive_message");
+    };
+  }, [socket]);
 
   return (
     <div className="chat-window">
