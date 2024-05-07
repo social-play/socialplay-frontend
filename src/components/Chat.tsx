@@ -39,23 +39,9 @@ function Chat({ socket, room, setIsChatOpen, gamePostUserName }: IProps) {
   };
 
   useEffect(() => {
-    // load chat
-    const storedMessage = localStorage.getItem("conversation");
-    if (storedMessage) {
-      setMessageList(JSON.parse(storedMessage));
-    }
-
     socket.on("receive_message", (data: IMessage) => {
       setMessageList((list) => [...list, data]);
-      //localstorage save chat
-      localStorage.setItem(
-        "conversation",
-        JSON.stringify([...messageList, data])
-      );
     });
-    return () => {
-      socket.off("receive_message");
-    };
   }, [socket]);
 
   return (
