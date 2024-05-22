@@ -15,7 +15,12 @@ interface IMessage {
   message: string;
   time: string;
 }
-function Chat({ socket, room, setIsChatOpen, gamePostUserName }: IProps) {
+export const Chat = ({
+  socket,
+  room,
+  setIsChatOpen,
+  gamePostUserName,
+}: IProps) => {
   const [currentMessage, setCurrentMessage] = useState<string>("");
   const [messageList, setMessageList] = useState<IMessage[]>([]);
 
@@ -43,6 +48,8 @@ function Chat({ socket, room, setIsChatOpen, gamePostUserName }: IProps) {
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);
+
+  // TODO, alle rooms erhalten gleiche unterhaltung!!
 
   return (
     <div className="chat-window">
@@ -91,6 +98,4 @@ function Chat({ socket, room, setIsChatOpen, gamePostUserName }: IProps) {
       </div>
     </div>
   );
-}
-
-export default Chat;
+};

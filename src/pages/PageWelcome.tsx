@@ -10,7 +10,7 @@ import { MdDelete } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import { io, Socket } from "socket.io-client";
-import Chat from "../components/Chat";
+import { Chat } from "../components/Chat";
 import { BsChatDots } from "react-icons/bs";
 
 interface IPageMembersProps {
